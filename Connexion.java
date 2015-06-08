@@ -30,11 +30,17 @@ public class Connexion extends JFrame{
 		
 		//Bouton de validation 
 		JButton connect = new JButton("Connexion");
+		//Bouton d'oubli des informations
+		JButton oubli = new JButton("Mot de passe oublié?");
+		
+		JPanel boutons = new JPanel(new FlowLayout());
+		boutons.add(connect,"North");
+		boutons.add(oubli,"South");
 		
 		//Positionnement des éléments
 		total.add(identifiant,"North");
 		total.add(mdp,"Center");
-		total.add(connect,"South");
+		total.add(boutons,"South");
 		
 		cont.add(total,"Center");
 		this.setVisible(true);

@@ -15,14 +15,14 @@ public class ConnexionMySQL{
 	    Class.forName("com.mysql.jdbc.Driver");
 	}
 	catch (Exception ex){
-	    System.out.println("classe non trouvé");
+	    System.out.println("classe non trouvée");
 	}
 	try{
 	    mysql = DriverManager.getConnection(nom_serveur+nom_base, login, "dmartin");
 	    ouverte=true;
 	}
 	catch (SQLException ex){
-	    System.out.println("Msg:"+ex.getMessage()+ex.getErrorCode());
+	    System.out.println("Msg: "+ex.getMessage()+ex.getErrorCode());
 	}
     }
 

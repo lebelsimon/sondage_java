@@ -29,19 +29,21 @@ public class UtilisateurBD {
     public boolean ConnexionUtilisateur(String login, String mdp){
     	try{
     		ResultSet rs = s.executeQuery("SELECT * FROM UTILISATEUR");
+    		String message="";
     		while(rs.next()){
     			if(rs.getString("login").equals(login) && rs.getString("motDePasse").equals(mdp)){
+    				System.out.println("connexion réussie");
     				return true;
     			}
-    			else if(rs.getString(login).equals(login) && !(rs.getString("motDePasse").equals(mdp))){
+    			else if(rs.getString("login").equals(login) && !(rs.getString("motDePasse").equals(mdp))){
     				System.out.println("mauvais mot de passe, veuillez réessayer");
     				return false;
     			}
     			else{
-    				System.out.println("mauvais login");
-    				return false;
+    				message="mauvais login";
     			}
     		}
+    		System.out.println(message);
     	}
     	catch(SQLException e){
     		System.out.println("Erreur requète : "+e);

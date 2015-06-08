@@ -9,14 +9,14 @@ public class Module extends JPanel{
 	
 	public Module(){
 		
-		perso =new JPanel();
-		JLabel PrenomNom = new JLabel();
-		PrenomNom.setText("Prenom Nom");
-		perso.add(PrenomNom);
+		// test
+		//~ JLabel PrenomNom = new JLabel();
+		//~ PrenomNom.setText("TESTTT");
+		//~ this.add( PrenomNom);
 	
 		// END
 		
 
-		this.add( perso,"SOUTH");
+		
 	}
 }

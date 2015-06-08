@@ -22,6 +22,7 @@ public class Fenetre extends JFrame{
 		
 			// creation espace module
 		m = new ModuleSondage();
+		this.add(m);
 		
 				// affichage en pleine ecran
 		GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();

@@ -1,5 +1,5 @@
 import java.sql.*;
-import java.util.Scanner;
+
 
 /**
  * @author Damien MARTIN
@@ -9,21 +9,16 @@ public class ConnexionMySQL {
 	// attributs
 	public Connection mysql;
 	boolean ouverte;
-	Scanner sc = null;
-	String mdp;
 
 	// constructeur
 	public ConnexionMySQL(String nom_serveur, String nom_base, String login, String repertoire_principal) {
-		sc = new Scanner(System.in);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (Exception ex) {
 			System.out.println("classe non trouvée");
 		}
 		try {
-			System.out.print("Entrez votre mot de passe de MySQL"+' ');
-			mdp= sc.nextLine();
-			mysql = DriverManager.getConnection(nom_serveur + nom_base, login, mdp);
+			mysql = DriverManager.getConnection(nom_serveur + nom_base, login, "dmartin");
 			ouverte = true;
 		} catch (SQLException ex) {
 			System.out.println("Msg: " + ex.getMessage() + ex.getErrorCode());
@@ -32,7 +27,7 @@ public class ConnexionMySQL {
 
 	public void reconnexion(String nom_serveur, String nom_base, String login, String repertoire_principal) {
 		try {
-			mysql = DriverManager.getConnection(nom_serveur, login, mdp);
+			mysql = DriverManager.getConnection(nom_serveur, login, "dmartin");
 		} catch (SQLException ex) {
 			System.out.println("Msg:" + ex.getMessage() + ex.getErrorCode());
 		}

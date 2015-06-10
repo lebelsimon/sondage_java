@@ -58,12 +58,16 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 	
-	public void affiche(){
-		System.out.println("Nom : "+this.nomU);
-		System.out.println("Prenom : "+this.prenomU);
-		System.out.println("idU : "+this.idU);
-		System.out.println("Login : "+this.login);
-		System.out.println("Mot de passe : "+this.motDePasse);
-		System.out.println("Role : "+this.role);
+	@Override
+	public String toString(){
+		String res="";
+		res+="Nom : "+this.nomU+"\n";
+		res+="Prenom : "+this.prenomU+"\n";
+		res+="idU : "+this.idU+"\n";
+		res+="Login : "+this.login+"\n";
+		res+="Mot de passe : "+this.motDePasse+"\n";
+		res+="Role : "+this.role+"\n";
+		return res;
+
 	}
 }

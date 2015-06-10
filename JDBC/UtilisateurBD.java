@@ -28,15 +28,16 @@ public class UtilisateurBD {
     
     public boolean ConnexionUtilisateur(String login, String mdp){
     	try{
-    		ResultSet rs = s.executeQuery("SELECT * FROM UTILISATEUR");
+    		ResultSet rs = s.executeQuery("SELECT * FROM UTILISATEUR NATURAL JOIN ROLEUTIL");
     		String message="";
     		while(rs.next()){
     			if(rs.getString("login").equals(login) && rs.getString("motDePasse").equals(mdp)){
-    				System.out.println("connexion réussie");
+    				message="connexion réussie";
+    				System.out.println(new Utilisateur(rs.getInt("idU"),rs.getString("nomU"),rs.getString("prenomU"),rs.getString("login"), rs.getString("motDePasse"), rs.getString("nomR")));
     				return true;
     			}
     			else if(rs.getString("login").equals(login) && !(rs.getString("motDePasse").equals(mdp))){
-    				System.out.println("mauvais mot de passe, veuillez réessayer");
+    				message="mauvais mot de passe, veuillez réessayer";
     				return false;
     			}
     			else{

@@ -1,6 +1,7 @@
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.sql.*;
 
 /**
  * @author Damien MARTIN
@@ -11,6 +12,7 @@ public class TestJDBC {
     ClientBD client;
     ReponsesBD reponse;
     UtilisateurBD util;
+    SondeBD sond;
 
     Scanner sc=null;
     public TestJDBC(){
@@ -82,6 +84,7 @@ public class TestJDBC {
 	    tjdbc.client = new ClientBD(co);
 	    tjdbc.reponse = new ReponsesBD(co);
 	    tjdbc.util = new UtilisateurBD(co);
+	    tjdbc.sond = new SondeBD(co);
 	    System.out.println("connexion établie");
 	}
 	catch (Exception e){
@@ -98,7 +101,8 @@ public class TestJDBC {
 	    System.out.println("7. Question nbReponsesLibreParCat");
 	    System.out.println("8. Question moyenneReponseParTrancheAgeEtHF");
 	    System.out.println("9. Se connecter");
-	    System.out.println("10. Sortir");
+	    System.out.println("10. Liste Sonde");
+	    System.out.println("11. Sortir");
 	    int rep=tjdbc.saisieInt("Entrez votre choix", 1,15 );
 	    int numCli;
 	    Client c;
@@ -170,6 +174,11 @@ public class TestJDBC {
 		    	tjdbc.util.ConnexionUtilisateur(login, mdp);
 		    	break;
 		    case 10:
+		    	ArrayList<Sonde> res = tjdbc.sond.getListeSonde();
+		    	for(Sonde s : res)
+		    		System.out.println(s);
+		    	break;
+		    case 11:
 		    	fini=true;
 		    	break;
 		    }

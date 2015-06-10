@@ -13,6 +13,9 @@ public class ModuleSondage extends Module{
 	
 	public ModuleSondage(){
 		super();	
+		this.setLayout( new FlowLayout());
 		this.questionnaire = new QuestionnaireVue();
+		
+		this.add(questionnaire);
 	}
 }

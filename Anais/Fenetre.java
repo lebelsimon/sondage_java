@@ -3,7 +3,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-
+@SuppressWarnings("serial")
 public class Fenetre extends JFrame{
 	static Module m;
 	Fenetre(){

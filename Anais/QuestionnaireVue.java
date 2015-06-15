@@ -10,7 +10,7 @@ public class QuestionnaireVue extends JPanel{
 	//		Questionnaire q, Sonde s
 	QuestionnaireVue(){
 		super();
-		this.setLayout(new GridLayout(2,1));
+		this.setLayout(new GridLayout(3,1));
 
 		
 		// Creation du label Questionnaire:
@@ -21,7 +21,7 @@ public class QuestionnaireVue extends JPanel{
 		
 		// réation de la vue de la question:
 			// par la suite on donnera une question et il creera la vue en fonction de la question
-		q = new QuestionVue();
+		q = new QuestionVueChoixNote();
 		
 		
 		//this.add(new JLabel("TESTTTTT"));

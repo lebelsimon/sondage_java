@@ -21,7 +21,7 @@ public class QuestionnaireVue extends JPanel{
 		
 		// réation de la vue de la question:
 			// par la suite on donnera une question et il creera la vue en fonction de la question
-		q = new QuestionVueXChoix();
+		q = new QuestionVueChoixNote();
 		
 		
 		//this.add(new JLabel("TESTTTTT"));

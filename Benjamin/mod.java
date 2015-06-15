@@ -19,9 +19,7 @@ public class mod extends Module{
     JPanel sondeP;//contien les informations de la BD
     JPanel SondeGlobal;//contient sonde et sondeP pour la centrer par rapport a ':'
     Sonde toto;
-    //liste de sonde bidon en attendant la BD
     SondeBD info;
-    ArrayList<String> son = new ArrayList<String>();
 			
     public mod(){
 	try{
@@ -33,10 +31,6 @@ public class mod extends Module{
 	    System.out.println(e);
 	    System.out.println("coucou");
 	}
-
-	//print test
-	//~ System.out.println(info.getListeSonde()+"test");
-	
 	
 				
 			
@@ -52,7 +46,6 @@ public class mod extends Module{
 	telephone = new JLabel("telephone : ");
 	
 	Sonde toto = selectSond();
-	//~ System.out.println(selectSond());
 	
 	//ajout des infos du sonde
 	JLabel tid=new JLabel(Integer.toString(toto.getNumSond()));
@@ -69,10 +62,6 @@ public class mod extends Module{
 	nom.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 	prenom.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 	telephone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-				
-	//alignement gauche pour centrer
-	//~ t1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-	//~ t2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 				
 	//ajout dans sondeP
 				
@@ -98,18 +87,17 @@ public class mod extends Module{
 				
 				
 	this.add(idtot);
-	System.out.println(selectSond());
 				
     }
     public Sonde selectSond(){
 
 		ArrayList <Sonde> list=info.getListeSonde();
 		Random random = new Random();
-		int ind=random.nextInt(list.size());
-		System.out.println("truc");		
+		int ind=random.nextInt(list.size());	
 		toto = new Sonde(list.get(ind));
-		System.out.println(toto+"truc");
-
+		info.supprimerSonde(toto.getNumSond());
+		//~ list.remove(ind);
+		//~ System.out.println(toto.getNumSond()+"tes");
 		return toto;
 	}
 }

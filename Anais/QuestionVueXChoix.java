@@ -14,6 +14,11 @@ public class QuestionVueXChoix extends QuestionVue{
 		test2 = new JCheckBox(" test2") ;
 		test3 = new JCheckBox(" test3") ;
 		
+		// Centrage des elements
+		test1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		test2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		test3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		
 		JPanel listeChoix = new JPanel(new GridLayout(3,1));
 		listeChoix.add(test1);
 		listeChoix.add(test2);

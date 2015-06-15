@@ -6,7 +6,7 @@ public class QuestionVue extends JPanel{
 	private JTextField enonce;
 	
 	QuestionVue(){
-		this.setLayout( new BorderLayout());
+		this.setLayout( new BorderLayout( 40, 4));
 		idQuestion = new JLabel("Question n° X/Y");
 		idQuestion.setHorizontalAlignment(SwingConstants.CENTER);
 		enonce = new JTextField("blablabla");

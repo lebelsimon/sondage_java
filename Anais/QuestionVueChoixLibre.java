@@ -21,6 +21,11 @@ public class QuestionVueChoixLibre extends QuestionVue{
 		test2 = new JRadioButton(" test 2") ;
 		test3 = new JRadioButton(" test 3") ;
 		
+		// Centrage des elements
+		test1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		test2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		test3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		
 		lesChoix.add(test1);
 		lesChoix.add(test2);
 		lesChoix.add(test3);
@@ -35,7 +40,7 @@ public class QuestionVueChoixLibre extends QuestionVue{
 		// creation du panel contenant les choix et ajout: 
 		// ATTENTION 
 		
-		JPanel RadioButon = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel RadioButon = new JPanel(new GridLayout(3,1));
 		
 		JPanel listeChoix = new JPanel(new GridLayout(2,1));
 		RadioButon.add(test1);

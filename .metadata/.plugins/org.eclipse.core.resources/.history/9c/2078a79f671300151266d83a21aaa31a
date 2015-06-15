@@ -1,0 +1,46 @@
+import java.sql.*;
+import java.util.ArrayList;
+
+/**
+ * 
+ */
+
+/**
+ * @author dmartin
+ * 
+ */
+public class QuestionBD {
+	private ConnexionMySQL c;
+	private Statement s;
+
+	// constructeur
+	public QuestionBD(ConnexionMySQL c) throws SQLException {
+		// on crée un nouveau clientBD
+		try {
+			this.c = c;
+			Connection conn = c.getConnexion();
+			this.s = conn.createStatement();
+			System.out.println("questionBD créé");
+		} catch (SQLException e) {
+			System.out.println("questionBD non créé");
+		}
+	}
+
+	public ArrayList<Question> getListeQuestion(int idQ){
+		ArrayList<Question> listeQuestion = new ArrayList<Question>();
+		try{
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTION WHERE idQ="+idQ); // on récupère tout les questions
+			ResultSet rs2 = s.executeQuery("SELECT * FROM QUESTION NATURAL JOIN VALPOSSIBLE WHERE idQ="+idQ); // on récupère les valerus possibles pour les questions où l'on retrouve des valeurs possibles
+			while (rs.next()){
+				Question q = new Question(rs.getString("texteQ"), (char)rs.getChar("idT"), rs.getInt("MaxVal"));
+				while(rs2.next()){
+					if(rs2.getInt("numQ")==rs.getInt("numQ")){
+						
+					}
+				}
+							}
+		}
+		catch(SQLException e){System.out.println(e);}
+		return listeQuestion;
+	}
+}

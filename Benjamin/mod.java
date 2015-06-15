@@ -1,72 +1,115 @@
 import javax.swing.*;
 import java.util.*;
-
+import java.sql.Connection;
+import java.sql.*;
+import java.util.Random;
 import java.awt.*;
 
-		// Panel Module Sondage
-		@SuppressWarnings("serial")
-		public class mod extends Module{
-			JLabel nom;
-			JLabel prenom;
-			JLabel telephone;
-			JLabel id;
-			JPanel sonde; //contient le nom prenom tel du sonde
-			JPanel idtot; //contient l'id et SondeGlobal
-			JPanel sondeP;//contien les informations de la BD
-			JPanel SondeGlobal;//contient sonde et sondeP pour la centrer par rapport a ':'
-			//liste de sonde bidon en attendant la BD
-			ArrayList<String> son = new ArrayList<String>();
+// Panel Module Sondage
+@SuppressWarnings("serial")
+public class mod extends Module{
 			
-			public mod(){
+    JLabel nom;
+    JLabel prenom;
+    JLabel telephone;
+    JLabel id;
+    JPanel sonde; //contient le nom prenom tel du sonde
+    JPanel idaff;
+    JPanel idtot; //contient l'id et SondeGlobal
+    JPanel sondeP;//contien les informations de la BD
+    JPanel SondeGlobal;//contient sonde et sondeP pour la centrer par rapport a ':'
+    Sonde toto;
+    //liste de sonde bidon en attendant la BD
+    SondeBD info;
+    ArrayList<String> son = new ArrayList<String>();
+			
+    public mod(){
+	try{
+	    ConnexionMySQL co = new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
+	    info = new SondeBD(co);
+
+	}
+	catch(Exception e){
+	    System.out.println(e);
+	    System.out.println("coucou");
+	}
+
+	//print test
+	//~ System.out.println(info.getListeSonde()+"test");
+	
+	
 				
-				sondeP=new JPanel(new GridLayout(4,2));
-				sonde=new JPanel(new GridLayout(4,2));
-				idtot=new JPanel(new BorderLayout());
-				SondeGlobal= new JPanel(new FlowLayout());
+			
+	idaff= new JPanel(new FlowLayout());
+	sondeP=new JPanel(new GridLayout(4,2));
+	sonde=new JPanel(new GridLayout(4,2));
+	idtot=new JPanel(new BorderLayout());
+	SondeGlobal= new JPanel(new FlowLayout());
 				
-				id = new JLabel("identifiant sonde: ");
-				nom = new JLabel("nom: ");
-				prenom = new JLabel("Prenom: ");
-				telephone = new JLabel("telephone: ");
+	id = new JLabel("numero sonde : ");
+	nom = new JLabel("nom : ");
+	prenom = new JLabel("Prenom : ");
+	telephone = new JLabel("telephone : ");
+	
+	Sonde toto = selectSond();
+	//~ System.out.println(selectSond());
+	
+	//ajout des infos du sonde
+	JLabel tid=new JLabel(Integer.toString(toto.getNumSond()));
+	JLabel tnom=new JLabel(toto.getNomSond());
+	JLabel tprenom=new JLabel(toto.getPrenomSond());
+	JLabel ttel=new JLabel(toto.getTelephoneSond());
 				
-				//test alignement
-				JLabel t1=new JLabel("toto");
-				JLabel t2=new JLabel("tataqgtergaertg");
-				JLabel t3=new JLabel("0606441017");
+	//encadrement
+	idtot.setBorder(BorderFactory.createLineBorder(Color.black));
+	SondeGlobal.setBorder(BorderFactory.createLineBorder(Color.black));
 				
-				//encadrement
-				idtot.setBorder(BorderFactory.createLineBorder(Color.black));
-				SondeGlobal.setBorder(BorderFactory.createLineBorder(Color.black));
+	//alignement droite pour centrer
+	id.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+	nom.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+	prenom.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+	telephone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 				
-				//alignement droite pour centrer
-				nom.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-				prenom.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-				telephone.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+	//alignement gauche pour centrer
+	//~ t1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+	//~ t2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 				
-				//alignement gauche pour centrer
-				t1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-				t2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+	//ajout dans sondeP
 				
-				//ajout dans sondeP
-				sondeP.add(t1);
-				sondeP.add(t2);
-				sondeP.add(t3);
+	sondeP.add(tnom);
+	sondeP.add(tprenom);
+	sondeP.add(ttel);
 				
-				//ajout dans sonde
-				sonde.add(nom);
-				sonde.add(prenom);
-				sonde.add(telephone);
+	//ajout dans sonde
+	sonde.add(nom);
+	sonde.add(prenom);
+	sonde.add(telephone);
 				
-				//ajout dans SondeGlobal
-				SondeGlobal.add(sonde);
-				SondeGlobal.add(sondeP);
+	//ajout dans SondeGlobal
+	SondeGlobal.add(sonde);
+	SondeGlobal.add(sondeP);
 				
 				
-				idtot.add(id,"North");
-				idtot.add(SondeGlobal,"South");
+	tid.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+	idaff.add(id);
+	idaff.add(tid);
+	idtot.add(idaff,"North");
+	idtot.add(SondeGlobal,"South");
 				
 				
-				this.add(idtot);
+	this.add(idtot);
+	System.out.println(selectSond());
 				
-			}
-		}
+    }
+    public Sonde selectSond(){
+
+		ArrayList <Sonde> list=info.getListeSonde();
+		Random random = new Random();
+		int ind=random.nextInt(list.size());
+		System.out.println("truc");		
+		toto = new Sonde(list.get(ind));
+		System.out.println(toto+"truc");
+
+		return toto;
+	}
+}

@@ -114,9 +114,10 @@ public class TestJDBC {
 			System.out.println("9. Se connecter");
 			System.out.println("10. Liste Sonde");
 			System.out.println("11. Supprimer sondé");
-			System.out.println("12. Afficher la liste des questionnaire avec la lmiste des questions");
+			System.out.println("12. Afficher la liste des questionnaire avec la liste des questions");
 			System.out.println("13. Afficher la liste des questions");
-			System.out.println("14. Sortir");
+			System.out.println("14. Afficher la liste des réponses libres de la question 5 du questionnaire 1");
+			System.out.println("15. Sortir");
 			int rep = tjdbc.saisieInt("Entrez votre choix", 1, 15);
 			int numCli;
 			Client c;
@@ -206,6 +207,9 @@ public class TestJDBC {
 				System.out.println(tjdbc.question.getListeQuestion(1));
 				break;
 			case 14:
+				System.out.println(tjdbc.question.getReponseLibre(1, 5));
+				break;
+			case 15:
 				fini = true;
 				break;
 			}

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -10,16 +12,17 @@ public class Sonde {
 	private int numSond, dateNaissSond;
 	private String nomSond, prenomSond, telephoneSond;
 	private String idC;
+	private ArrayList<Integer> listeQuestionnaire;
 
 	// constructeur
-	public Sonde(int numSond, String nomSond, String prenomSond,
-			int dateNaissSond, String telephone, String idCategorie) {
+	public Sonde(int numSond, String nomSond, String prenomSond, int dateNaissSond, String telephone, String idCategorie) {
 		this.numSond = numSond;
 		this.nomSond = nomSond;
 		this.prenomSond = prenomSond;
 		this.dateNaissSond = dateNaissSond;
 		this.telephoneSond = telephone;
 		this.idC = idCategorie;
+		this.listeQuestionnaire = new ArrayList<Integer>();
 	}
 
 	public Sonde(Sonde s) {
@@ -80,11 +83,19 @@ public class Sonde {
 		this.idC = idC;
 	}
 
+	public void addQuestionnaire(int idQ){
+		this.listeQuestionnaire.add(idQ);
+	}
+	
+	public ArrayList<Integer> getListeQuestionnaire(){
+		return this.listeQuestionnaire;
+	}
+	
 	@Override
 	public String toString() {
 		return "Sonde [numSond=" + numSond + ", dateNaissSond=" + dateNaissSond
 				+ ", nomSond=" + nomSond + ", prenomSond=" + prenomSond
-				+ ", telephoneSond=" + telephoneSond + ", idC=" + idC + "]";
+				+ ", telephoneSond=" + telephoneSond + ", idC=" + idC + ", listeQuestionnaire="+ listeQuestionnaire+ "]";
 	}
 
 }

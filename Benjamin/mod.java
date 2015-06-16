@@ -23,7 +23,7 @@ public class mod extends Module{
     JButton appeler;
     Sonde toto;
     SondeBD info;
-			
+			 
     public mod(){
 	try{
 	    ConnexionMySQL co = new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
@@ -34,7 +34,7 @@ public class mod extends Module{
 	    System.out.println(e);
 	    System.out.println("coucou");
 	}
-	appeler = new JButton ("Appeler");
+	appeler = new JButton ("");
 	suivant = new JButton("Suivant");
 	
 	sondregroup=new JPanel(new BorderLayout());
@@ -97,11 +97,13 @@ public class mod extends Module{
 	idtot.add(idaff,"North");
 	idtot.add(SondeGlobal,"South");
 
-	SondeGlobal.add(suivant,"West");
-	SondeGlobal.add(appeler,"East");
+	SondeGlobal.add(suivant,"East");
+	SondeGlobal.add(appeler,"West");
 	SondeGlobal.add(sondregroup,"North");
 	sondregroup.add(sonde,"West");
 	sondregroup.add(sondeP,"East");
+	
+	//~ appeler.setIcon(new ImageIcon("tel.png"));
 			
 	this.add(idtot);
 				

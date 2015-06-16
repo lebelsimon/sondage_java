@@ -50,5 +50,5 @@ public class Menu extends JMenuBar{
 		this.add(Aide);
 		this.add(Box.createHorizontalGlue());
 		this.add(PrenomNom);
-	}
+	} 
 }

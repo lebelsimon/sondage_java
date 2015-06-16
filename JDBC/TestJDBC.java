@@ -13,6 +13,7 @@ public class TestJDBC {
     ReponsesBD reponse;
     UtilisateurBD util;
     SondeBD sond;
+    QuestionnaireBD questionnaire;
 
     Scanner sc=null;
     public TestJDBC(){
@@ -85,6 +86,7 @@ public class TestJDBC {
 	    tjdbc.reponse = new ReponsesBD(co);
 	    tjdbc.util = new UtilisateurBD(co);
 	    tjdbc.sond = new SondeBD(co);
+	    tjdbc.questionnaire = new QuestionnaireBD(co);
 	    System.out.println("connexion établie");
 	}
 	catch (Exception e){
@@ -103,7 +105,8 @@ public class TestJDBC {
 	    System.out.println("9. Se connecter");
 	    System.out.println("10. Liste Sonde");
 	    System.out.println("11. Supprimer sondé");
-	    System.out.println("12. Sortir");
+	    System.out.println("12. Afficher la liste des questionnaire avec la lmiste des questions");
+	    System.out.println("13. Sortir");
 	    int rep=tjdbc.saisieInt("Entrez votre choix", 1,15 );
 	    int numCli;
 	    Client c;
@@ -183,6 +186,9 @@ public class TestJDBC {
 		tjdbc.sond.supprimerSonde(1);
 		break;
 	    case 12:
+		System.out.println(tjdbc.questionnaire.getListeQuestionnaire());
+		break;
+	    case 13:
 		fini=true;
 		break;
 	    }

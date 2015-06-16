@@ -23,8 +23,8 @@ public class ApplicationSondage extends JFrame {
 		// Panel Module
 		
 		JPanel Module = new JPanel();
-		// dépend du module, a completer
-		Module.setLayout();
+		// depend du module, a completer
+		Module.setLayout(new FlowLayout());
 		
 		
 		// END
@@ -32,5 +32,9 @@ public class ApplicationSondage extends JFrame {
 		Fenetre.add(Menu,"NORTH");
 		Fenetre.add(Module,"SOUTH");
 		this.setVisible(true);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ApplicationSondage test = new ApplicationSondage();
 	}
 }

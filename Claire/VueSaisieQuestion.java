@@ -1,4 +1,5 @@
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -12,22 +13,39 @@ public class VueSaisieQuestion extends JPanel {
 	public VueSaisieQuestion(Question q){
 		
 		this.setLayout(new BorderLayout());//new BoxLayout(this, BoxLayout.Y_AXIS)
-		JPanel quest = new JPanel(new BorderLayout());
 		
 		
-		JPanel haut = new JPanel();
+		// Fenetre du container
+		JPanel fen = new JPanel(new BorderLayout());
+		
+		
+		// Fenetre de centre avec les questions
+		JPanel quest = new JPanel(new GridLayout(0,1));
+		
+		JPanel haut = new JPanel(new GridLayout(2,0));
 		JPanel milieu = new JPanel(new FlowLayout());
 		JPanel bas = new JPanel();
 		
 		
-		// Enoncé des questions ===============================================
+		// EnoncÃ© des questions ===============================================
+		JLabel numquestionnaire = new JLabel("Questionnaire n° X");
+		JLabel numquest = new JLabel("Question n° X");
+		JPanel titre = new JPanel(new BorderLayout());
+		//titre.setLayout();    A remodifier
+		
+		
 		JLabel eq = new JLabel("Enonce de la question: ");
 		enonceQuestion = new JTextField();
 		enonceQuestion.setText(q.getEnonce());
 		
-		haut.add(eq);
-		haut.add(enonceQuestion);
+		JPanel enonce = new JPanel();
 		
+		titre.add(numquestionnaire);
+		titre.add(numquest);
+		enonce.add(eq);
+		enonce.add(enonceQuestion);
+		haut.add(titre);
+		haut.add(enonce);
 		
 		
 		// Choix du type de question ==========================================
@@ -37,7 +55,7 @@ public class VueSaisieQuestion extends JPanel {
 		JRadioButton bClassement= new JRadioButton("Classement");
 		JRadioButton bNote= new JRadioButton("Note");
 		JRadioButton bLibre= new JRadioButton("Libre");
-		// création du groupe de bouton
+		// crÃ©ation du groupe de bouton
 		ButtonGroup choixOption = new ButtonGroup();
 		// ajout des boutons au groupe de choix
 		choixOption.add(bChoixsimple);
@@ -45,7 +63,7 @@ public class VueSaisieQuestion extends JPanel {
 		choixOption.add(bClassement);
 		choixOption.add(bNote);
 		choixOption.add(bLibre);
-		// création du panel
+		// crÃ©ation du panel
 		JPanel panelChoix = new JPanel();
 		// on va mettre les choix les uns en dessous des autres 
 		panelChoix.setLayout(new BoxLayout(panelChoix, BoxLayout.Y_AXIS));
@@ -75,7 +93,7 @@ public class VueSaisieQuestion extends JPanel {
 		JButton ajouter = new JButton("Ajouter");
 		JButton supprimer = new JButton("Supprimer");
 		
-		JPanel pBouton = new JPanel(new GridLayout(0,1));
+		JPanel pBouton = new JPanel(new GridLayout(0,1,0,40));
 		pBouton.add(ajouter);
 		pBouton.add(supprimer);
 		
@@ -86,16 +104,19 @@ public class VueSaisieQuestion extends JPanel {
 		bas.add(valider);
 		
 		
-		
-		
 		model=q;
 		
 		
-		quest.add(haut,"North");
-		quest.add(milieu,"Center");
-		quest.add(bas,"South");
 		
-		this.add(quest);
+		// Assemblement des panel
+		
+		quest.add(haut);
+		quest.add(milieu);
+		quest.add(bas);
+		
+		fen.add(quest,"Center");
+		this.add(fen);
+		
 		
 	}
 

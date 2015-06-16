@@ -104,6 +104,12 @@ public class mod extends Module{
 	sondregroup.add(sondeP);
 	
 	appeler.setIcon(new ImageIcon("tel.png"));
+	appeler.setToolTipText("Appeler le sonde");
+	suivant.setToolTipText("Sonde suivant");
+	appeler.setName("appeler");
+	appeler.addActionListener(new QuestionnaireButton(appeler.getName()));
+	suivant.setName("suivi");
+	suivant.addActionListener(new QuestionnaireButton(suivant.getName()));
 			
 	this.add(idtot);
 				

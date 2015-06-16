@@ -5,7 +5,7 @@ import javax.swing.*;
 
 
 public class Fenetre extends JFrame{
-	static Module m;
+//	static Module m;
 	Fenetre(){
 		super("Rapid'Sond");
 		System.out.println("Fenetre deb");
@@ -21,8 +21,8 @@ public class Fenetre extends JFrame{
 		System.out.println("ajout menu");
 		
 			// creation espace module
-		m = new ModuleSondage();
-		this.add(m);
+//		m = new ModuleSondage();
+//		this.add(m);
 		
 				// affichage en pleine ecran
 		GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -42,10 +42,10 @@ public class Fenetre extends JFrame{
 	
 	
 	
-	@SuppressWarnings("unused")
-	public static void main ( String [] args){
-		new Fenetre();
-		
-	}
+
+//	public static void main ( String [] args){
+//		new Fenetre();
+//		
+//	}
 
 }

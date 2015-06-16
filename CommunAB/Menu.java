@@ -12,7 +12,7 @@ public class Menu extends JMenuBar{
 		
 				// créatiojn des éléments du menu	  
 		Compte = new JMenu("Compte");
-		changerPerso = new JMenuItem("Changer d'Utilisateur");
+		changerPerso = new JMenuItem("Paramètres");
 		deconnexion = new JMenuItem("Deconnexion CTR+D");
 
 		Affichage = new JMenu("Affichage");
@@ -41,7 +41,7 @@ public class Menu extends JMenuBar{
 		Personne = new JMenu("Prenom Nom ");
 		
 			// 1 JMenuItem ne peut appartenir qu'a un JMenu, il faut donc recréer des JMenuItem
-		changerPerso2 = new JMenuItem("Changer d'Utilisateur");
+		changerPerso2 = new JMenuItem("Paramètres");
 		deconnexion2 = new JMenuItem("Deconnexion CTR+D");
 		Personne.add(changerPerso2);
 		Personne.add(deconnexion2);

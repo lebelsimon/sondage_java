@@ -114,10 +114,13 @@ public class TestJDBC {
 			System.out.println("9. Se connecter");
 			System.out.println("10. Liste Sonde");
 			System.out.println("11. Supprimer sondé");
-			System.out.println("12. Afficher la liste des questionnaire avec la lmiste des questions");
+			System.out.println("12. Afficher la liste des questionnaire avec la liste des questions");
 			System.out.println("13. Afficher la liste des questions");
-			System.out.println("14. Sortir");
-			int rep = tjdbc.saisieInt("Entrez votre choix", 1, 15);
+			System.out.println("14. Insérer un nouveau questionnaire");
+			System.out.println("15. Modifier un questionnaire");
+			System.out.println("16. Supprimer un questionnaire");
+			System.out.println("17. Sortir");
+			int rep = tjdbc.saisieInt("Entrez votre choix", 1, 25);
 			int numCli;
 			Client c;
 			switch (rep) {
@@ -189,7 +192,7 @@ public class TestJDBC {
 			case 9:
 				String login = tjdbc.saisieString("Login : ");
 				String mdp = tjdbc.saisieString("Mot de passe : ");
-				tjdbc.util.ConnexionUtilisateur(login, mdp);
+				System.out.println(tjdbc.util.ConnexionUtilisateur(login, mdp));
 				break;
 			case 10:
 				ArrayList<Sonde> res = tjdbc.sond.getListeSonde();
@@ -206,6 +209,17 @@ public class TestJDBC {
 				System.out.println(tjdbc.question.getListeQuestion(1));
 				break;
 			case 14:
+				tjdbc.question.modifieQuestion(1, new Question("question test", 'n', 10, 1));
+				break;
+			case 15:
+				Questionnaire qu = new Questionnaire("Questionnaire test modifié", 15688, 4, 1, 'S');
+				qu.setIdQ(9);
+				tjdbc.questionnaire.modifierQuestionnaire(qu);
+				break;
+			case 16:
+				tjdbc.questionnaire.supprimerQuestionnaire(5);
+				break;
+			case 17:
 				fini = true;
 				break;
 			}

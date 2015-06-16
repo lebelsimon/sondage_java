@@ -13,11 +13,14 @@ public class mod extends Module{
     JLabel prenom;
     JLabel telephone;
     JLabel id;
+    JPanel sondregroup;
     JPanel sonde; //contient le nom prenom tel du sonde
     JPanel idaff;
     JPanel idtot; //contient l'id et SondeGlobal
     JPanel sondeP;//contien les informations de la BD
     JPanel SondeGlobal;//contient sonde et sondeP pour la centrer par rapport a ':'
+    JButton suivant;
+    JButton appeler;
     Sonde toto;
     SondeBD info;
 			
@@ -31,14 +34,15 @@ public class mod extends Module{
 	    System.out.println(e);
 	    System.out.println("coucou");
 	}
+	appeler = new JButton ("Appeler");
+	suivant = new JButton("Suivant");
 	
-				
-			
+	sondregroup=new JPanel(new BorderLayout());
 	idaff= new JPanel(new FlowLayout());
-	sondeP=new JPanel(new GridLayout(4,2));
-	sonde=new JPanel(new GridLayout(4,2));
+	sondeP=new JPanel(new GridLayout(5,2));
+	sonde=new JPanel(new GridLayout(5,2));
 	idtot=new JPanel(new BorderLayout());
-	SondeGlobal= new JPanel(new FlowLayout());
+	SondeGlobal= new JPanel(new BorderLayout());
 				
 	id = new JLabel("numero sonde : ");
 	nom = new JLabel("nom : ");
@@ -48,6 +52,7 @@ public class mod extends Module{
 	Sonde toto = selectSond();
 	
 	//ajout des infos du sonde
+	
 	JLabel tid=new JLabel(Integer.toString(toto.getNumSond()));
 	JLabel tnom=new JLabel(toto.getNomSond());
 	JLabel tprenom=new JLabel(toto.getPrenomSond());
@@ -68,6 +73,7 @@ public class mod extends Module{
 	sondeP.add(tnom);
 	sondeP.add(tprenom);
 	sondeP.add(ttel);
+	
 				
 	//ajout dans sonde
 	sonde.add(nom);
@@ -75,17 +81,28 @@ public class mod extends Module{
 	sonde.add(telephone);
 				
 	//ajout dans SondeGlobal
-	SondeGlobal.add(sonde);
-	SondeGlobal.add(sondeP);
-				
+	//~ SondeGlobal.add(sonde);
+	//~ SondeGlobal.add(sondeP);
+
+	//~ suivant.setPreferredSize(new Dimension(100, 5));
+	//~ appeler.setPreferredSize(new Dimension(100, 5));
+	//~ 
+	//~ suivant.setMinimumSize(new Dimension(1,1));
+	//~ suivant.setMaximumSize(new Dimension(1,1));
+	
 				
 	tid.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 	idaff.add(id);
 	idaff.add(tid);
 	idtot.add(idaff,"North");
 	idtot.add(SondeGlobal,"South");
-				
-				
+
+	SondeGlobal.add(suivant,"West");
+	SondeGlobal.add(appeler,"East");
+	SondeGlobal.add(sondregroup,"North");
+	sondregroup.add(sonde,"West");
+	sondregroup.add(sondeP,"East");
+			
 	this.add(idtot);
 				
     }

@@ -26,7 +26,7 @@ public class SondeBD {
     public ArrayList<Sonde> getListeSonde() {
 	ArrayList<Sonde> res = new ArrayList<Sonde>();
 	try {
-	    ResultSet rs = s.executeQuery("SELECT * FROM SONDE NATURAL JOIN INTERROGER NATURAL JOIN UTILISATEUR WHERE idR=1");
+	    ResultSet rs = s.executeQuery("SELECT * FROM SONDE NATURAL JOIN INTERROGER NATURAL JOIN UTILISATEUR WHERE idR=2");
 	    while (rs.next()) {
 		res.add(new Sonde(rs.getInt("numSond"), rs.getString("nomSond"),
 				  rs.getString("prenomSond"), rs.getInt("dateNaisSond"),

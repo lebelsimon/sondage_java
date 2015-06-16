@@ -23,7 +23,7 @@ public class mod extends Module{
     JButton appeler;
     Sonde toto;
     SondeBD info;
-			 
+			
     public mod(){
 	try{
 	    ConnexionMySQL co = new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
@@ -37,7 +37,7 @@ public class mod extends Module{
 	appeler = new JButton ("");
 	suivant = new JButton("Suivant");
 	
-	sondregroup=new JPanel(new BorderLayout());
+	sondregroup=new JPanel(new FlowLayout());
 	idaff= new JPanel(new FlowLayout());
 	sondeP=new JPanel(new GridLayout(5,2));
 	sonde=new JPanel(new GridLayout(5,2));
@@ -84,8 +84,8 @@ public class mod extends Module{
 	//~ SondeGlobal.add(sonde);
 	//~ SondeGlobal.add(sondeP);
 
-	//~ suivant.setPreferredSize(new Dimension(100, 5));
-	//~ appeler.setPreferredSize(new Dimension(100, 5));
+	suivant.setPreferredSize(new Dimension(100, 40));
+	appeler.setPreferredSize(new Dimension(100, 40));
 	//~ 
 	//~ suivant.setMinimumSize(new Dimension(1,1));
 	//~ suivant.setMaximumSize(new Dimension(1,1));
@@ -100,10 +100,10 @@ public class mod extends Module{
 	SondeGlobal.add(suivant,"East");
 	SondeGlobal.add(appeler,"West");
 	SondeGlobal.add(sondregroup,"North");
-	sondregroup.add(sonde,"West");
-	sondregroup.add(sondeP,"East");
+	sondregroup.add(sonde);
+	sondregroup.add(sondeP);
 	
-	//~ appeler.setIcon(new ImageIcon("tel.png"));
+	appeler.setIcon(new ImageIcon("tel.png"));
 			
 	this.add(idtot);
 				

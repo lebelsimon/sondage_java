@@ -87,9 +87,9 @@ public class QuestionBD {
 		}
 	}
 
-	public void modifieQuestion(int idQ, Question q) { //ajouter les val possibles si besoin
+	public void modifieQuestion(int idQ, Question q) {
 		try {
-			s.executeUpdate("UPDATE QUESTION SET texteQ=" + q.getTexteQuestion() + ", idT="+ q.getIdT()+" WHERE numQ="+q.getNumQ());
+			s.executeUpdate("UPDATE QUESTION SET texteQ='" + q.getTexteQuestion() + "', idT='"+ q.getIdT()+"' WHERE numQ="+q.getNumQ());
 			if(q.getPropositions().size()!=0){
 				for(int i=0; i<q.getPropositions().size(); i++){
 					s.executeUpdate("UPDATE VALPOSSIBLE SET Valeur="+q.getPropositions().getElementAt(i).getTexte()+" WHERE idQ="+idQ+" AND numQ="+q.getNumQ());

@@ -209,8 +209,7 @@ public class TestJDBC {
 				System.out.println(tjdbc.question.getListeQuestion(1));
 				break;
 			case 14:
-				Questionnaire q = new Questionnaire("Questionnaire test", 15688, 4, 1, 'C');
-				tjdbc.questionnaire.ajouterQuestionnaire(q);
+				tjdbc.question.modifieQuestion(1, new Question("question test", 'n', 10, 1));
 				break;
 			case 15:
 				Questionnaire qu = new Questionnaire("Questionnaire test modifié", 15688, 4, 1, 'S');

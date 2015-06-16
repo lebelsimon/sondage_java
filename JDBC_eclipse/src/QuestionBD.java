@@ -76,14 +76,10 @@ public class QuestionBD {
 
 	public void addQuestion(int idQ, Question q) {
 		try {
-			s.executeUpdate("INSERT INTO QUESTION VALUES (" + idQ + ", "
-					+ q.getNumQ() + ", '" + q.getTexteQuestion() + "', "
-					+ q.getMaxVal() + ", '" + q.idT + "'");
+			s.executeUpdate("INSERT INTO QUESTION VALUES (" + idQ + ", "+ q.getNumQ() + ", '" + q.getTexteQuestion() + "', "+ q.getMaxVal() + ", '" + q.idT + "'");
 			if (q.getPropositions().size() != 0) {
 				for (int i = 0; i < q.getPropositions().size(); i++) {
-					s.executeUpdate("INSERT INTO VALPOSSIBLE VALUES (" + idQ
-							+ ", " + q.getNumQ() + ", " + (1 + i) + ", "
-							+ q.getPropositions().get(i).getTexte());
+					s.executeUpdate("INSERT INTO VALPOSSIBLE VALUES (" + idQ+ ", " + q.getNumQ() + ", " + (1 + i) + ", "+ q.getPropositions().get(i).getTexte());
 				}
 			}
 		} catch (SQLException e) {
@@ -91,12 +87,16 @@ public class QuestionBD {
 		}
 	}
 
-	public void modifieQuestion(int idQ, Question q) {
+	public void modifieQuestion(int idQ, Question q) { //ajouter les val possibles si besoin
 		try {
-			s.executeUpdate("UPDATE QUESTION SET numQ=" + q.getNumQ()
-					+ ", texteQ=" + q.getTexteQuestion() + ", idT="
-					+ q.getIdT());
-		} catch (SQLException e) {
+			s.executeUpdate("UPDATE QUESTION SET texteQ=" + q.getTexteQuestion() + ", idT="+ q.getIdT()+" WHERE numQ="+q.getNumQ());
+			if(q.getPropositions().size()!=0){
+				for(int i=0; i<q.getPropositions().size(); i++){
+					s.executeUpdate("UPDATE VALPOSSIBLE SET Valeur="+q.getPropositions().getElementAt(i).getTexte()+" WHERE idQ="+idQ+" AND numQ="+q.getNumQ());
+				}
+			}
+		} 
+		catch (SQLException e) {
 			System.out.println(e);
 		}
 	}

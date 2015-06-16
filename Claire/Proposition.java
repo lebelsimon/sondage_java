@@ -1,6 +1,6 @@
-import java.awt.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Proposition extends JFrame {
 	private String text;
 	private Boolean valide;

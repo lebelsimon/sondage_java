@@ -1,6 +1,6 @@
-import java.awt.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Question extends JFrame {
 	private String enonce;
 	private DefaultListModel<Proposition> lesPropositions;
@@ -33,5 +33,6 @@ public class Question extends JFrame {
 	public void setProp(DefaultListModel<Proposition> p){
 		lesPropositions=p;
 	}
+	
 	
 }

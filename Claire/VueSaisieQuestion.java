@@ -3,12 +3,15 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+@SuppressWarnings("serial")
 public class VueSaisieQuestion extends JPanel {
 	Question model;
 	JTextField enonceQuestion;
 	JTextField textProposition;
 	JList<Proposition> listePropositions;
 	JScrollPane scroll;
+	JList<String> liste2;
+	DefaultListModel<String> liste;
 	
 	public VueSaisieQuestion(Question q){
 		
@@ -37,7 +40,7 @@ public class VueSaisieQuestion extends JPanel {
 		numquestionnaire.setHorizontalAlignment(getX()/2);
 		numquest.setHorizontalAlignment(getX()/2);
 		
-		JLabel eq = new JLabel("Enonce de la question: ");
+		JLabel eq = new JLabel("Enonce de la question : ");
 		enonceQuestion = new JTextField();
 		enonceQuestion.setText(q.getEnonce());
 		
@@ -86,11 +89,18 @@ public class VueSaisieQuestion extends JPanel {
 		//                         Liste des propositions
 		// =====================================================================
 		listePropositions = new JList<Proposition>(q.getProp());
-		JPanel liste = new JPanel(new FlowLayout());
-		liste.add(listePropositions);
-		DefaultListCellRenderer renderer =(DefaultListCellRenderer)listePropositions.getCellRenderer();  
-		renderer.setHorizontalAlignment(JLabel.CENTER); 
-		scroll = new JScrollPane(listePropositions, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		liste= new DefaultListModel<String>();
+		//
+		for(int i=0; i<q.getProp().getSize(); i++){
+			liste.addElement(q.getProp().getElementAt(i).getText());
+		}
+		
+		liste2 = new JList<String>(liste);
+		
+		
+		DefaultListCellRenderer renderer =(DefaultListCellRenderer)liste2.getCellRenderer();  
+		renderer.setHorizontalAlignment(JLabel.LEFT);
+		scroll = new JScrollPane(liste2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		Dimension dim = new Dimension(300,125);
 		scroll.setPreferredSize(dim);
 		milieu.add(scroll);
@@ -99,8 +109,11 @@ public class VueSaisieQuestion extends JPanel {
 		//                              Les boutons
 		// =====================================================================
 		JButton ajouter = new JButton("Ajouter");
+		ajouter.addActionListener(new BoutonAjouter());
 		JButton modifier = new JButton("Modier");
+		modifier.addActionListener(new BoutonModifier());
 		JButton supprimer = new JButton("Supprimer");
+		supprimer.addActionListener(new BoutonSupprimer());
 		
 		JPanel pBouton = new JPanel(new GridLayout(0,1,0,20));
 		pBouton.add(ajouter);
@@ -110,12 +123,12 @@ public class VueSaisieQuestion extends JPanel {
 		milieu.add(pBouton);
 		
 		JButton valider = new JButton ("Valider");
+		valider.addActionListener(new BoutonValider());
 		
 		bas.add(valider);
 		
 		
 		model=q;
-		
 		
 		// =====================================================================
 		//                       Assemblement des panel

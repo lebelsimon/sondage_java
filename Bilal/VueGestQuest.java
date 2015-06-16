@@ -21,22 +21,22 @@ public class VueGestQuest extends JFrame {
 		
 		
 		JButton btnDeco = new JButton("");
-		btnDeco.setIcon(new ImageIcon("C:\\Users\\Bilal\\Desktop\\Sondage3C.git\\gnome-logout-icone-4756-48.png"));
+		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
 		btnDeco.setBounds(648, 11, 104, 62);
 		getContentPane().add(btnDeco);
 		
 		JButton btnAjouter = new JButton("");
-		btnAjouter.setIcon(new ImageIcon("C:\\Users\\Bilal\\Desktop\\Sondage3C.git\\ajouter-vert-plus-icone-9549-48.png"));
+		btnAjouter.setIcon(new ImageIcon("../Ressources/ajouter-vert-plus-icone-9549-48.png"));
 		btnAjouter.setBounds(44, 358, 146, 62);
 		getContentPane().add(btnAjouter);
 		
 		JButton btnModifier = new JButton("");
-		btnModifier.setIcon(new ImageIcon("C:\\Users\\Bilal\\Desktop\\Sondage3C.git\\bloc-notes-stylo-ecrire-icone-8970-48.png"));
+		btnModifier.setIcon(new ImageIcon("../Ressources/bloc-notes-stylo-ecrire-icone-8970-48.png"));
 		btnModifier.setBounds(326, 358, 146, 62);
 		getContentPane().add(btnModifier);
 		
 		JButton btnSupprimer = new JButton("");
-		btnSupprimer.setIcon(new ImageIcon("C:\\Users\\Bilal\\Desktop\\Sondage3C.git\\supprimer-icone-5418-64.png"));
+		btnSupprimer.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-64.png"));
 		btnSupprimer.setBounds(596, 358, 146, 62);
 		getContentPane().add(btnSupprimer);
 		
@@ -51,14 +51,15 @@ public class VueGestQuest extends JFrame {
 		        "Birthday Card List", "High School", "Country", "Continent",
 		        "Planet" };
 		
-		JList list = new JList(categories);
-		list.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		JList<String> list = new JList<String>(categories);
+		list.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		list.setBounds(44, 154, 698, 181);
+		getContentPane().add(list);
 		
-		JScrollPane scrollPane = new JScrollPane(list);
+		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(740, 154, 19, 181);
-		scrollPane.add(list);
+		//~ scrollPane.add(list);
 		getContentPane().add(scrollPane);
 		
 		JLabel labelAjouter = new JLabel("Ajouter");
@@ -79,7 +80,7 @@ public class VueGestQuest extends JFrame {
 		labelSupprimer.setBounds(596, 424, 146, 22);
 		getContentPane().add(labelSupprimer);
 		
-		JLabel labelDeco = new JLabel("Déconnexion");
+		JLabel labelDeco = new JLabel("Deconnexion");
 		labelDeco.setHorizontalAlignment(SwingConstants.CENTER);
 		labelDeco.setBounds(648, 76, 104, 22);
 		getContentPane().add(labelDeco);
@@ -89,9 +90,6 @@ public class VueGestQuest extends JFrame {
 		
 		// END
 
-
-		
-//		getContentPane().add(Menu,"NORTH");
 		this.setVisible(true);
 	}
 

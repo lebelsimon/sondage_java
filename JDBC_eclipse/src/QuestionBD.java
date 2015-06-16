@@ -35,11 +35,9 @@ public class QuestionBD {
 									// les questions où l'on retrouve des
 									// valeurs possibles
 			while (rs.next()) {
-				System.out.println(rs.getInt("numQ"));
-				Question q = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("MaxVal"));
+				Question q = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("MaxVal"),rs.getInt("numQ"));
 				rs2 = s2.executeQuery("SELECT * FROM QUESTION NATURAL JOIN VALPOSSIBLE WHERE idQ="+ idQ);
 				while (rs2.next()) {
-					System.out.println(rs.getInt("numQ")+" "+rs2.getInt("numQ"));
 					if (rs2.getInt("numQ") == rs.getInt("numQ")) {
 						q.addProposition(new Proposition(rs2.getString("Valeur")));
 					}
@@ -50,5 +48,24 @@ public class QuestionBD {
 			System.out.println(e);
 		}
 		return listeQuestion;
+	}
+	
+	public void addQuestion(int idQ, Question q){
+		try{
+			s.executeUpdate("INSERT INTO QUESTION VALUES ("+idQ+", "+q.getNumQ()+", '"+q.getTexteQuestion()+"', "+q.getMaxVal()+", '"+q.idT+"'");
+			if(q.getPropositions().size()!=0){
+				for(int i=0; i<q.getPropositions().size(); i++){
+					s.executeUpdate("INSERT INTO VALPOSSIBLE VALUES ("+idQ+", "+q.getNumQ()+", "+(1+i)+", "+q.getPropositions().get(i).getTexte());					
+				}
+			}
+		}
+		catch(SQLException e){ System.out.println(e); }
+	}
+	
+	public void modifieQuestion(int idQ, Question q){
+		try{
+			s.executeUpdate("UPDATE QUESTION SET numQ="+q.getNumQ()+", texteQ="+q.getTexteQuestion()+", idT="+q.getIdT());
+		}
+		catch(SQLException e){ System.out.println(e); }
 	}
 }

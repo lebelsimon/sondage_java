@@ -189,7 +189,7 @@ public class TestJDBC {
 			case 9:
 				String login = tjdbc.saisieString("Login : ");
 				String mdp = tjdbc.saisieString("Mot de passe : ");
-				tjdbc.util.ConnexionUtilisateur(login, mdp);
+				System.out.println(tjdbc.util.ConnexionUtilisateur(login, mdp));
 				break;
 			case 10:
 				ArrayList<Sonde> res = tjdbc.sond.getListeSonde();

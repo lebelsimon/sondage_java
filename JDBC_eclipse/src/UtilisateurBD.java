@@ -26,22 +26,24 @@ public class UtilisateurBD {
 		}
     }
     
-    public boolean ConnexionUtilisateur(String login, String mdp){
+    public Utilisateur ConnexionUtilisateur(String login, String mdp){
+		Utilisateur u=null;
     	try{
     		ResultSet rs = s.executeQuery("SELECT * FROM UTILISATEUR NATURAL JOIN ROLEUTIL");
     		String message="";
     		while(rs.next()){
     			if(rs.getString("login").equals(login) && rs.getString("motDePasse").equals(mdp)){
     				message="connexion réussie";
-    				System.out.println(new Utilisateur(rs.getInt("idU"),rs.getString("nomU"),rs.getString("prenomU"),rs.getString("login"), rs.getString("motDePasse"), rs.getString("nomR")));
-    				return true;
+    				u=new Utilisateur(rs.getInt("idU"),rs.getString("nomU"),rs.getString("prenomU"),rs.getString("login"), rs.getString("motDePasse"), rs.getString("nomR"));
+    				break;
     			}
     			else if(rs.getString("login").equals(login) && !(rs.getString("motDePasse").equals(mdp))){
     				message="mauvais mot de passe, veuillez réessayer";
-    				return false;
+    				break;
     			}
     			else{
     				message="mauvais login";
+    				break;
     			}
     		}
     		System.out.println(message);
@@ -49,6 +51,6 @@ public class UtilisateurBD {
     	catch(SQLException e){
     		System.out.println("Erreur requète : "+e);
     	}
-    	return false;
+    	return u;
     }
 }

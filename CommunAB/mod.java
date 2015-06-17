@@ -23,8 +23,9 @@ public class mod extends Module{
     JButton appeler;
     Sonde toto;
     SondeBD info;
+    ModuleSondage modsond;
 			
-    public mod(){
+    public mod(ModuleSondage s){
 	try{
 	    ConnexionMySQL co = new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
 	    info = new SondeBD(co);
@@ -79,17 +80,9 @@ public class mod extends Module{
 	sonde.add(nom);
 	sonde.add(prenom);
 	sonde.add(telephone);
-				
-	//ajout dans SondeGlobal
-	//~ SondeGlobal.add(sonde);
-	//~ SondeGlobal.add(sondeP);
-
+	
 	suivant.setPreferredSize(new Dimension(100, 40));
 	appeler.setPreferredSize(new Dimension(100, 40));
-	//~ 
-	//~ suivant.setMinimumSize(new Dimension(1,1));
-	//~ suivant.setMaximumSize(new Dimension(1,1));
-	
 				
 	tid.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 	idaff.add(id);
@@ -107,9 +100,9 @@ public class mod extends Module{
 	appeler.setToolTipText("Appeler le sonde");
 	suivant.setToolTipText("Sonde suivant");
 	appeler.setName("appeler");
-	appeler.addActionListener(new QuestionnaireButton(appeler.getName()));
+	appeler.addActionListener(new QuestionnaireButton(appeler.getName(),this));
 	suivant.setName("suivi");
-	suivant.addActionListener(new QuestionnaireButton(suivant.getName()));
+	suivant.addActionListener(new QuestionnaireButton(suivant.getName(),this));
 			
 	this.add(idtot);
 				
@@ -121,8 +114,7 @@ public class mod extends Module{
 		int ind=random.nextInt(list.size());	
 		toto = new Sonde(list.get(ind));
 		info.supprimerSonde(toto.getNumSond());
-		//~ list.remove(ind);
-		//~ System.out.println(toto.getNumSond()+"tes");
+
 		return toto;
 	}
 }

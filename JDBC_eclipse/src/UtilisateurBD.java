@@ -37,13 +37,8 @@ public class UtilisateurBD {
     				u=new Utilisateur(rs.getInt("idU"),rs.getString("nomU"),rs.getString("prenomU"),rs.getString("login"), rs.getString("motDePasse"), rs.getString("nomR"));
     				break;
     			}
-    			else if(rs.getString("login").equals(login) && !(rs.getString("motDePasse").equals(mdp))){
-    				message="mauvais mot de passe, veuillez réessayer";
-    				break;
-    			}
     			else{
-    				message="mauvais login";
-    				break;
+    				message="identifiant invalide";
     			}
     		}
     		System.out.println(message);

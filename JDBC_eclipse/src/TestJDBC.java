@@ -116,10 +116,11 @@ public class TestJDBC {
 			System.out.println("11. Supprimer sondé");
 			System.out.println("12. Afficher la liste des questionnaire avec la liste des questions");
 			System.out.println("13. Afficher la liste des questions");
-			System.out.println("14. Insérer un nouveau questionnaire");
-			System.out.println("15. Modifier un questionnaire");
-			System.out.println("16. Supprimer un questionnaire");
-			System.out.println("17. Sortir");
+			System.out.println("14. Modifier une question");
+			System.out.println("15. Insérer un nouveau questionnaire");
+			System.out.println("16. Modifier un questionnaire");
+			System.out.println("17. Supprimer un questionnaire");
+			System.out.println("18. Sortir");
 			int rep = tjdbc.saisieInt("Entrez votre choix", 1, 25);
 			int numCli;
 			Client c;
@@ -171,9 +172,7 @@ public class TestJDBC {
 				break;
 			case 5:
 				try {
-					numCli = tjdbc.saisieInt(
-							"\nEntrez le numéro du client à afficher", 1,
-							999999);
+					numCli = tjdbc.saisieInt("\nEntrez le numéro du client à afficher", 1,999999);
 					// ici l'appel à la méthode qui va bien
 					tjdbc.client.affiche(numCli);
 				} catch (SQLException e) {
@@ -212,14 +211,19 @@ public class TestJDBC {
 				tjdbc.question.modifieQuestion(1, new Question("question test", 'n', 10, 1));
 				break;
 			case 15:
+				tjdbc.questionnaire.ajouterQuestionnaire(new Questionnaire("ajout questionnaire test", 15688, 7, 2, 'S'));
+				break;
+			case 16:
 				Questionnaire qu = new Questionnaire("Questionnaire test modifié", 15688, 4, 1, 'S');
 				qu.setIdQ(9);
 				tjdbc.questionnaire.modifierQuestionnaire(qu);
 				break;
-			case 16:
-				tjdbc.questionnaire.supprimerQuestionnaire(5);
-				break;
 			case 17:
+				System.out.println("entrez le numéro de questionnaire à supprimer");
+				String num = tjdbc.sc.nextLine();
+				tjdbc.questionnaire.supprimerQuestionnaire(Integer.parseInt(num));
+				break;
+			case 18:
 				fini = true;
 				break;
 			}

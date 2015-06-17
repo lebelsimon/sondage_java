@@ -100,4 +100,14 @@ public class QuestionBD {
 			System.out.println(e);
 		}
 	}
+	
+	public void supprimerQuestion(int idQ, Question q){
+		try{
+			s.executeUpdate("DELETE FROM QUESTION WHERE numQ="+q.getNumQ()+" AND idQ="+idQ);
+			if(q.getPropositions().size()!=0){
+				s.executeUpdate("DELETE FROM VALPOSSIBLE WHERE numQ="+q.getNumQ()+" AND idQ="+idQ);
+			}
+		}
+		catch(SQLException e){ System.out.println(e); }
+	}
 }

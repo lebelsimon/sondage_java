@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class QuestionnaireBD{
 	private ConnexionMySQL c;
-	private Statement s;
+	private Statement s, s2;
 
 	// constructeur
 	public QuestionnaireBD(ConnexionMySQL c) throws SQLException {
@@ -16,6 +16,7 @@ public class QuestionnaireBD{
 			this.c = c;
 			Connection conn = c.getConnexion();
 			this.s = conn.createStatement();
+			this.s2 = conn.createStatement();
 			System.out.println("questionnaireBD créé");
 		} 
 		catch (SQLException e) {
@@ -28,17 +29,25 @@ public class QuestionnaireBD{
 		try{
 			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION");
 			int questionnaireCourant=-1;
+			ArrayList<Question> listeQuestion = new ArrayList<Question>();
 			while(rs.next()){
-				ArrayList<Question> listeQuestion = new ArrayList<Question>();
 				if(questionnaireCourant==rs.getInt("idQ")){
 					listeQuestion.add(new Question(rs.getString("texteQ")));
 				}
 				else{
+					listeQuestion = new ArrayList<Question>();
 					Questionnaire q = new Questionnaire(rs.getString("Titre"), rs.getInt("numC"), rs.getInt("idU"), rs.getInt("idPan"), rs.getString("etat").charAt(0));
 					q.setIdQ(rs.getInt("idQ"));
+					questionnaireCourant=rs.getInt("idQ");
 					q.setListeQuestions(listeQuestion);
 					listeQuestionnaire.add(q);
 				}
+			}
+			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTIONNAIRE WHERE Titre NOT IN (SELECT Titre FROM QUESTIONNAIRE NATURAL JOIN QUESTION)");
+			while(rs2.next()){
+				Questionnaire q = new Questionnaire(rs2.getString("Titre"), rs2.getInt("numC"),  rs2.getInt("idU"),  rs2.getInt("idPan"),  rs2.getString("etat").charAt(0));
+				q.setListeQuestions(new ArrayList<Question>());
+				listeQuestionnaire.add(q);
 			}
 		}
 		catch(SQLException e){System.out.println(e);}
@@ -62,7 +71,7 @@ public class QuestionnaireBD{
 	return 1;
 	}
 	
-	public void supprimerQuestionnaire(int idQ){ // problème
+	public void supprimerQuestionnaire(int idQ){
 		try{
 			s.executeUpdate("DELETE FROM QUESTIONNAIRE WHERE idQ="+idQ);
 		}
@@ -71,7 +80,7 @@ public class QuestionnaireBD{
 	
 	public void modifierQuestionnaire(Questionnaire q){ // problème
 		try{
-			s.executeUpdate("UPDATE QUESTIONNAIRE SET Titre='"+q.getTitreQuestionnaire()+"' etat='"+q.getEtat()+"', numC="+q.getNumC()+", idU="+q.getIdU()+", idPan="+q.getIdPan()+" WHERE idQ="+q.getIdQ());
+			s.executeUpdate("UPDATE QUESTIONNAIRE SET Titre='"+q.getTitreQuestionnaire()+"', etat='"+q.getEtat()+"', numC="+q.getNumC()+", idU="+q.getIdU()+", idPan="+q.getIdPan()+" WHERE idQ="+q.getIdQ());
 		}
 		catch(SQLException e){System.out.println(e);}
 	}

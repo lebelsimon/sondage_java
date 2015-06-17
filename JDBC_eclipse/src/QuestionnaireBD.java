@@ -78,10 +78,32 @@ public class QuestionnaireBD{
 		catch(SQLException e){ System.out.println(e);}
 	}
 	
-	public void modifierQuestionnaire(Questionnaire q){ // problème
+	public void modifierQuestionnaire(Questionnaire q){
 		try{
 			s.executeUpdate("UPDATE QUESTIONNAIRE SET Titre='"+q.getTitreQuestionnaire()+"', etat='"+q.getEtat()+"', numC="+q.getNumC()+", idU="+q.getIdU()+", idPan="+q.getIdPan()+" WHERE idQ="+q.getIdQ());
 		}
 		catch(SQLException e){System.out.println(e);}
+	}
+	
+	public Questionnaire creerQuestionnaire(int idQ){
+		Questionnaire res=null;
+		ArrayList<Question> listeQuestion=new ArrayList<Question>();
+		try{
+			String titreQuestionnaire="";
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE WHERE idQ="+idQ);
+			while(rs.next()){
+				titreQuestionnaire=rs.getString("Titre");
+				res=new Questionnaire(titreQuestionnaire, rs.getInt("numC"),  rs.getInt("idU"),  rs.getInt("idPan"), rs.getString("etat").charAt(0));
+			}
+			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION WHERE idQ="+idQ);
+			if(rs2.absolute(1)){
+				while(rs2.next()){
+					listeQuestion.add(new Question(rs2.getString("texteQ"), rs2.getString("idT").charAt(0), rs2.getInt("maxVal"), rs2.getInt("numQ")));
+				}
+			}
+			res.setListeQuestions(listeQuestion);
+		}
+		catch(SQLException e){ System.out.println(e); }
+		return res;
 	}
 }

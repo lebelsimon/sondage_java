@@ -120,7 +120,8 @@ public class TestJDBC {
 			System.out.println("15. Insérer un nouveau questionnaire");
 			System.out.println("16. Modifier un questionnaire");
 			System.out.println("17. Supprimer un questionnaire");
-			System.out.println("18. Sortir");
+			System.out.println("18. Créer un questionnaire à partir d'un numéro et d'un questionnaire de la BD");
+			System.out.println("19. Sortir");
 			int rep = tjdbc.saisieInt("Entrez votre choix", 1, 25);
 			int numCli;
 			Client c;
@@ -224,6 +225,9 @@ public class TestJDBC {
 				tjdbc.questionnaire.supprimerQuestionnaire(Integer.parseInt(num));
 				break;
 			case 18:
+				System.out.println(tjdbc.questionnaire.creerQuestionnaire(2));
+				break;
+			case 19:
 				fini = true;
 				break;
 			}

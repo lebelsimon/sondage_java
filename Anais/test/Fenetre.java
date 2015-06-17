@@ -16,22 +16,20 @@ public class Fenetre extends JFrame{
 		Fond f = new Fond();
 		
 		
-		this.add(f);	
-		this.pack();
+		//		this.add(f);	
 		this.setSize(800,600);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-		
+		this.setContentPane(f);
 		Container c = this.getContentPane();
-
 			// Menu
 		this.setJMenuBar(new Menu());
 		System.out.println("ajout menu");
 		
 			// creation espace module
 		m = new ModuleSondage();
-
+		m.setOpaque(false);
 		c.add(m);
 		
 				// affichage en pleine ecran

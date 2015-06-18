@@ -12,18 +12,18 @@ public class ControleurVueGestQuest implements ActionListener {
 		JButton b =(JButton)arg0.getSource();
 		if(b.getName()=="Deconnexion"){
 			Connexion conn = new Connexion();
-			VGQ.dispose();
+			VGQ.setVisible(false);
 		}
 		if(b.getName()=="Ajouter"){
-			VueCreatQuest VCQ = new VueCreatQuest("c");
-			VGQ.dispose();
+			VueCreatQuest VCQ = new VueCreatQuest("c",VGQ.connection);
+			VGQ.setVisible(false);
 		}
 		if(b.getName()=="Supprimer"){
 			VGQ.listcat.removeElementAt(VGQ.list.getSelectedIndex());
 		}
 		if(b.getName()=="Modifier"){
-			VueCreatQuest VCQ = new VueCreatQuest("m");
-			VGQ.dispose();
+			VueCreatQuest VCQ = new VueCreatQuest("m",VGQ.connection);
+			VGQ.setVisible(false);
 		}
 	}
 }

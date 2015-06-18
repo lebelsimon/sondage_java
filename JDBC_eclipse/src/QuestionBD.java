@@ -34,7 +34,7 @@ public class QuestionBD {
 		ArrayList<Question> listeQuestion = new ArrayList<Question>();
 		try {
 			ResultSet rs = s.executeQuery("SELECT * FROM QUESTION WHERE idQ="+ idQ); // on récupère tout les questions
-			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTION NATURAL JOIN VALPOSSIBLE WHERE idQ="+ idQ); // on récupère les valerus possibles pour
+			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTION NATURAL JOIN VALPOSSIBLE WHERE idQ="+ idQ); // on récupère les valeurs possibles pour
 			// les questions où l'on retrouve des
 			// valeurs possibles
 			while (rs.next()) {
@@ -109,5 +109,14 @@ public class QuestionBD {
 			}
 		}
 		catch(SQLException e){ System.out.println(e); }
+	}
+	
+	public DefaultListModel<Proposition> getListePropositionPourUneQuestion(int idQ, int numQ){
+		ArrayList<Question> listeQuestion = this.getListeQuestion(idQ);
+		for(Question q : listeQuestion){
+			if(q.getNumQ()==numQ)
+				return q.getPropositions();
+		}
+		return new DefaultListModel<Proposition>();
 	}
 }

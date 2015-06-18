@@ -26,7 +26,7 @@ public class UtilisateurBD {
 		}
     }
     
-    public Utilisateur ConnexionUtilisateur(String login, String mdp){
+    public Utilisateur connexionUtilisateur(String login, String mdp){
 		Utilisateur u=null;
     	try{
     		ResultSet rs = s.executeQuery("SELECT * FROM UTILISATEUR NATURAL JOIN ROLEUTIL");

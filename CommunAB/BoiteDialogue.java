@@ -17,8 +17,8 @@ public class BoiteDialogue extends JOptionPane {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			System.out.println("ddfdf");
 			bt.getRootFrame().dispose();
+			
 		}
 		
 	}
@@ -33,6 +33,7 @@ public class BoiteDialogue extends JOptionPane {
 	public BoiteDialogue(int tps) {
 		super();
 		init(tps);
+		
 		// TODO Auto-generated constructor stub
 	}
 

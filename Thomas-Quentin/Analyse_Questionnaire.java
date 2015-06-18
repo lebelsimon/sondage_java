@@ -11,7 +11,10 @@ import java.awt.Canvas;
 
 
 public class Analyse_Questionnaire extends JFrame {
+	private JButton btnModifier;
+	public boolean visible;
 	public Analyse_Questionnaire() {
+		this.visible=true;
 		this.setTitle("Rapid Sond'");
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -26,14 +29,19 @@ public class Analyse_Questionnaire extends JFrame {
 		
 		
 		JButton btnDeco = new JButton("");
-		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
+		btnDeco.setName("Deco");
+		btnDeco.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\gnome-logout-icone-4756-48.png"));
 		btnDeco.setBounds(648, 11, 104, 62);
 		getContentPane().add(btnDeco);
+		btnDeco.addActionListener(new ActionBoutonI1(this));
 		
-		JButton btnModifier = new JButton("");
-		btnModifier.setIcon(new ImageIcon("../Ressources/bloc-notes-stylo-ecrire-icone-8970-48.png"));
-		btnModifier.setBounds(326, 358, 146, 62);
-		getContentPane().add(btnModifier);
+		
+		JButton btnAnalyse = new JButton("");
+		btnAnalyse.setName("Analyse");
+		btnAnalyse.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\analyse.png"));
+		btnAnalyse.setBounds(326, 358, 146, 62);
+		getContentPane().add(btnAnalyse);
+		btnAnalyse.addActionListener(new ActionBoutonI1(this));
 		
 		JLabel VosQuest = new JLabel("Vos questionnaires");
 		VosQuest.setHorizontalAlignment(SwingConstants.CENTER);
@@ -41,21 +49,16 @@ public class Analyse_Questionnaire extends JFrame {
 		VosQuest.setBounds(44, 109, 698, 22);
 		getContentPane().add(VosQuest);
 		
-		String categories[] = { "Household", "Office", "Extended Family",
-		        "Company (US)", "Company (World)", "Team", "Will",
-		        "Birthday Card List", "High School", "Country", "Continent",
-		        "Planet" };
-		
-		JList<String> list = new JList<String>(categories);
-		list.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
-		list.setBounds(44, 154, 698, 181);
-		getContentPane().add(list);
+		String categories[] = { "Questionnaire 1", "Questionnaire 2", "Questionnaire3",
+		        "Questionnaire 3", "Questionnaire 4", "Questionnaire 5", "Questionnaire 6"};
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(740, 154, 19, 181);
-		//~ scrollPane.add(list);
+		scrollPane.setBounds(44, 154, 698, 181);
 		getContentPane().add(scrollPane);
+		
+		JList<String> list = new JList<String>(categories);
+		scrollPane.setViewportView(list);
+		list.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		
 		JLabel labelModifier = new JLabel("Analyser");
 		labelModifier.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -75,7 +78,7 @@ public class Analyse_Questionnaire extends JFrame {
 		
 		// END
 
-		this.setVisible(true);
+		this.setVisible(this.visible);
 	}
 
 
@@ -85,6 +88,12 @@ public class Analyse_Questionnaire extends JFrame {
 			Analyse_Questionnaire Appli = new Analyse_Questionnaire();
 			}
 		
+	public Icon getBtnModifierIcon() {
+		return btnModifier.getIcon();
+	}
+	public void setBtnModifierIcon(Icon icon) {
+		btnModifier.setIcon(icon);
+	}
 	}
 
 

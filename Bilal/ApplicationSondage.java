@@ -6,35 +6,17 @@ import java.awt.*;
 
 @SuppressWarnings("serial")
 public class ApplicationSondage extends JFrame {
-	public ApplicationSondage(){
+	public ApplicationSondage(Menu menu, VueSaisieQuestion qcm){
 		super("Rapid'Sond");
-		this.setSize(1000,800);
+		this.setSize(800,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().add(qcm);
 		JPanel Fenetre = new JPanel();
 		Fenetre.setLayout( new GridLayout() );
-		// Panel Menu
+		this.setJMenuBar(new Menu());
 		
-		JPanel Menu = new JPanel();
-		Menu.setLayout( new FlowLayout());
-		
-		
-		
-		
-		// Panel Module
-		
-		JPanel Module = new JPanel();
-		// depend du module, a completer
-		Module.setLayout(new FlowLayout());
-		
-		
-		// END
-		
-		Fenetre.add(Menu,"NORTH");
-		Fenetre.add(Module,"SOUTH");
+
 		this.setVisible(true);
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ApplicationSondage test = new ApplicationSondage();
-	}
+
 }

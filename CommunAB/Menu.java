@@ -16,7 +16,7 @@ public class Menu extends JMenuBar{
 		changerPerso = new JMenuItem("Paramètres");
 		deconnexion = new JMenuItem("Deconnexion CTR+D");
 		deconnexion.setName("deco");
-		deconnexion.addActionListener(new MenuAction(deconnexion.getName()));
+		deconnexion.addActionListener(new MenuAction(deconnexion.getName(),this));
 
 		Affichage = new JMenu("Affichage");
 		zoomPlus = new JMenuItem("zoom +");
@@ -47,7 +47,7 @@ public class Menu extends JMenuBar{
 		changerPerso2 = new JMenuItem("Paramètres");
 		deconnexion2 = new JMenuItem("Deconnexion CTR+D");
 		deconnexion2.setName("deco");
-		deconnexion2.addActionListener(new MenuAction(deconnexion2.getName()));
+		deconnexion2.addActionListener(new MenuAction(deconnexion2.getName(),this));
 
 		Personne.add(changerPerso2);
 		Personne.add(deconnexion2);
@@ -58,5 +58,9 @@ public class Menu extends JMenuBar{
 		this.add(Aide);
 		this.add(Box.createHorizontalGlue()); // permet d'espacer les element dans le menu
 		this.add(Personne);
+		
 	}
+	public Fenetre getfen(){
+			return fen;
+		}
 }

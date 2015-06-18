@@ -3,17 +3,20 @@ import javax.swing.*;
 
 	
 public class Menu extends JMenuBar{
-	
-	 private JMenuBar BarMenu;
-	 private JMenu Affichage, Aide, Compte, Personne;
-	 private JMenuItem changerPerso, deconnexion, zoomPlus, zoomMoins, tuto, manuel, changerPerso2, deconnexion2;
+	private Fenetre fen;
+	private JMenuBar BarMenu;
+	private JMenu Affichage, Aide, Compte, Personne;
+	private JMenuItem changerPerso, deconnexion, zoomPlus, zoomMoins, tuto, manuel, changerPerso2, deconnexion2;
 
-	Menu(){
+	Menu(Fenetre fen){
 		
 				// créatiojn des éléments du menu	  
+		this.fen=fen;
 		Compte = new JMenu("Compte");
 		changerPerso = new JMenuItem("Paramètres");
 		deconnexion = new JMenuItem("Deconnexion CTR+D");
+		deconnexion.setName("deco");
+		deconnexion.addActionListener(new MenuAction(deconnexion.getName()));
 
 		Affichage = new JMenu("Affichage");
 		zoomPlus = new JMenuItem("zoom +");
@@ -43,6 +46,9 @@ public class Menu extends JMenuBar{
 			// 1 JMenuItem ne peut appartenir qu'a un JMenu, il faut donc recréer des JMenuItem
 		changerPerso2 = new JMenuItem("Paramètres");
 		deconnexion2 = new JMenuItem("Deconnexion CTR+D");
+		deconnexion2.setName("deco");
+		deconnexion2.addActionListener(new MenuAction(deconnexion2.getName()));
+
 		Personne.add(changerPerso2);
 		Personne.add(deconnexion2);
 		

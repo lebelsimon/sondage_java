@@ -15,76 +15,73 @@ import javax.swing.table.DefaultTableModel;
 public class Analyse_Tableau extends JFrame {
 	private JTextField txtEntrezVotreCommentaire;
 	private JTable table;
+	//public boolean visible;
 	Analyse_Tableau(){
-		this.setSize(500,400);
+		this.setSize(800,600);
 		this.setResizable(false);
 		this.setTitle("Appli RapidSond");
 		getContentPane().setLayout(null);
 			
 		JPanel panel = new JPanel();
-		panel.setBounds(20, 11, 464, 19);
+		panel.setBounds(39, 41, 718, 19);
 		getContentPane().add(panel);
 		
-		JLabel lblQuestionnaire = new JLabel("Questionnaire n°: 01");
+		JLabel lblQuestionnaire = new JLabel("Questionnaire n: 01");
 		panel.add(lblQuestionnaire);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(20, 29, 464, 293);
+		panel_1.setBounds(39, 60, 718, 415);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblQuestionN = new JLabel("Question n\u00B0: 01/02");
-		lblQuestionN.setBounds(20, 30, 92, 14);
+		lblQuestionN.setBounds(20, 30, 159, 14);
 		panel_1.add(lblQuestionN);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(323, 30, 116, 68);
+		panel_2.setBounds(498, 56, 190, 67);
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Age");
-		rdbtnNewRadioButton.setBounds(-2, 5, 45, 23);
-		rdbtnNewRadioButton.setSelected(true);
-		panel_2.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnAge = new JRadioButton("Age");
+		rdbtnAge.setBounds(-2, 5, 121, 23);
+		rdbtnAge.setSelected(true);
+		panel_2.add(rdbtnAge);
 		
 		JRadioButton rdbtnCategorieSociopro = new JRadioButton("Categorie Socio-pro");
-		rdbtnCategorieSociopro.setBounds(-2, 33, 121, 23);
+		rdbtnCategorieSociopro.setBounds(-2, 33, 167, 28);
 		panel_2.add(rdbtnCategorieSociopro);
 		
 		JButton btnGraphique = new JButton("Graphique");
-		btnGraphique.setBounds(333, 109, 89, 23);
+		btnGraphique.setName("Graphique");
+		btnGraphique.setBounds(543, 150, 102, 53);
 		panel_1.add(btnGraphique);
+		btnGraphique.addActionListener(new ActionBoutonI2(this));
 		
 		txtEntrezVotreCommentaire = new JTextField();
 		txtEntrezVotreCommentaire.setText("Entrez votre commentaire");
-		txtEntrezVotreCommentaire.setBounds(323, 143, 116, 113);
+		txtEntrezVotreCommentaire.setBounds(498, 231, 190, 147);
 		panel_1.add(txtEntrezVotreCommentaire);
 		txtEntrezVotreCommentaire.setColumns(1);
 		
-		// JScrollPane scrollPane = new JScrollPane();
-		// scrollPane.setToolTipText("");
-		// scrollPane.setBounds(445, 0, 19, 293);
-		// panel_1.add(scrollPane);
-		// scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
 		JLabel lblNomquestion = new JLabel("NOM_Question");
-		lblNomquestion.setBounds(127, 30, 100, 14);
+		lblNomquestion.setBounds(155, 30, 333, 14);
 		panel_1.add(lblNomquestion);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(20, 55, 287, 227);
+		panel_3.setBounds(20, 55, 444, 323);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setToolTipText("");
-		scrollPane_1.setBounds(268, 0, 19, 210);
+		scrollPane_1.setBounds(425, 0, 19, 305);
 		panel_3.add(scrollPane_1);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane_2.setBounds(0, 210, 268, 16);
+		scrollPane_2.setBounds(0, 304, 444, 19);
 		panel_3.add(scrollPane_2);
 		
 		table = new JTable();
@@ -105,30 +102,25 @@ public class Analyse_Tableau extends JFrame {
 				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
 			}
 		));
-		table.setBounds(0, 0, 267, 208);
+		table.setBounds(0, 0, 434, 312);
 		panel_3.add(table);
 		
-		JButton btnSuivant = new JButton("Retour");
-		btnSuivant.setBounds(20, 327, 89, 23);
-		getContentPane().add(btnSuivant);
-		
-
-		JLabel labelSuiv = new JLabel("Suiv");
-		labelSuiv.setHorizontalAlignment(SwingConstants.CENTER);
-		labelSuiv.setBounds(648, 76, 104, 22);
-		getContentPane().add(labelSuiv);
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.setName("Retour");
+		btnRetour.setBounds(39, 496, 104, 43);
+		getContentPane().add(btnRetour);
+		btnRetour.addActionListener(new ActionBoutonI2(this));
 		
 
 		JButton btnSuiv = new JButton("Question suivante");
-		btnSuiv.setBounds(335, 327, 126, 23);
+		btnSuiv.setBounds(670, 496, 87, 43);
 		getContentPane().add(btnSuiv);
 		btnSuiv.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
 		
 		ButtonGroup choixOption = new ButtonGroup();
-		choixOption.add(rdbtnNewRadioButton);
+		choixOption.add(rdbtnAge);
 		choixOption.add(rdbtnCategorieSociopro);
-		//panel_2.add(choixOption);
-
+		
 		this.setJMenuBar(new Menu());
 		this.setVisible(true);
 

@@ -10,7 +10,16 @@ public class Fenetre extends JFrame{
 		super("Rapid'Sond");
 		System.out.println("Fenetre deb");
 
-		this.setSize(1000,800);
+		
+		
+		// mise en place d'une image de fond
+		Fond f = new Fond();
+		
+		
+		this.add(f);	
+		this.pack();
+		this.setSize(800,600);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
@@ -22,22 +31,25 @@ public class Fenetre extends JFrame{
 		
 			// creation espace module
 		m = new ModuleSondage();
+
 		c.add(m);
 		
 				// affichage en pleine ecran
-		GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		if (device.isFullScreenSupported()) {
-			device.setFullScreenWindow(this);
-	    } else {
-	        System.err.println("Le mode plein ecran n'est pas disponible");
-	    }
+		//~ GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		//~ if (device.isFullScreenSupported()) {
+			//~ device.setFullScreenWindow(this);
+	    //~ } else {
+	        //~ System.err.println("Le mode plein ecran n'est pas disponible");
+	    //~ }
 	    
 
 		
-
+		
 	    
 	    
 		 this.setVisible(true);
+		 this.revalidate();
+		 this.repaint();
 	}
 	
 	

@@ -6,7 +6,7 @@ import java.awt.*;
 public class QuestionnaireVue extends JPanel{
 	//static Questionnaire q, Sonde s;
 	private JLabel idQuestionnaire;
-	private Questionnaire q;
+	Questionnaire questionnaire;
 	
 	
 	// pour l'instant je crée un affichage vide, mais par la suite le constructeur prendra en parametre:
@@ -15,11 +15,15 @@ public class QuestionnaireVue extends JPanel{
 		super();
 		this.setLayout(new BorderLayout());
 
+		// initialisation
+		String nomQuestionnaire = questionnaire.getTitreQuestionnaire();
 		
 		// Creation du label Questionnaire:
 		
 		JPanel idQuestionnaireJ = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 4));
-		idQuestionnaire = new JLabel("Questionnaire n° X");
+		
+		
+		idQuestionnaire = new JLabel(nomQuestionnaire);
 		idQuestionnaireJ.add(idQuestionnaire);
 		idQuestionnaireJ.setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -31,19 +35,19 @@ public class QuestionnaireVue extends JPanel{
 		boutonsQuestions.setBorder(BorderFactory.createLineBorder(Color.black));
 		JButton qsuiv = new JButton(">");
 		qsuiv.setName("suiv");
-		qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this.q));
+		qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this.questionnaire));
 		
 		JButton qprec = new JButton("<");
 		qprec.setName("prec");
-		qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this.q));
+		qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this.questionnaire));
 		
 		JButton qprem = new JButton("<<<");
 		qprem.setName("prem");
-		qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this.q));
+		qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this.questionnaire));
 		
 		JButton qder = new JButton(">>>");
 		qder.setName("dern");
-		qder.addActionListener(new QuestionnaireButton(qder.getName(), this.q));
+		qder.addActionListener(new QuestionnaireButton(qder.getName(), this.questionnaire));
 		
 		boutonsQuestions.add(qprem); 
 		boutonsQuestions.add(qprec);

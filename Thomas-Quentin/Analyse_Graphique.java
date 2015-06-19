@@ -72,7 +72,7 @@ public class Analyse_Graphique extends JFrame {
 		btnTableau.addActionListener(new ActionBoutonI3(this));
 		
 		JLabel lblTableauBrut = new JLabel("Tableau brut");
-		lblTableauBrut.setBounds(574, 294, 76, 20);
+		lblTableauBrut.setBounds(562, 294, 100, 20);
 		panel_1.add(lblTableauBrut);
 		
 		JLabel label = new JLabel("NOM_Question");
@@ -87,12 +87,12 @@ public class Analyse_Graphique extends JFrame {
         
                 
                 
-                JButton btnSuivant = new JButton("");
-                btnSuivant.setBounds(657, 486, 104, 44);
-                getContentPane().add(btnSuivant);
-                btnSuivant.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\suivant1.png"));
-                btnSuivant.setToolTipText("Suivant");
-                btnSuivant.setToolTipText("Retour");
+        JButton btnSuivant = new JButton("");
+        btnSuivant.setBounds(657, 486, 104, 44);
+        getContentPane().add(btnSuivant);
+        btnSuivant.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\suivant1.png"));
+        btnSuivant.setToolTipText("Suivant");
+        btnSuivant.setToolTipText("Retour");
         button.addActionListener(new ActionBoutonI3(this));
 		
 		ButtonGroup choixOption = new ButtonGroup();

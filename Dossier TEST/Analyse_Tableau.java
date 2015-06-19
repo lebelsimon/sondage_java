@@ -105,6 +105,7 @@ public class Analyse_Tableau extends JFrame {
 		
 		JButton btnGraphique = new JButton("");
 		btnGraphique.setName("Graphique");
+		btnGraphique.setIcon(new ImageIcon("../Ressources/graphique.png"));
 		btnGraphique.setBounds(543, 130, 102, 53);
 		panel_1.add(btnGraphique);
 		btnGraphique.addActionListener(new ActionBoutonI2(this));
@@ -114,6 +115,7 @@ public class Analyse_Tableau extends JFrame {
         btnRetour.setIcon(new ImageIcon("../Ressources/retoutpetit.png"));
         btnRetour.setBounds(39, 496, 104, 43);
         getContentPane().add(btnRetour);
+        btnRetour.setToolTipText("Retour");
         btnRetour.addActionListener(new ActionBoutonI2(this));
 		
 
@@ -123,7 +125,7 @@ public class Analyse_Tableau extends JFrame {
 		getContentPane().add(btnSuiv);
 		btnSuiv.setIcon(new ImageIcon("../Ressources/suivant1.png"));
 		btnSuiv.addActionListener(new ActionBoutonI2(this));
-		
+		btnSuiv.setToolTipText("Suivant");
 		ButtonGroup choixOption = new ButtonGroup();
 		choixOption.add(rdbtnAge);
 		choixOption.add(rdbtnCategorieSociopro);

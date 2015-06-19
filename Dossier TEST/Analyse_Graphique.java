@@ -67,8 +67,8 @@ public class Analyse_Graphique extends JFrame {
 		btnTableau.setName("Tableau");
 		btnTableau.setBounds(547, 238, 121, 45);
 		panel_1.add(btnTableau);
-		btnTableau.setIcon(new ImageIcon("../Ressources/table.png"));
-		btnTableau.setToolTipText("Suivant");
+		btnTableau.setIcon(new ImageIcon("../Ressources/tableau2.png"));
+
 		btnTableau.addActionListener(new ActionBoutonI3(this));
 		
 		JLabel lblTableauBrut = new JLabel("Tableau brut");
@@ -85,6 +85,7 @@ public class Analyse_Graphique extends JFrame {
         button.setBounds(39, 496, 104, 43);
         getContentPane().add(button);
         
+        button.setToolTipText("Retour");
                 
                 
         JButton btnSuivant = new JButton("");
@@ -92,7 +93,6 @@ public class Analyse_Graphique extends JFrame {
         getContentPane().add(btnSuivant);
                 btnSuivant.setIcon(new ImageIcon("../Ressources/suivant1.png"));
         btnSuivant.setToolTipText("Suivant");
-        btnSuivant.setToolTipText("Retour");
         button.addActionListener(new ActionBoutonI3(this));
 		
 		ButtonGroup choixOption = new ButtonGroup();

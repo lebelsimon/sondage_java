@@ -114,6 +114,7 @@ public class Analyse_Tableau extends JFrame {
         //btnRetour.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\retoutpetit.png"));
         btnRetour.setBounds(39, 496, 104, 43);
         getContentPane().add(btnRetour);
+        btnRetour.setToolTipText("Retour");
         btnRetour.addActionListener(new ActionBoutonI2(this));
 		
 
@@ -122,6 +123,7 @@ public class Analyse_Tableau extends JFrame {
 		btnSuiv.setBounds(653, 496, 104, 43);
 		getContentPane().add(btnSuiv);
 		//btnSuiv.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
+		btnSuiv.setToolTipText("Suivant");
 		btnSuiv.addActionListener(new ActionBoutonI2(this));
 		
 		ButtonGroup choixOption = new ButtonGroup();

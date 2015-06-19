@@ -26,7 +26,7 @@ public class QuestionnaireBD{
 		}
 	}
 	
-	public ArrayList<Questionnaire> getListeQuestionnaire(){
+	public ArrayList<Questionnaire> getListeQuestionnaire(){ // prendre en compte l'id de l'utilisateur et l'état des questionnaires.
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
 		try{
 			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION");

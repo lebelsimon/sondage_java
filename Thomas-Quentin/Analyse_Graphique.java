@@ -67,7 +67,7 @@ public class Analyse_Graphique extends JFrame {
 		btnTableau.setName("Tableau");
 		btnTableau.setBounds(547, 238, 121, 45);
 		panel_1.add(btnTableau);
-		btnTableau.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\table.png"));
+		btnTableau.setIcon(new ImageIcon("../Ressources/table.png"));
 		btnTableau.setToolTipText("Suivant");
 		btnTableau.addActionListener(new ActionBoutonI3(this));
 		
@@ -81,7 +81,7 @@ public class Analyse_Graphique extends JFrame {
         
         JButton button = new JButton("");
         button.setName("Retour");
-        button.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\retoutpetit.png"));
+        button.setIcon(new ImageIcon("../Ressources/retoutpetit.png"));
         button.setBounds(39, 496, 104, 43);
         getContentPane().add(button);
         
@@ -90,7 +90,7 @@ public class Analyse_Graphique extends JFrame {
                 JButton btnSuivant = new JButton("");
                 btnSuivant.setBounds(657, 486, 104, 44);
                 getContentPane().add(btnSuivant);
-                btnSuivant.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\suivant1.png"));
+                btnSuivant.setIcon(new ImageIcon("../Ressources/suivant1.png"));
                 btnSuivant.setToolTipText("Suivant");
                 btnSuivant.setToolTipText("Retour");
         button.addActionListener(new ActionBoutonI3(this));

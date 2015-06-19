@@ -69,12 +69,12 @@ public class Analyse_pdf extends JFrame {
 		JButton btnModifier = new JButton("");
 		btnModifier.setBounds(176, 268, 146, 62);
 		panel.add(btnModifier);
-		btnModifier.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\send2.png"));
+		btnModifier.setIcon(new ImageIcon("../Ressources/send2.png"));
 		
 		JButton btnRetour = new JButton("");
 		btnRetour.setBounds(17, 353, 91, 44);
 		panel.add(btnRetour);
-		btnRetour.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\retourback.png"));
+		btnRetour.setIcon(new ImageIcon("../Ressources/retourback.png"));
 		
 		JLabel lblRetour = new JLabel("Retour");
 		lblRetour.setHorizontalAlignment(SwingConstants.CENTER);

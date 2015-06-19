@@ -42,10 +42,12 @@ public class ActionBouton implements ActionListener {
 	    VueGestQuest Appli = new VueGestQuest(this.conn.c);
 	    break;
 	case "Sondeur":
-	    System.out.println("s");
+	    conn.dispose();
+	    Fenetre fen = new Fenetre();
 	    break;
 	case "Analyste":
-	    System.out.println("a");
+	    conn.dispose();
+	    Analyse_Questionnaire analyse = new Analyse_Questionnaire();
 	    break;
 	}
     }

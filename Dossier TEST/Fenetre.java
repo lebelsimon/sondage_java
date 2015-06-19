@@ -3,14 +3,14 @@ import java.awt.*;
 
 import javax.swing.*;
 
-
+@SuppressWarnings("serial")
 public class Fenetre extends JFrame{
-//	static Module m;
+	static Module m;
 	Fenetre(){
 		super("Rapid'Sond");
 		System.out.println("Fenetre deb");
 
-		this.setSize(1000,800);
+		this.setSize(800,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
@@ -21,16 +21,17 @@ public class Fenetre extends JFrame{
 		System.out.println("ajout menu");
 		
 			// creation espace module
-//		m = new ModuleSondage();
-//		this.add(m);
+		m = new ModuleSondage();
+		
+		c.add(m,"Center");
 		
 				// affichage en pleine ecran
-		GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		if (device.isFullScreenSupported()) {
-			device.setFullScreenWindow(this);
-	    } else {
-	        System.err.println("Le mode plein ecran n'est pas disponible");
-	    }
+		//~ GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		//~ if (device.isFullScreenSupported()) {
+			//~ device.setFullScreenWindow(this);
+	    //~ } else {
+	        //~ System.err.println("Le mode plein ecran n'est pas disponible");
+	    //~ }
 	    
 
 		
@@ -42,10 +43,10 @@ public class Fenetre extends JFrame{
 	
 	
 	
-
-//	public static void main ( String [] args){
-//		new Fenetre();
-//		
-//	}
+	@SuppressWarnings("unused")
+	public static void main ( String [] args){
+		new Fenetre();
+		
+	}
 
 }

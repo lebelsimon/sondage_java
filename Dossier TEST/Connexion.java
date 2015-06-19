@@ -26,7 +26,7 @@ public class Connexion extends JFrame{
 		JPanel total = new JPanel(new FlowLayout());
 		
 		//JLabel pour le logo
-		JLabel image = new JLabel(new ImageIcon("../Ressources/logo1.jpg"));
+		JLabel image = new JLabel(new ImageIcon("../Ressources/logo1.png"));
 
 		
 		//Panel de l'identifiant

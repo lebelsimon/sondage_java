@@ -8,14 +8,14 @@ import javax.swing.JLabel;
 public class QuestionButton implements ActionListener {
 	
 	// Lien vers le questionnaire pour pouvoir modifier certaines de ses propriétés
-	Question q;
+	//~ Question q;
 	
 	 // nom du bouton:
 	String nom;
 	
 	// Constructeur
-	public QuestionButton(String _nom, Question _q) {
-		this.q=_q;
+	public QuestionButton(String _nom){//, Question _q) {
+		//~ this.q=_q;
 		this.nom=_nom;
 	}
 

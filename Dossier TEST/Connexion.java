@@ -2,16 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class Connexion extends JFrame{
     ConnexionMySQL c;
-    JTextField texteMdp, texteID;    
+    JTextField texteID;    
+    JPasswordField texteMdp;
     
 	public Connexion(ConnexionMySQL c){
 		super("Projet Sondage");
@@ -40,7 +36,7 @@ public class Connexion extends JFrame{
 		//Panel du mot de passe
 		JPanel mdp = new JPanel(new FlowLayout());
 		JLabel mdpID = new JLabel("Mot de passe :");
-		texteMdp = new JTextField(20);
+		texteMdp = new JPasswordField(20);
 		
 		mdp.add(mdpID);
 		mdp.add(texteMdp);

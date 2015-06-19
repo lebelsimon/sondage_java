@@ -68,25 +68,25 @@ public class QuestionnaireVue extends JPanel{
 		JButton qsuiv = new JButton(">");
 		qsuiv.setName("suiv");
 		qsuiv.setToolTipText("question suivante");
-		qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this));//, this.q));
+		// qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this));//, this.q));
 		
 			//question precedente
 		JButton qprec = new JButton("<");
 		qprec.setName("prec");
 		qprec.setToolTipText("question précédente");
-		qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this));//, this.q));
+		// qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this));//, this.q));
 		
 			//premiere question
 		JButton qprem = new JButton("<<<");
 		qprem.setName("prem");
 		qprem.setToolTipText("première question");
-		qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this));//, this.q));
+		// qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this));//, this.q));
 		
 			// derniere question
 		JButton qder = new JButton(">>>");
 		qder.setName("dern");
 		qder.setToolTipText("dernière question");
-		qder.addActionListener(new QuestionnaireButton(qder.getName(), this));//, this.q));
+		// qder.addActionListener(new QuestionnaireButton(qder.getName(), this));//, this.q));
 		
 		// ajout des boutons au panel boutons
 		boutonsQuestions.add(qprem); 

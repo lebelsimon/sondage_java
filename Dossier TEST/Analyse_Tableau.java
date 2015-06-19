@@ -16,7 +16,6 @@ public class Analyse_Tableau extends JFrame {
 	private JTextField txtEntrezVotreCommentaire;
 	private JTable table;
 	//public boolean visible;
-	ConnexionMySQL conn;
 	Analyse_Tableau(){
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -52,12 +51,6 @@ public class Analyse_Tableau extends JFrame {
 		JRadioButton rdbtnCategorieSociopro = new JRadioButton("Categorie Socio-pro");
 		rdbtnCategorieSociopro.setBounds(-2, 33, 167, 28);
 		panel_2.add(rdbtnCategorieSociopro);
-		
-		JButton btnGraphique = new JButton("Graphique");
-		btnGraphique.setName("Graphique");
-		btnGraphique.setBounds(543, 150, 102, 53);
-		panel_1.add(btnGraphique);
-		btnGraphique.addActionListener(new ActionBoutonI2(this));
 		
 		txtEntrezVotreCommentaire = new JTextField();
 		txtEntrezVotreCommentaire.setText("Entrez votre commentaire");
@@ -97,7 +90,7 @@ public class Analyse_Tableau extends JFrame {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null}
 			},
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
@@ -106,17 +99,30 @@ public class Analyse_Tableau extends JFrame {
 		table.setBounds(0, 0, 434, 312);
 		panel_3.add(table);
 		
-		JButton btnRetour = new JButton("Retour");
-		btnRetour.setName("Retour");
-		btnRetour.setBounds(39, 496, 104, 43);
-		getContentPane().add(btnRetour);
-		btnRetour.addActionListener(new ActionBoutonI2(this));
+		JLabel lblGraphique = new JLabel("Graphique");
+		lblGraphique.setBounds(557, 188, 100, 20);
+		panel_1.add(lblGraphique);
+		
+		JButton btnGraphique = new JButton("");
+		btnGraphique.setName("Graphique");
+		btnGraphique.setBounds(543, 130, 102, 53);
+		panel_1.add(btnGraphique);
+		btnGraphique.addActionListener(new ActionBoutonI2(this));
+		
+		JButton btnRetour = new JButton("");
+        btnRetour.setName("Retour");
+        btnRetour.setIcon(new ImageIcon("../Ressources/retoutpetit.png"));
+        btnRetour.setBounds(39, 496, 104, 43);
+        getContentPane().add(btnRetour);
+        btnRetour.addActionListener(new ActionBoutonI2(this));
 		
 
-		JButton btnSuiv = new JButton("Question suivante");
-		btnSuiv.setBounds(670, 496, 87, 43);
+		JButton btnSuiv = new JButton("");
+		btnSuiv.setName("Suivant");
+		btnSuiv.setBounds(653, 496, 104, 43);
 		getContentPane().add(btnSuiv);
-		btnSuiv.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
+		btnSuiv.setIcon(new ImageIcon("../Ressources/suivant1.png"));
+		btnSuiv.addActionListener(new ActionBoutonI2(this));
 		
 		ButtonGroup choixOption = new ButtonGroup();
 		choixOption.add(rdbtnAge);

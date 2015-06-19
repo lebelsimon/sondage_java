@@ -69,7 +69,7 @@ public class Analyse_pdf extends JFrame {
 		JButton btnModifier = new JButton("");
 		btnModifier.setBounds(176, 268, 146, 62);
 		panel.add(btnModifier);
-		btnModifier.setIcon(new ImageIcon("../Ressources/end2.png"));
+		btnModifier.setIcon(new ImageIcon("../Ressources/send2.png"));
 		
 		JButton btnRetour = new JButton("");
 		btnRetour.setBounds(17, 353, 91, 44);

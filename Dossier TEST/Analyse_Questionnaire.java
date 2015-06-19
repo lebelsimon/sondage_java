@@ -49,7 +49,7 @@ public class Analyse_Questionnaire extends JFrame {
 		VosQuest.setBounds(44, 109, 698, 22);
 		getContentPane().add(VosQuest);
 		
-		String categories[] = { "Questionnaire 1", "Questionnaire 2", "Questionnaire 3",
+		String categories[] = { "Questionnaire 1", "Questionnaire 2", "Questionnaire3",
 		        "Questionnaire 3", "Questionnaire 4", "Questionnaire 5", "Questionnaire 6"};
 		
 		JScrollPane scrollPane = new JScrollPane();

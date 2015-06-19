@@ -68,25 +68,25 @@ public class QuestionnaireVue extends JPanel{
 		JButton qsuiv = new JButton(">");
 		qsuiv.setName("suiv");
 		qsuiv.setToolTipText("question suivante");
-		qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName()));//, this.q));
+		qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this));//, this.q));
 		
 			//question precedente
 		JButton qprec = new JButton("<");
 		qprec.setName("prec");
 		qprec.setToolTipText("question précédente");
-		qprec.addActionListener(new QuestionnaireButton(qprec.getName()));//, this.q));
+		qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this));//, this.q));
 		
 			//premiere question
 		JButton qprem = new JButton("<<<");
 		qprem.setName("prem");
 		qprem.setToolTipText("première question");
-		qprem.addActionListener(new QuestionnaireButton(qprem.getName()));//, this.q));
+		qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this));//, this.q));
 		
 			// derniere question
 		JButton qder = new JButton(">>>");
 		qder.setName("dern");
 		qder.setToolTipText("dernière question");
-		qder.addActionListener(new QuestionnaireButton(qder.getName()));//, this.q));
+		qder.addActionListener(new QuestionnaireButton(qder.getName(), this));//, this.q));
 		
 		// ajout des boutons au panel boutons
 		boutonsQuestions.add(qprem); 
@@ -97,7 +97,7 @@ public class QuestionnaireVue extends JPanel{
 
 		// creation de la vue de la question:
 			// par la suite on donnera une question et il creera la vue en fonction de la question
-		questionVue = new QuestionVue(question);
+		questionVue = new QuestionVue(question, this);
 		
 		questionVue.setBorder(BorderFactory.createLineBorder(Color.black));
 		questionVue.setPreferredSize(new Dimension(300,150));
@@ -117,5 +117,18 @@ public class QuestionnaireVue extends JPanel{
 		} catch (Exception e) {
 			System.out.println("connexion non établie");
 		}
+	}
+	public void ChangerQuestion( QuestionnaireVue questionnaireVue ,Question q){
+		System.out.println("deb ChangerQuestion");
+		questionnaireVue.question = q;
+		questionnaireVue.questionVue =  new QuestionVue(q, questionnaireVue);
+		
+		System.out.println("changement du num");
+		this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
+		
+		this.getParent().getParent().revalidate();
+		this.getParent().getParent().repaint();
+		System.out.println("fin ChangerQuestion");
+		
 	}
 }

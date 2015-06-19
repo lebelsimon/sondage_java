@@ -1,0 +1,9 @@
+!SESSION 2015-06-18 10:22:19.647 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_79
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.jdt.launching 4 150 2015-06-18 10:53:13.755
+!MESSAGE The project: JDBC which is referenced by the classpath, does not exist.

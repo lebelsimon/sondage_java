@@ -12,7 +12,6 @@ public class Executable {
 		question.addProposition(p3);
 		questionnaire.addQuestion(question);
 		VueSaisieQuestion QCM1 = new VueSaisieQuestion(questionnaire, question);
-		Menu men = new Menu();
 		
 		System.out.println(question.getTexteQuestion());
 		System.out.println(questionnaire.getIdQ());

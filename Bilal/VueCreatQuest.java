@@ -14,8 +14,10 @@ public class VueCreatQuest extends JFrame {
 	private JTable table;
 	public JList<String> listeQ;
 	public DefaultListModel<String> list;
-	public VueCreatQuest(String etat){
+	public ConnexionMySQL connection;
+	public VueCreatQuest(String etat,ConnexionMySQL connec){
 		this.etat = etat;
+		this.connection = connec;
 		this.setTitle("Rapid Sond' | Creation questionnaire");
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -174,7 +176,7 @@ public class VueCreatQuest extends JFrame {
 //		getContentPane().add(Menu,"NORTH");
 		this.setVisible(true);
 	}
-	public static void main(String[] args) {
-		VueCreatQuest Appli = new VueCreatQuest("c");
-		}
+	// public static void main(String[] args) {
+	// 	VueCreatQuest Appli = new VueCreatQuest("c");
+	// 	}
 }

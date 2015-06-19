@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 public class VueGestQuest extends JFrame {
 	DefaultListModel<String> listcat;
 	JList<String> list;
-	public VueGestQuest(){
+	ConnexionMySQL connection;
+	public VueGestQuest(ConnexionMySQL connec){
+		this.connection = connec;
 		this.setTitle("Rapid Sond'");
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -109,7 +111,7 @@ public class VueGestQuest extends JFrame {
 		this.setVisible(true);
 	}
 
-public static void main(String[] args) {
-	VueGestQuest Appli = new VueGestQuest();
-	}
+// public static void main(String[] args) {
+// 	VueGestQuest Appli = new VueGestQuest();
+// 	}
 }

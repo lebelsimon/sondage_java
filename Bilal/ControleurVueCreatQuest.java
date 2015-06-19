@@ -16,22 +16,22 @@ public class ControleurVueCreatQuest implements ActionListener {
 		}
 		if(b.getName()=="Ajouter"){
 //			VueSaisieQuestion VSQ = new VueSaisieQuestion();
-			VCQ.dispose();
+			VCQ.setVisible(false);
 		}
 		if(b.getName()=="Supprimer"){
 			VCQ.list.removeElementAt(VCQ.listeQ.getSelectedIndex());
 		}
 		if(b.getName()=="Modifier"){
 //			VueSaisieQuestion VSQ = new VueSaisieQuestion();
-			VCQ.dispose();
+			VCQ.setVisible(false);
 		}
 		if(b.getName()=="Annuler"){
-			VueGestQuest VGQ = new VueGestQuest();
-			VCQ.dispose();
+			VueGestQuest VGQ = new VueGestQuest(VCQ.connection);
+			VCQ.setVisible(false);
 		}
 		if(b.getName()=="Valider"){
-			VueGestQuest VGQ = new VueGestQuest();
-			VCQ.dispose();
+			VueGestQuest VGQ = new VueGestQuest(VCQ.connection);
+			VCQ.setVisible(false);
 		}
 	}
 }

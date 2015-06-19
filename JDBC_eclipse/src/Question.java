@@ -78,6 +78,10 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question ["+texteQuestion + ", " + idT + ", " + numQ + ", " + maxVal + ", " + propositions + "]\n";
+		return "Question [texteQuestion=" + texteQuestion + ", idT=" + idT
+				+ ", maxVal=" + maxVal + ", numQ=" + numQ + ", propositions="
+				+ propositions + "]\n";
 	}
+
+
 }

@@ -1,0 +1,55 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+
+public class ActionBouton implements ActionListener {
+	
+    // Lien vers le questionnaire pour pouvoir modifier certaines de ses propriétés
+    //~ Questionnaire q;
+	
+    // nom du bouton:
+    String nom;
+    Connexion conn;
+	
+    // Constructeur
+    public ActionBouton(String _nom, Connexion conn){
+	this.nom=_nom;
+	this.conn=conn;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+	String role="";
+	// on change l'affichage en fonction du boutons choisi
+	switch (this.nom){	
+	case "connexion":
+	    UtilisateurBD utili=null;
+	    System.out.println("connexion");
+	    try{
+		utili = new UtilisateurBD(this.conn.c);
+	    }
+	    catch(SQLException e){System.out.println(e);}
+	    Utilisateur u=((UtilisateurBD) utili).ConnexionUtilisateur(this.conn.texteID.getText(), this.conn.texteMdp.getText());
+	    role=u.getRole();
+	    break;
+	case "mdp":
+	    System.out.println("mdp oublié");
+	}
+	System.out.println(role);
+	switch(role){
+	case "Concepteur":
+	    System.out.println("c");
+	    conn.dispose();
+	    VueGestQuest Appli = new VueGestQuest(this.conn.c);
+	    break;
+	case "Sondeur":
+	    System.out.println("s");
+	    break;
+	case "Analyste":
+	    System.out.println("a");
+	    break;
+	}
+    }
+
+}

@@ -123,8 +123,8 @@ public class QuestionnaireVue extends JPanel{
 		questionnaireVue.question = q;
 		questionnaireVue.questionVue =  new QuestionVue(q, questionnaireVue);
 		
-		System.out.println("changement du num");
-		this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
+		//~ System.out.println("changement du num");
+		//~ this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
 		
 		this.getParent().getParent().revalidate();
 		this.getParent().getParent().repaint();

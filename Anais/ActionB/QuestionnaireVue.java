@@ -15,8 +15,7 @@ public class QuestionnaireVue extends JPanel{
 	QuestionVue questionVue;
 	Question question;
 	
-	// pour l'instant je crée un affichage vide, mais par la suite le constructeur prendra en parametre:
-	//		Questionnaire q, Sonde s
+
 	QuestionnaireVue(mod _m){
 		
 		// initialisation des valeurs
@@ -126,6 +125,7 @@ public class QuestionnaireVue extends JPanel{
 		//~ System.out.println("changement du num");
 		//~ this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
 		
+		System.out.println(this.getParent().getParent().getParent().getParent());
 		this.getParent().getParent().revalidate();
 		this.getParent().getParent().repaint();
 		System.out.println("fin ChangerQuestion");

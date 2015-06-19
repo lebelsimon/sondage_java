@@ -27,7 +27,7 @@ public class Fenetre extends JFrame{
 		m.setOpaque(false);
 		
 		c.add(m,"Center");
-		
+		System.out.println("Fenetre: "+this);
 		 this.setVisible(true);
 		 this.revalidate();
 		 this.repaint();

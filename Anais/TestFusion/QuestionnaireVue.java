@@ -45,12 +45,8 @@ public class QuestionnaireVue extends JPanel{
 		Random randomQ = new Random();
 		
 		questionnaire = BD.creerQuestionnaire(numQuestionnaire);
-		//~ int pif = random.nextInt( questionnaire.getListeQuestions().size());
-		System.out.println("Ici");		
-	
 		
 		question = questionnaire.getListeQuestions().get(0);
-		System.out.println("Ici");	
 
 		// Creation du label Questionnaire:
 		
@@ -125,7 +121,8 @@ public class QuestionnaireVue extends JPanel{
 		
 		System.out.println("changement du num");
 		this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
-		
+
+		System.out.println("Fenetre ? "+this.getParent().getParent().getParent());		
 		this.getParent().getParent().revalidate();
 		this.getParent().getParent().repaint();
 		System.out.println("fin ChangerQuestion");

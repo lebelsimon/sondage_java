@@ -1,33 +1,28 @@
-import javax.swing.*;
 
-@SuppressWarnings("serial")
-public class Proposition extends JFrame {
-	private String text;
-	private Boolean valide;
-	
-	public Proposition(String t, boolean v){
-		text=t;
-		valide=v;
-		
+public class Proposition {
+	String texte;
+
+	public Proposition(String texte){
+		this.texte=texte;
 	}
 	
-	public void setText(String text){
-		this.text=text;
+	// Constructeur permettant de recopier une proposition 
+	public Proposition(Proposition p) {
+		super();
+		this.texte = new String(p.texte);
+
 	}
 	
-	public void setValide(boolean valide){
-		this.valide=valide;
+	public String getTexte() {
+		return texte;
+	}
+	public void setTexte(String texte) {
+		this.texte = new String(texte);
+	}
+
+	@Override
+	public String toString() {
+		return texte;
 	}
 	
-	public String getText(){
-		return text;
-	}
-	
-	public Boolean getValide(){
-		return valide;
-	}
-	
-	public String toString(String [] args){
-		return text+"["+valide+"]";
-	}
 }

@@ -7,16 +7,22 @@ import javax.swing.JOptionPane;
 public class BoutonAjouter implements ActionListener{
 	
 	VueSaisieQuestion quest;
+	Question q;
 	
-	public BoutonAjouter(){
+	public BoutonAjouter(VueSaisieQuestion vue){
+		quest=vue;
+		q=vue.question;
+		
+		
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 	    String nom = jop.showInputDialog(null, "Veuillez entrer une proposition", "Ajout de proposition", JOptionPane.QUESTION_MESSAGE);
-	    jop2.showMessageDialog(null, "Vous avez ajouté la proposition " + nom, "Proposition ajouté", JOptionPane.INFORMATION_MESSAGE);
-	    
+	    jop2.showMessageDialog(null, "Vous avez ajoute la proposition " + nom, "Proposition ajoute", JOptionPane.INFORMATION_MESSAGE);
+	    q.addProposition(new Proposition(nom));
+	    quest.liste.addElement(nom);
 	}
 	
 	

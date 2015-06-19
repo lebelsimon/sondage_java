@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class QuestionnaireBD{
 	private ConnexionMySQL c;
 	private Statement s, s2;
+	private QuestionBD qBD;
 
 	// constructeur
 	public QuestionnaireBD(ConnexionMySQL c) throws SQLException {
@@ -17,6 +18,7 @@ public class QuestionnaireBD{
 			Connection conn = c.getConnexion();
 			this.s = conn.createStatement();
 			this.s2 = conn.createStatement();
+			this.qBD=new QuestionBD(c);
 			System.out.println("questionnaireBD créé");
 		} 
 		catch (SQLException e) {
@@ -32,13 +34,18 @@ public class QuestionnaireBD{
 			ArrayList<Question> listeQuestion = new ArrayList<Question>();
 			while(rs.next()){
 				if(questionnaireCourant==rs.getInt("idQ")){
-					listeQuestion.add(new Question(rs.getString("texteQ")));
+					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
+					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
+					listeQuestion.add(question);
 				}
 				else{
 					listeQuestion = new ArrayList<Question>();
 					Questionnaire q = new Questionnaire(rs.getString("Titre"), rs.getInt("numC"), rs.getInt("idU"), rs.getInt("idPan"), rs.getString("etat").charAt(0));
 					q.setIdQ(rs.getInt("idQ"));
 					questionnaireCourant=rs.getInt("idQ");
+					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
+					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
+					listeQuestion.add(question);
 					q.setListeQuestions(listeQuestion);
 					listeQuestionnaire.add(q);
 				}

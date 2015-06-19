@@ -1,38 +1,83 @@
-import javax.swing.*;
+import javax.swing.DefaultListModel;
 
-@SuppressWarnings("serial")
-public class Question extends JFrame {
-	private String enonce;
-	private DefaultListModel<Proposition> lesPropositions;
-	
-	public Question(String e){
-		enonce=e;
-		lesPropositions= new DefaultListModel<Proposition>();
+
+public class Question {
+	String texteQuestion;
+	char idT;
+	int maxVal;
+	int numQ;
+	DefaultListModel<Proposition> propositions;
+	public Question(String texteQuestion) {
+		super();
+		this.texteQuestion = new String(texteQuestion);
+		this.propositions = new DefaultListModel<Proposition>();
 	}
 	
-	public void setEnonce(String enonce){
-		this.enonce=enonce;
+	public Question(String texteQuestion, char idT, int maxVal, int numQ) {
+		super();
+		this.texteQuestion = new String(texteQuestion);
+		this.propositions = new DefaultListModel<Proposition>();
+		this.idT=idT;
+		this.maxVal=maxVal;
+		this.numQ=numQ;
 	}
 	
-	public String getEnonce(){
-		return enonce;
+	// constructeur permettant la recopie d'un question
+	public Question(Question q){
+		super();
+		this.texteQuestion=new String(q.texteQuestion);
+
+		int nbP=q.getPropositions().size();
+		this.propositions=new DefaultListModel<Proposition>();
+		for (int i=0;i<nbP;i++){
+			this.addProposition(new Proposition(q.getPropositions().get(i)));
+		}
+	}
+	public String getTexteQuestion() {
+		return texteQuestion;
+	}
+	public void setTexteQuestion(String texteQuestion) {
+		this.texteQuestion = new String(texteQuestion);
+	}
+	public DefaultListModel<Proposition> getPropositions() {
+		return propositions;
+	}
+	public void setPropositions(DefaultListModel<Proposition> reponses) {
+		this.propositions = reponses;
+	}
+	public void addProposition(Proposition rep){
+		this.propositions.addElement(rep);
+	}
+	public void removeProposition(int index){
+		this.propositions.remove(index);
 	}
 	
-	public void addProposition(Proposition prop, int i){
-		lesPropositions.add(i, prop);
+	public char getIdT() {
+		return idT;
 	}
-	
-	public void deltProposition(int i){
-		lesPropositions.remove(i);
+
+	public void setIdT(char idT) {
+		this.idT = idT;
 	}
-	
-	public DefaultListModel<Proposition> getProp(){
-		return lesPropositions;
+
+	public int getMaxVal() {
+		return maxVal;
 	}
-	
-	public void setProp(DefaultListModel<Proposition> p){
-		lesPropositions=p;
+
+	public void setMaxVal(int maxVal) {
+		this.maxVal = maxVal;
 	}
-	
-	
+
+	public int getNumQ() {
+		return numQ;
+	}
+
+	public void setNumQ(int numQ) {
+		this.numQ = numQ;
+	}
+
+	@Override
+	public String toString() {
+		return "Question ["+texteQuestion + ", " + idT + ", " + numQ + ", " + maxVal + ", " + propositions + "]\n";
+	}
 }

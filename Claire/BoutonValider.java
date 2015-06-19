@@ -8,7 +8,7 @@ public class BoutonValider implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JOptionPane jop = new JOptionPane();
-	    jop.showMessageDialog(null, "Votre question a bien été enregistré ", "Sauvegarde de la question", JOptionPane.INFORMATION_MESSAGE);
+	    jop.showMessageDialog(null, "Votre question a bien ete enregistre ", "Sauvegarde de la question", JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 

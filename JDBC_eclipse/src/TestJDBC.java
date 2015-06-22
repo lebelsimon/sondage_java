@@ -200,7 +200,7 @@ public class TestJDBC {
 				System.out.println(tjdbc.util.connexionUtilisateur(login, mdp));
 				break;
 			case 10:
-				ArrayList<Sonde> res = tjdbc.sond.getListeSonde();
+				ArrayList<Sonde> res = tjdbc.sond.getListeSonde(2);
 				for (Sonde s : res)
 					System.out.println(s);
 				break;

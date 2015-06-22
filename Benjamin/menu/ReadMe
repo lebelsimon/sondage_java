@@ -1,0 +1,3 @@
+Pour que la deconnexion fonctionne il faut lorsque vous creer le menu passer en parametre this
+exemple :
+this.setJMenuBar(new Menu(this));

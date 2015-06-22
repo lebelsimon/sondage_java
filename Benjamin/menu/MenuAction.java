@@ -20,7 +20,7 @@ public class MenuAction implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		switch (nom){
 			case "deco":
-			Connexion co = new Connexion();
+			Connexion co = new Connexion(new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/", "dbdmartin", "dbdmartin","/home/dmartin"));
 			men.getfen().dispose();
 			break;
 			case "manu":

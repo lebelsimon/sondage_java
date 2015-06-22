@@ -1,23 +1,34 @@
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
-
+import java.sql.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class VueGestQuest extends JFrame {
 	DefaultListModel<String> listcat;
 	JList<String> list;
 	ConnexionMySQL connection;
-	public VueGestQuest(ConnexionMySQL connec){
-		this.connection = connec;
+	QuestionnaireBD qBD;
+	ArrayList<Questionnaire> listeQ;
+	Utilisateur util;
+	public VueGestQuest(ConnexionMySQL c, Utilisateur util){
+		this.connection = c;
+		this.util = util;
 		this.setTitle("Rapid Sond'");
 		this.setSize(800,600);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		try{
+			qBD = new QuestionnaireBD(connection);
+		}
+		catch (SQLException e) {
+			System.out.println("questionnaireBD non créé");
+		}
+		
 //		JPanel Fenetre = new JPanel();
 //		Fenetre.setLayout(new GridLayout());
 		// Panel Menu
@@ -28,28 +39,28 @@ public class VueGestQuest extends JFrame {
 		
 		JButton btnDeco = new JButton("");
 		btnDeco.setName("Deconnexion");
-		btnDeco.addActionListener(new ControleurVueGestQuest(this,connection));
+		btnDeco.addActionListener(new ControleurVueGestQuest(this,connection,util));
 		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
 		btnDeco.setBounds(648, 11, 104, 62);
 		getContentPane().add(btnDeco);
 		
 		JButton btnAjouter = new JButton("");
 		btnAjouter.setIcon(new ImageIcon("../Ressources/ajouter-vert-plus-icone-9549-48.png"));
-		btnAjouter.addActionListener(new ControleurVueGestQuest(this,connection));
+		btnAjouter.addActionListener(new ControleurVueGestQuest(this,connection,util));
 		btnAjouter.setName("Ajouter");
 		btnAjouter.setBounds(44, 358, 146, 62);
 		getContentPane().add(btnAjouter);
 		
 		JButton btnModifier = new JButton("");
 		btnModifier.setIcon(new ImageIcon("../Ressources/bloc-notes-stylo-ecrire-icone-8970-48.png"));
-		btnModifier.addActionListener(new ControleurVueGestQuest(this,connection));
+		btnModifier.addActionListener(new ControleurVueGestQuest(this,connection,util));
 		btnModifier.setName("Modifier");
 		btnModifier.setBounds(326, 358, 146, 62);
 		getContentPane().add(btnModifier);
 		
 		JButton btnSupprimer = new JButton("");
 		btnSupprimer.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-64.png"));
-		btnSupprimer.addActionListener(new ControleurVueGestQuest(this,connection));
+		btnSupprimer.addActionListener(new ControleurVueGestQuest(this,connection,util));
 		btnSupprimer.setName("Supprimer");
 		btnSupprimer.setBounds(596, 358, 146, 62);
 		getContentPane().add(btnSupprimer);
@@ -59,15 +70,16 @@ public class VueGestQuest extends JFrame {
 		VosQuest.setFont(new Font("Tahoma", Font.BOLD, 15));
 		VosQuest.setBounds(44, 109, 698, 22);
 		getContentPane().add(VosQuest);
-		
-		String categories[] = { "Household", "Office", "Extended Family",
-		        "Company (US)", "Company (World)", "Team", "Will",
-		        "Birthday Card List", "High School", "Country", "Continent",
-		        "Planet" };
-		
+
+		listeQ = new ArrayList<Questionnaire>();
+
+		for(Questionnaire elem:qBD.getListeQuestionnaire(util.getIdU(),"Concepteur")){
+			listeQ.add(elem);
+		}
 		listcat = new DefaultListModel<String>();
-		for(String elem:categories){
-			listcat.addElement(elem);
+
+		for(Questionnaire elem:listeQ){
+			listcat.addElement(elem.getTitreQuestionnaire());
 		}
 		
 		
@@ -103,7 +115,7 @@ public class VueGestQuest extends JFrame {
 		scrollPane.setViewportView(list);
 		list.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		
 		
 		// END

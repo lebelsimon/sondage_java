@@ -12,7 +12,7 @@ public class ApplicationSondageSQ extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel Fenetre = new JPanel();
 		Fenetre.setLayout( new GridLayout() );
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		QuestionSQ question = new QuestionSQ("Aimes-tu les cookies ?");
 		PropositionSQ p1 = new PropositionSQ("Oui", true);
 		PropositionSQ p2 = new PropositionSQ("Non", false);

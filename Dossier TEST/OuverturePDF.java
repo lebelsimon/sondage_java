@@ -9,7 +9,7 @@ public class OuverturePDF
     public static File access(String fileNameInJAR, String extension) throws IOException
     {
         InputStream in = OuverturePDF.class.getClass().getResourceAsStream(fileNameInJAR);
-        File f = File.createTempFile("JAR_", extension);
+        File f = File.createTempFile("Manuel d'utilisation ", extension);
         FileOutputStream out = new FileOutputStream(f);
         
         byte[] buf = new byte[1024];
@@ -22,6 +22,6 @@ public class OuverturePDF
     
     public static void main(String[] args) throws IOException
     {
-        Desktop.getDesktop().open(access("/manuel.pdf",".pdf"));
+        Desktop.getDesktop().open(access("./manuel.pdf",".pdf"));
     }
 }

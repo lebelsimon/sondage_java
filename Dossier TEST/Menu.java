@@ -3,15 +3,15 @@ import javax.swing.*;
 
 	
 public class Menu extends JMenuBar{
-	private Fenetre fen;
+	private JFrame fen;
 	private JMenuBar BarMenu;
 	private JMenu Affichage, Aide, Compte, Personne;
 	private JMenuItem changerPerso, deconnexion, zoomPlus, zoomMoins, tuto, manuel, changerPerso2, deconnexion2;
 
-	Menu(){
+	Menu(JFrame fen){
 		
 				// créatiojn des éléments du menu	  
-		//this.fen=fen;
+		this.fen=fen;
 		Compte = new JMenu("Compte");
 		changerPerso = new JMenuItem("Paramètres");
 		deconnexion = new JMenuItem("Deconnexion CTR+D");
@@ -25,6 +25,9 @@ public class Menu extends JMenuBar{
 		Aide = new JMenu("Aide");
 		tuto = new JMenuItem("Tutoriel");
 		manuel = new JMenuItem("Manuel d'Utilisation");
+		manuel.setName("manu");
+		manuel.addActionListener(new MenuAction(manuel.getName(),this));
+
 	  
 				// ajout des sous-menu 
 		Compte.add(changerPerso);

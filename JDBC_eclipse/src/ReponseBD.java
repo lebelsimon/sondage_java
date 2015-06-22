@@ -89,6 +89,26 @@ public class ReponseBD{
 			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'm':
+			try{
+				rs2 = s2.executeQuery("SELECT COUNT(*) FROM VALPOSSIBLE WHERE numQ="+numQ);
+				rs.next();
+				rs2.next();
+				// on crée le tableau avec un +1 pour l'affichage du total
+				tabReponses = new int[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
+				// on insère la première valeur
+				String[] tabValStr = rs.getString("valeur").split("; ");
+				int[] tabValInt = new int[tabValStr.length];
+				for(int i=0; i<tabValInt.length; i++)
+					tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] +=1;
+				// on insère les autres valeurs
+				while(rs.next()){
+					tabValStr = rs.getString("valeur").split("; ");
+					tabValInt = new int[tabValStr.length];
+					for(int i=0; i<tabValInt.length; i++)
+						tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] +=1; 
+				}
+			}
+			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'u':
 			try{
@@ -209,6 +229,26 @@ public class ReponseBD{
 			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'm':
+			try{
+				rs2 = s2.executeQuery("SELECT COUNT(*) FROM VALPOSSIBLE WHERE numQ="+numQ);
+				rs.next();
+				rs2.next();
+				// on crée le tableau avec un +1 pour l'affichage du total
+				tabReponses = new int[rs2.getInt("COUNT(*)")*3+ 1][nbTranche + 1];
+				// on insère la première valeur
+				String[] tabValStr = rs.getString("valeur").split("; ");
+				int[] tabValInt = new int[tabValStr.length];
+				for(int i=0; i<tabValInt.length; i++)
+					tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] +=1;
+				// on insère les autres valeurs
+				while(rs.next()){
+					tabValStr = rs.getString("valeur").split("; ");
+					tabValInt = new int[tabValStr.length];
+					for(int i=0; i<tabValInt.length; i++)
+						tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] +=1; 
+				}
+			}
+			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'u':
 			try{

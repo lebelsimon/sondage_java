@@ -23,10 +23,10 @@ public class SondeBD {
 		}
 	}
 
-	public ArrayList<Sonde> getListeSonde() {
+	public ArrayList<Sonde> getListeSonde(int idU) {
 		ArrayList<Sonde> res = new ArrayList<Sonde>();
 		try {
-			ResultSet rs = s.executeQuery("SELECT * FROM SONDE NATURAL JOIN INTERROGER NATURAL JOIN UTILISATEUR WHERE idR=2");
+			ResultSet rs = s.executeQuery("SELECT * FROM SONDE NATURAL JOIN INTERROGER NATURAL JOIN UTILISATEUR WHERE idR=2 AND idU="+idU);
 			while (rs.next()) {
 				Sonde s = new Sonde(rs.getInt("numSond"),
 						rs.getString("nomSond"), rs.getString("prenomSond"),
@@ -50,11 +50,12 @@ public class SondeBD {
 		}
 	}
 	
-	public ArrayList<Integer> getListeQuestionnairePourUnSonde(int numSond){
-		ArrayList<Sonde> listeSonde = this.getListeSonde();
+	public ArrayList<Integer> getListeQuestionnairePourUnSonde(int numSond, int idU){
+		ArrayList<Sonde> listeSonde = this.getListeSonde(idU);
 		for (Sonde sond : listeSonde) {
-			if (sond.getNumSond() == numSond)
+			if (sond.getNumSond() == numSond){
 				return sond.getListeQuestionnaire();
+			}
 		}
 		return new ArrayList<Integer>();
 	}

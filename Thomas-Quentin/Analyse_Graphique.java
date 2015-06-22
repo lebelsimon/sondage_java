@@ -23,7 +23,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class Analyse_Graphique extends JFrame {
 	private JTable table;
-	Analyse_Graphique(){
+	public String Nom_Questionnaire;
+	public int Indice_Question;
+	public Analyse_Questionnaire Aq;
+	Analyse_Graphique(String Nom_Questionnaire,int Indice_Question){
+		Aq=new Analyse_Questionnaire();
+		int indicebis=Indice_Question+1;
+		this.Nom_Questionnaire=Nom_Questionnaire;
+		this.Indice_Question=Indice_Question;
 		this.setSize(800,600);
 		this.setResizable(false);
 		this.setTitle("Appli RapidSond");
@@ -33,7 +40,7 @@ public class Analyse_Graphique extends JFrame {
 		panel.setBounds(39, 39, 718, 23);
 		getContentPane().add(panel);
 		
-		JLabel lblQuestionnaire = new JLabel("Questionnaire n: 01");
+		JLabel lblQuestionnaire = new JLabel("Questionnaire : "+Nom_Questionnaire);
 		panel.add(lblQuestionnaire);
 		
 		JPanel panel_1 = new JPanel();
@@ -41,7 +48,7 @@ public class Analyse_Graphique extends JFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblQuestionN = new JLabel("Question n\u00B0: 01/02");
+		JLabel lblQuestionN = new JLabel("Question 0"+indicebis+"/0"+Aq.total.get(Nom_Questionnaire).getListeQuestions().size()+" : ");
 		lblQuestionN.setBounds(20, 30, 159, 14);
 		panel_1.add(lblQuestionN);
 		
@@ -67,14 +74,15 @@ public class Analyse_Graphique extends JFrame {
 		btnTableau.setName("Tableau");
 		btnTableau.setBounds(547, 238, 121, 45);
 		panel_1.add(btnTableau);
-		btnTableau.setIcon(new ImageIcon("../Ressources/table.png"));
+		btnTableau.setIcon(new ImageIcon("../Ressources/tableau2.png"));
+
 		btnTableau.addActionListener(new ActionBoutonI3(this));
 		
 		JLabel lblTableauBrut = new JLabel("Tableau brut");
 		lblTableauBrut.setBounds(562, 294, 100, 20);
 		panel_1.add(lblTableauBrut);
 		
-		JLabel label = new JLabel("NOM_Question");
+		JLabel label = new JLabel(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getTexteQuestion());
 		label.setBounds(155, 30, 333, 14);
 		panel_1.add(label);
         
@@ -86,13 +94,24 @@ public class Analyse_Graphique extends JFrame {
         
         button.setToolTipText("Retour");
                 
+         if (indicebis != Aq.total.get(Nom_Questionnaire).getListeQuestions().size()){       
         JButton btnSuivant = new JButton("");
+        btnSuivant.setName("Suivante");
         btnSuivant.setBounds(657, 486, 104, 44);
         getContentPane().add(btnSuivant);
-                btnSuivant.setIcon(new ImageIcon("../Ressources/suivant1.png"));
-        btnSuivant.setToolTipText("Suivant");
+        btnSuivant.setIcon(new ImageIcon("../Ressources/suivant1.png"));
+        btnSuivant.setToolTipText("Suivante");
+        button.addActionListener(new ActionBoutonI3(this));}
+        else{
+			JButton btnPDF = new JButton("");
+		btnPDF.setName("PDF");
+		btnPDF.setBounds(653, 496, 104, 43);
+		getContentPane().add(btnPDF);
+		btnPDF.setIcon(new ImageIcon("../Ressources/pdf1.png"));
+		btnPDF.addActionListener(new ActionBoutonI3(this));
+		btnPDF.setToolTipText("Envoyer PDF");
+		}
 
-        button.addActionListener(new ActionBoutonI3(this));
 		
 		ButtonGroup choixOption = new ButtonGroup();
 		choixOption.add(rdbtnCourbe);
@@ -103,7 +122,8 @@ public class Analyse_Graphique extends JFrame {
 		this.setVisible(true);
 
 	}
-	public static void main(String[] args) {
-		Analyse_Graphique Appli = new Analyse_Graphique();
-		}
+	// public static void main(String[] args) {
+	// 	Analyse_Graphique Appli = new Analyse_Graphique();
+	// 	}
+
 }

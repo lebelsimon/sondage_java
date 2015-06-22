@@ -15,8 +15,15 @@ import javax.swing.table.DefaultTableModel;
 public class Analyse_Tableau extends JFrame {
 	private JTextField txtEntrezVotreCommentaire;
 	private JTable table;
+	public String Nom_Questionnaire;
+	public int Indice_Question;
+	public Analyse_Questionnaire Aq;
 	//public boolean visible;
-	Analyse_Tableau(){
+	Analyse_Tableau(String Nom_Questionnaire,int Indice_Question){
+		Aq=new Analyse_Questionnaire();
+		int indicebis=Indice_Question+1;
+		this.Indice_Question=Indice_Question;
+		this.Nom_Questionnaire=Nom_Questionnaire;
 		this.setSize(800,600);
 		this.setResizable(false);
 		this.setTitle("Appli RapidSond");
@@ -26,7 +33,7 @@ public class Analyse_Tableau extends JFrame {
 		panel.setBounds(39, 41, 718, 19);
 		getContentPane().add(panel);
 		
-		JLabel lblQuestionnaire = new JLabel("Questionnaire n: 01");
+		JLabel lblQuestionnaire = new JLabel("Questionnaire : "+Nom_Questionnaire);
 		panel.add(lblQuestionnaire);
 		
 		JPanel panel_1 = new JPanel();
@@ -34,10 +41,10 @@ public class Analyse_Tableau extends JFrame {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblQuestionN = new JLabel("Question n\u00B0: 01/02");
+		
+		JLabel lblQuestionN = new JLabel("Question 0"+indicebis+"/0"+Aq.total.get(Nom_Questionnaire).getListeQuestions().size()+" : ");
 		lblQuestionN.setBounds(20, 30, 159, 14);
 		panel_1.add(lblQuestionN);
-		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(498, 56, 190, 67);
 		panel_1.add(panel_2);
@@ -58,7 +65,7 @@ public class Analyse_Tableau extends JFrame {
 		panel_1.add(txtEntrezVotreCommentaire);
 		txtEntrezVotreCommentaire.setColumns(1);
 		
-		JLabel lblNomquestion = new JLabel("NOM_Question");
+		JLabel lblNomquestion = new JLabel(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getTexteQuestion());
 		lblNomquestion.setBounds(155, 30, 333, 14);
 		panel_1.add(lblNomquestion);
 		
@@ -105,27 +112,39 @@ public class Analyse_Tableau extends JFrame {
 		
 		JButton btnGraphique = new JButton("");
 		btnGraphique.setName("Graphique");
+		btnGraphique.setIcon(new ImageIcon("../Ressources/graphique.png"));
 		btnGraphique.setBounds(543, 130, 102, 53);
 		panel_1.add(btnGraphique);
 		btnGraphique.addActionListener(new ActionBoutonI2(this));
 		
 		JButton btnRetour = new JButton("");
         btnRetour.setName("Retour");
-        //btnRetour.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\retoutpetit.png"));
+        btnRetour.setIcon(new ImageIcon("../Ressources/retoutpetit.png"));
         btnRetour.setBounds(39, 496, 104, 43);
         getContentPane().add(btnRetour);
         btnRetour.setToolTipText("Retour");
         btnRetour.addActionListener(new ActionBoutonI2(this));
 		
-
+        if (indicebis != Aq.total.get(Nom_Questionnaire).getListeQuestions().size()){
 		JButton btnSuiv = new JButton("");
 		btnSuiv.setName("Suivant");
 		btnSuiv.setBounds(653, 496, 104, 43);
 		getContentPane().add(btnSuiv);
-		//btnSuiv.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
-		btnSuiv.setToolTipText("Suivant");
+		btnSuiv.setIcon(new ImageIcon("../Ressources/suivant1.png"));
 		btnSuiv.addActionListener(new ActionBoutonI2(this));
-		
+		btnSuiv.setToolTipText("Suivant");}
+		else{
+			JButton btnPDF = new JButton("");
+		btnPDF.setName("PDF");
+		btnPDF.setBounds(653, 496, 104, 43);
+		getContentPane().add(btnPDF);
+		btnPDF.setIcon(new ImageIcon("../Ressources/pdf1.png"));
+		btnPDF.addActionListener(new ActionBoutonI2(this));
+		btnPDF.setToolTipText("Envoyer PDF");
+		}
+
+
+
 		ButtonGroup choixOption = new ButtonGroup();
 		choixOption.add(rdbtnAge);
 		choixOption.add(rdbtnCategorieSociopro);
@@ -134,7 +153,8 @@ public class Analyse_Tableau extends JFrame {
 		this.setVisible(true);
 
 	}
-	public static void main(String[] args) {
-		Analyse_Tableau Appli = new Analyse_Tableau();
-		}
+	// public static void main(String[] args) {
+	// 	Analyse_Tableau Appli = new Analyse_Tableau(list.getSelectedValue());
+	// 	}
+
 }

@@ -304,6 +304,9 @@ public class TestJDBC {
 				}
 				break;
 			case 22:
+				
+				break;
+			case 23:
 				fini = true;
 				break;
 			}

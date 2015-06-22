@@ -15,6 +15,7 @@ public class TestJDBC {
 	SondeBD sond;
 	QuestionnaireBD questionnaire;
 	QuestionBD question;
+	ReponseBD rep;
 
 	Scanner sc = null;
 
@@ -97,6 +98,7 @@ public class TestJDBC {
 			tjdbc.sond = new SondeBD(co);
 			tjdbc.questionnaire = new QuestionnaireBD(co);
 			tjdbc.question = new QuestionBD(co);
+			tjdbc.rep = new ReponseBD(co);
 			System.out.println("connexion établie");
 		} catch (Exception e) {
 			System.out.println("connexion non établie");
@@ -122,7 +124,9 @@ public class TestJDBC {
 			System.out.println("17. Supprimer un questionnaire");
 			System.out.println("18. Créer un questionnaire à partir d'un numéro et d'un questionnaire de la BD");
 			System.out.println("19. Afficher la liste des questionnaire pour le sondé n°10");
-			System.out.println("20. Sortir");
+			System.out.println("20. Afficher les réponses du questionnaire 1 par age");
+			System.out.println("21. Afficher les réponses du questionnaire 1 par catégorie socio-professionnelle");
+			System.out.println("22. Sortir");
 			int rep = tjdbc.saisieInt("Entrez votre choix", 1, 25);
 			int numCli;
 			Client c;
@@ -204,7 +208,7 @@ public class TestJDBC {
 				tjdbc.sond.supprimerSonde(1);
 				break;
 			case 12:
-				System.out.println(tjdbc.questionnaire.getListeQuestionnaire());
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaire(1, "Sondeur"));
 				break;
 			case 13:
 				System.out.println(tjdbc.question.getListeQuestion(1));
@@ -232,6 +236,74 @@ public class TestJDBC {
 				System.out.println(tjdbc.sond.getListeQuestionnairePourUnSonde(10));
 				break;
 			case 20:
+				System.out.println("------------ question note-------------");
+				int[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
+				for(int i=0; i<tab.length; i++){
+					for(int j=0; j<tab[i].length; j++){
+						System.out.print(tab[i][j]+", ");
+					}
+					System.out.println();
+				}
+				System.out.println("------------ question choix unique-------------");
+				tab = tjdbc.rep.getReponsesParAge(1, 3, 'u');
+				for(int i=0; i<tab.length; i++){
+					for(int j=0; j<tab[i].length; j++){
+						System.out.print(tab[i][j]+", ");
+					}
+					System.out.println();
+				}
+				System.out.println("------------ question choix libre-------------");
+				tab = tjdbc.rep.getReponsesParAge(1, 5, 'l');
+				for(int i=0; i<tab.length; i++){
+					for(int j=0; j<tab[i].length; j++){
+						System.out.print(tab[i][j]+", ");
+					}
+					System.out.println();
+				}
+				System.out.println("------------ question classement-------------");
+				tab = tjdbc.rep.getReponsesParAge(1, 4, 'c');
+				for(int i=0; i<tab.length; i++){
+					for(int j=0; j<tab[i].length; j++){
+						System.out.print(tab[i][j]+", ");
+					}
+					System.out.println();
+				}
+				break;
+			case 21:
+				System.out.println("------------ question note-------------");
+				int[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
+				for(int i=0; i<tab2.length; i++){
+					for(int j=0; j<tab2[i].length; j++){
+						System.out.print(tab2[i][j]+", ");
+					}
+					System.out.println();
+				}
+				System.out.println("------------ question choix unique-------------");
+				tab2 = tjdbc.rep.getReponsesParCategorie(1, 3, 'u');
+				for(int i=0; i<tab2.length; i++){
+					for(int j=0; j<tab2[i].length; j++){
+						System.out.print(tab2[i][j]+", ");
+					}
+					System.out.println();
+				}
+				System.out.println("------------ question choix libre-------------");
+				tab2 = tjdbc.rep.getReponsesParCategorie(1, 5, 'l');
+				for(int i=0; i<tab2.length; i++){
+					for(int j=0; j<tab2[i].length; j++){
+						System.out.print(tab2[i][j]+", ");
+					}
+					System.out.println();
+				}
+				System.out.println("------------ question classement-------------");
+				tab2 = tjdbc.rep.getReponsesParCategorie(1, 4, 'c');
+				for(int i=0; i<tab2.length; i++){
+					for(int j=0; j<tab2[i].length; j++){
+						System.out.print(tab2[i][j]+", ");
+					}
+					System.out.println();
+				}
+				break;
+			case 22:
 				fini = true;
 				break;
 			}

@@ -26,38 +26,48 @@ public class QuestionnaireBD{
 		}
 	}
 	
-	public ArrayList<Questionnaire> getListeQuestionnaire(){ // prendre en compte l'id de l'utilisateur et l'état des questionnaires.
+	public ArrayList<Questionnaire> getListeQuestionnaire(int idU, String role){
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
+		ArrayList<Question> listeQuestion = new ArrayList<Question>();
 		try{
-			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION");
-			int questionnaireCourant=-1;
-			ArrayList<Question> listeQuestion = new ArrayList<Question>();
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION WHERE idU="+idU+" AND Etat='"+role.charAt(0)+"'");
+			int idQcourant=-1;
 			while(rs.next()){
-				if(questionnaireCourant==rs.getInt("idQ")){
+				// si c'est le même questionnaire
+				if(rs.getInt("idQ")==idQcourant){
+					// on crée une nouvelle question et on lui ajoute la liste des propositions
 					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
 					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
 					listeQuestion.add(question);
 				}
+				// sinon c'est un nouveau questionnaire
 				else{
+					// on crée une nouvelle liste de question
 					listeQuestion = new ArrayList<Question>();
+					// on crée un nouveau questionnaire
 					Questionnaire q = new Questionnaire(rs.getString("Titre"), rs.getInt("numC"), rs.getInt("idU"), rs.getInt("idPan"), rs.getString("etat").charAt(0));
 					q.setIdQ(rs.getInt("idQ"));
-					questionnaireCourant=rs.getInt("idQ");
+					idQcourant=rs.getInt("idQ");
+					// on crée une nouvelle question
 					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
+					// on ajoute les propositions de la question
 					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
+					// on ajoute la question à la liste
 					listeQuestion.add(question);
 					q.setListeQuestions(listeQuestion);
 					listeQuestionnaire.add(q);
+					
 				}
 			}
-			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTIONNAIRE WHERE Titre NOT IN (SELECT Titre FROM QUESTIONNAIRE NATURAL JOIN QUESTION)");
+			// on récpère les questionnaires qui ne sont pas associés à des questions.
+			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTIONNAIRE WHERE Titre NOT IN(SELECT Titre FROM QUESTIONNAIRE NATURAL JOIN QUESTION) AND idU="+idU+" AND Etat='"+role.charAt(0)+"'");
 			while(rs2.next()){
 				Questionnaire q = new Questionnaire(rs2.getString("Titre"), rs2.getInt("numC"),  rs2.getInt("idU"),  rs2.getInt("idPan"),  rs2.getString("etat").charAt(0));
 				q.setListeQuestions(new ArrayList<Question>());
 				listeQuestionnaire.add(q);
 			}
 		}
-		catch(SQLException e){System.out.println(e);}
+		catch(SQLException e) { System.out.println(e); }
 		return listeQuestionnaire;
 	}
 
@@ -112,5 +122,17 @@ public class QuestionnaireBD{
 		}
 		catch(SQLException e){ System.out.println(e); }
 		return res;
+	}
+	
+	public ArrayList<Questionnaire> getListeQuestionnaireSonde(int numSond){
+		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
+		try{
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE q, INTERROGER i WHERE q.idQ=i.idQ AND numSond="+numSond);
+			while(rs.next()){
+				listeQuestionnaire.add(this.creerQuestionnaire(rs.getInt("idQ")));
+			}
+		}
+		catch(SQLException e){System.out.println(e);}
+		return listeQuestionnaire;
 	}
 }

@@ -7,7 +7,7 @@ public class Questionnaire {
 	int numC, idU, idPan, idQ;
 	char etat;
 	ArrayList <Question> listeQuestions;
-	HashMap<Integer, String> listeReponses;
+	HashMap<Integer, ArrayList<String>> listeReponses;
 	public Questionnaire(String titreQuestionnaire, int numC, int idU, int idPan, char etat) {
 		super();
 		this.titreQuestionnaire = titreQuestionnaire;
@@ -16,7 +16,7 @@ public class Questionnaire {
 		this.idU=idU;
 		this.idPan=idPan;
 		this.etat=etat;
-		this.listeReponses = new HashMap<Integer, String>();
+		this.listeReponses = new HashMap<Integer, ArrayList<String>>();
 	}
 	
 	public String getTitreQuestionnaire() {
@@ -81,10 +81,16 @@ public class Questionnaire {
 	}
 	
 	public void ajouterReponse(int numQ, String reponse){
-		this.listeReponses.put(numQ, reponse);
+		if(this.listeReponses.containsKey(numQ))
+			this.listeReponses.get(numQ).add(reponse);
+		else{
+			ArrayList<String> liste = new ArrayList<String>();
+			liste.add(reponse);
+			this.listeReponses.put(numQ, liste);
+		}
 	}
 	
-	public HashMap<Integer, String> getListeReponses(){
+	public HashMap<Integer, ArrayList<String>> getListeReponses(){
 		return this.listeReponses;
 	}
 

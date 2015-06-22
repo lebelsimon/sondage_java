@@ -13,11 +13,22 @@ public class ActionBoutonI3 implements ActionListener{
     	
     	if (b.getName()=="Tableau"){
     		i.setVisible(false);
-    		Analyse_Tableau j=new Analyse_Tableau();}
+    		Analyse_Tableau j=new Analyse_Tableau(i.Nom_Questionnaire,i.Indice_Question);
+        }
     	else if(b.getName()=="Retour"){
     		i.setVisible(false);
     		Analyse_Questionnaire k=new Analyse_Questionnaire();
+        }
+        else if(b.getName()=="Suivante"){
+            try{
+            i.setVisible(false);
+            Analyse_Graphique l=new Analyse_Graphique(i.Nom_Questionnaire,i.Indice_Question+1);}
+            catch(ArrayIndexOutOfBoundsException e){}
+        }
+        else if(b.getName()=="PDF"){
+            Analyse_pdf p=new Analyse_pdf();
+        }
     		
-    	}
+    	
     }
 }

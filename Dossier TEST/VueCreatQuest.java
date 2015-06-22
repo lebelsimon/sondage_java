@@ -9,17 +9,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class VueCreatQuest extends JFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTable table;
+	public JTextField textField;
+	public JTextField textField_1;
 	public JList<String> listeQ;
 	public DefaultListModel<String> list;
 	public ConnexionMySQL connection;
 	public Questionnaire questModif;
 	public ArrayList<Question> listeQuestions;
 	public QuestionnaireBD qBD;
-	public VueCreatQuest(ConnexionMySQL connec){
+	public Utilisateur util;
+	public JComboBox<Integer> CBSociete;
+	public JComboBox<Integer> CBPanel;
+	public VueCreatQuest(ConnexionMySQL connec,Utilisateur util){
 		this.connection = connec;
+		this.util = util;
 		try{
 			qBD = new QuestionnaireBD(connection);
 		}
@@ -36,21 +39,21 @@ public class VueCreatQuest extends JFrame {
 		JButton btnAjouter = new JButton("");
 		btnAjouter.setName("Ajouter");
 		btnAjouter.setIcon(new ImageIcon("../Ressources/ajouter-vert-plus-icone-9549-32.png"));
-		btnAjouter.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnAjouter.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnAjouter.setBounds(676, 188, 46, 34);
 		getContentPane().add(btnAjouter);
 		
 		JButton btnModifier = new JButton("");
 		btnModifier.setName("Modifier");
 		btnModifier.setIcon(new ImageIcon("../Ressources/bloc-notes-stylo-ecrire-icone-8970-32.png"));
-		btnModifier.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnModifier.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnModifier.setBounds(676, 263, 46, 34);
 		getContentPane().add(btnModifier);
 		
 		JButton btnSupprimer = new JButton("");
 		btnSupprimer.setName("Supprimer");
 		btnSupprimer.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-32.png"));
-		btnSupprimer.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnSupprimer.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnSupprimer.setBounds(676, 335, 46, 34);
 		getContentPane().add(btnSupprimer);
 		
@@ -91,25 +94,25 @@ public class VueCreatQuest extends JFrame {
 		lblAssocierPanel.setBounds(189, 422, 117, 27);
 		getContentPane().add(lblAssocierPanel);
 		
-		JComboBox<String> CBSociete = new JComboBox<String>();
+		CBSociete = new JComboBox<Integer>();
 		CBSociete.setBounds(292, 387, 215, 20);
 		getContentPane().add(CBSociete);
 		
-		JComboBox<String> CBPanel = new JComboBox<String>();
+		CBPanel = new JComboBox<Integer>();
 		CBPanel.setBounds(292, 425, 215, 20);
 		getContentPane().add(CBPanel);
 		
 		JButton btnValider = new JButton("");
 		btnValider.setIcon(new ImageIcon("../Ressources/accepter-verifier-vert-ok-oui-icone-6380-48.png"));
 		btnValider.setName("Valider");
-		btnValider.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnValider.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnValider.setBounds(653, 411, 89, 83);
 		getContentPane().add(btnValider);
 		
 		JButton btnAnnuler = new JButton("");
 		btnAnnuler.setName("Annuler");
 		btnAnnuler.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-64.png"));
-		btnAnnuler.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnAnnuler.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnAnnuler.setBounds(31, 411, 89, 83);
 		getContentPane().add(btnAnnuler);
 		
@@ -134,7 +137,7 @@ public class VueCreatQuest extends JFrame {
 		JButton btnDeco = new JButton("");
 		btnDeco.setName("Deconnexion");
 		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
-		btnDeco.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnDeco.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnDeco.setBounds(657, 25, 104, 62);
 		getContentPane().add(btnDeco);
 		
@@ -179,9 +182,10 @@ public class VueCreatQuest extends JFrame {
 //		getContentPane().add(Menu,"NORTH");
 		this.setVisible(true);
 	}
-	public VueCreatQuest(ConnexionMySQL connec,Questionnaire q){
+	public VueCreatQuest(ConnexionMySQL connec,Questionnaire q,Utilisateur util){
 		this.questModif = q;
 		this.connection = connec;
+		this.util = util;
 		this.setTitle("Rapid Sond' | Creation questionnaire");
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -192,21 +196,21 @@ public class VueCreatQuest extends JFrame {
 		JButton btnAjouter = new JButton("");
 		btnAjouter.setName("Ajouter");
 		btnAjouter.setIcon(new ImageIcon("../Ressources/ajouter-vert-plus-icone-9549-32.png"));
-		btnAjouter.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnAjouter.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnAjouter.setBounds(676, 188, 46, 34);
 		getContentPane().add(btnAjouter);
 		
 		JButton btnModifier = new JButton("");
 		btnModifier.setName("Modifier");
 		btnModifier.setIcon(new ImageIcon("../Ressources/bloc-notes-stylo-ecrire-icone-8970-32.png"));
-		btnModifier.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnModifier.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnModifier.setBounds(676, 263, 46, 34);
 		getContentPane().add(btnModifier);
 		
 		JButton btnSupprimer = new JButton("");
 		btnSupprimer.setName("Supprimer");
 		btnSupprimer.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-32.png"));
-		btnSupprimer.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnSupprimer.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnSupprimer.setBounds(676, 335, 46, 34);
 		getContentPane().add(btnSupprimer);
 		
@@ -247,25 +251,25 @@ public class VueCreatQuest extends JFrame {
 		lblAssocierPanel.setBounds(189, 422, 117, 27);
 		getContentPane().add(lblAssocierPanel);
 		
-		JComboBox<String> CBSociete = new JComboBox<String>();
+		CBSociete = new JComboBox<Integer>();
 		CBSociete.setBounds(292, 387, 215, 20);
 		getContentPane().add(CBSociete);
 		
-		JComboBox<String> CBPanel = new JComboBox<String>();
+		CBPanel = new JComboBox<Integer>();
 		CBPanel.setBounds(292, 425, 215, 20);
 		getContentPane().add(CBPanel);
 		
 		JButton btnValider = new JButton("");
 		btnValider.setIcon(new ImageIcon("../Ressources/accepter-verifier-vert-ok-oui-icone-6380-48.png"));
 		btnValider.setName("Valider");
-		btnValider.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnValider.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnValider.setBounds(653, 411, 89, 83);
 		getContentPane().add(btnValider);
 		
 		JButton btnAnnuler = new JButton("");
 		btnAnnuler.setName("Annuler");
 		btnAnnuler.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-64.png"));
-		btnAnnuler.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnAnnuler.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnAnnuler.setBounds(31, 411, 89, 83);
 		getContentPane().add(btnAnnuler);
 		
@@ -290,7 +294,7 @@ public class VueCreatQuest extends JFrame {
 		JButton btnDeco = new JButton("");
 		btnDeco.setName("Deconnexion");
 		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
-		btnDeco.addActionListener(new ControleurVueCreatQuest(this,connection));
+		btnDeco.addActionListener(new ControleurVueCreatQuest(this,connection,util));
 		btnDeco.setBounds(657, 25, 104, 62);
 		getContentPane().add(btnDeco);
 		

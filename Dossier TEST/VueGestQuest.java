@@ -1,16 +1,18 @@
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
-
+import java.sql.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class VueGestQuest extends JFrame {
 	DefaultListModel<String> listcat;
 	JList<String> list;
 	ConnexionMySQL connection;
+	QuestionnaireBD qBD;
+	ArrayList<Questionnaire> listeQ;
 	public VueGestQuest(ConnexionMySQL connec){
 		this.connection = connec;
 		this.setTitle("Rapid Sond'");
@@ -18,6 +20,13 @@ public class VueGestQuest extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		try{
+			qBD = new QuestionnaireBD(connection);
+		}
+		catch (SQLException e) {
+			System.out.println("questionnaireBD non créé");
+		}
+		
 //		JPanel Fenetre = new JPanel();
 //		Fenetre.setLayout(new GridLayout());
 		// Panel Menu
@@ -59,15 +68,16 @@ public class VueGestQuest extends JFrame {
 		VosQuest.setFont(new Font("Tahoma", Font.BOLD, 15));
 		VosQuest.setBounds(44, 109, 698, 22);
 		getContentPane().add(VosQuest);
-		
-		String categories[] = { "Household", "Office", "Extended Family",
-		        "Company (US)", "Company (World)", "Team", "Will",
-		        "Birthday Card List", "High School", "Country", "Continent",
-		        "Planet" };
-		
+
+		listeQ = new ArrayList<Questionnaire>();
+
+		for(Questionnaire elem:qBD.getListeQuestionnaire()){
+			listeQ.add(elem);
+		}
 		listcat = new DefaultListModel<String>();
-		for(String elem:categories){
-			listcat.addElement(elem);
+
+		for(Questionnaire elem:listeQ){
+			listcat.addElement(elem.getTitreQuestionnaire());
 		}
 		
 		

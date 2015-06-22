@@ -208,7 +208,7 @@ public class TestJDBC {
 				tjdbc.sond.supprimerSonde(1);
 				break;
 			case 12:
-				System.out.println(tjdbc.questionnaire.getListeQuestionnaire(3, "Analyste"));
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaire(2, "Sondeur"));
 				break;
 			case 13:
 				System.out.println(tjdbc.question.getListeQuestion(1));
@@ -230,10 +230,10 @@ public class TestJDBC {
 				tjdbc.questionnaire.supprimerQuestionnaire(Integer.parseInt(num));
 				break;
 			case 18:
-				System.out.println(tjdbc.questionnaire.creerQuestionnaire(2));
+				System.out.println(tjdbc.questionnaire.creerQuestionnaire(1, 2, "Sondeur"));
 				break;
 			case 19:
-				System.out.println(tjdbc.sond.getListeQuestionnairePourUnSonde(10));
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaireSonde(16, 2, "Sondeur"));
 				break;
 			case 20:
 				System.out.println("------------ question note-------------");

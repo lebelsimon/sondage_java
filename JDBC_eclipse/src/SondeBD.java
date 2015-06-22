@@ -53,8 +53,9 @@ public class SondeBD {
 	public ArrayList<Integer> getListeQuestionnairePourUnSonde(int numSond){
 		ArrayList<Sonde> listeSonde = this.getListeSonde();
 		for (Sonde sond : listeSonde) {
-			if (sond.getNumSond() == numSond)
+			if (sond.getNumSond() == numSond){
 				return sond.getListeQuestionnaire();
+			}
 		}
 		return new ArrayList<Integer>();
 	}

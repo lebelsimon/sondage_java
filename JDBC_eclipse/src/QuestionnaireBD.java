@@ -124,10 +124,10 @@ public class QuestionnaireBD{
 		return res;
 	}
 	
-	public ArrayList<Questionnaire> getListeQuestionnaireSonde(int numSond){
+	public ArrayList<Questionnaire> getListeQuestionnaireSonde(int numSond, int idU, String role){
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
 		try{
-			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE q, INTERROGER i WHERE q.idQ=i.idQ AND numSond="+numSond);
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE q, INTERROGER i WHERE q.idQ=i.idQ AND numSond="+numSond+" AND idU="+idU+" AND Etat="+role.charAt(0));
 			while(rs.next()){
 				listeQuestionnaire.add(this.creerQuestionnaire(rs.getInt("idQ")));
 			}

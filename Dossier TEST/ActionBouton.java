@@ -11,6 +11,7 @@ public class ActionBouton implements ActionListener {
     // nom du bouton:
     String nom;
     Connexion conn;
+    Utilisateur u;
 	
     // Constructeur
     public ActionBouton(String _nom, Connexion conn){
@@ -29,7 +30,7 @@ public class ActionBouton implements ActionListener {
 		utili = new UtilisateurBD(this.conn.c);
 	    }
 	    catch(SQLException e){System.out.println(e);}
-	    Utilisateur u=utili.connexionUtilisateur(this.conn.texteID.getText(), this.conn.texteMdp.getText());
+	    u=utili.connexionUtilisateur(this.conn.texteID.getText(), this.conn.texteMdp.getText());
 	    role=u.getRole();
 	    break;
 	case "mdp":
@@ -39,7 +40,7 @@ public class ActionBouton implements ActionListener {
 	switch(role){
 	case "Concepteur":
 	    conn.dispose();
-	    VueGestQuest Appli = new VueGestQuest(this.conn.c);
+	    VueGestQuest Appli = new VueGestQuest(this.conn.c,u);
 	    break;
 	case "Sondeur":
 	    conn.dispose();

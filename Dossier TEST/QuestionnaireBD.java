@@ -90,6 +90,8 @@ public class QuestionnaireBD{
 	
 	public void supprimerQuestionnaire(int idQ){
 		try{
+			s.executeUpdate("DELETE FROM VALPOSSIBLE WHERE idQ="+idQ);
+			s.executeUpdate("DELETE FROM QUESTION WHERE idQ="+idQ);
 			s.executeUpdate("DELETE FROM QUESTIONNAIRE WHERE idQ="+idQ);
 		}
 		catch(SQLException e){ System.out.println(e);}

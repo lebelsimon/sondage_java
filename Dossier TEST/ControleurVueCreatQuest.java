@@ -32,6 +32,9 @@ public class ControleurVueCreatQuest implements ActionListener {
 			VCQ.setVisible(false);
 		}
 		if(b.getName()=="Valider"){
+			// Questionnaire q = new Questionnaire(VCQ.textField.getText(),VCQ.CBSociete.getSelectedItem(),IDUTILISATEUR,VCQ.CBPanel.getSelectItem(),VCQ.textField_1.getText(),"S");
+			// q.setListeQuestions(VCQ.listeQuestions);
+			// VCQ.qBD.ajouterQuestionnaire(q);
 			VueGestQuest VGQ = new VueGestQuest(VCQ.connection);
 			VCQ.setVisible(false);
 		}

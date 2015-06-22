@@ -172,7 +172,7 @@ public class VueCreatQuest extends JFrame {
 		scroll.setBounds(64, 188, 586, 181);
 	
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		
 		
 		// END
@@ -336,7 +336,7 @@ public class VueCreatQuest extends JFrame {
 		scroll.setBounds(64, 188, 586, 181);
 	
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		
 		
 		// END

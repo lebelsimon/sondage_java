@@ -115,7 +115,7 @@ public class VueGestQuest extends JFrame {
 		scrollPane.setViewportView(list);
 		list.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		
 		
 		// END

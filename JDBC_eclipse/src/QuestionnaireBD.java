@@ -12,7 +12,6 @@ public class QuestionnaireBD{
 
 	// constructeur
 	public QuestionnaireBD(ConnexionMySQL c) throws SQLException {
-		// on crée un nouveau clientBD
 		try {
 			this.c = c;
 			Connection conn = c.getConnexion();
@@ -26,6 +25,12 @@ public class QuestionnaireBD{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param idU l'id de l'utilisateur
+	 * @param role son role
+	 * @return une liste de questionnaire dont l'utilisateur a la charge
+	 */
 	public ArrayList<Questionnaire> getListeQuestionnaire(int idU, String role){
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
 		ArrayList<Question> listeQuestion = new ArrayList<Question>();
@@ -78,16 +83,22 @@ public class QuestionnaireBD{
 		return listeQuestionnaire;
 	}
 
+	/**
+	 * 
+	 * @param q un questionnaire a ajouter
+	 * permet d'ajouter un nouveau questionnaire dans la base de donnees
+	 */
 	public void ajouterQuestionnaire(Questionnaire q){
 		try{
 			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+this.getMaxIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
-			for(Integer cle : q.getListeReponses().keySet()){
-				// inserer dans REPONDRE
-			}
 		}
 		catch(SQLException e){ System.out.println(e); }
 	}
 	
+	/**
+	 * permet de recuperer l'id max dans une liste de questionnaire
+	 * @return
+	 */
 	private int getMaxIdQ(){
 		try{
 			ResultSet rs = s.executeQuery("SELECT MAX(idQ) FROM QUESTIONNAIRE");
@@ -98,6 +109,11 @@ public class QuestionnaireBD{
 	return 1;
 	}
 	
+	/**
+	 * 
+	 * @param idQ l'identifiant d'un questionnaire
+	 * permet de supprimer toutes les donnees correpondantes à un questionnaire mis en parametre
+	 */
 	public void supprimerQuestionnaire(int idQ){
 		try{
 			s.executeUpdate("DELETE FROM VALPOSSIBLE WHERE idQ="+idQ);
@@ -107,6 +123,11 @@ public class QuestionnaireBD{
 		catch(SQLException e){ System.out.println(e);}
 	}
 	
+	/**
+	 * 
+	 * @param q un questionnaire
+	 * permet de modifier un questionnaire dans la base de donnees
+	 */
 	public void modifierQuestionnaire(Questionnaire q){
 		try{
 			s.executeUpdate("UPDATE QUESTIONNAIRE SET Titre='"+q.getTitreQuestionnaire()+"', etat='"+q.getEtat()+"', numC="+q.getNumC()+", idU="+q.getIdU()+", idPan="+q.getIdPan()+" WHERE idQ="+q.getIdQ());
@@ -114,10 +135,38 @@ public class QuestionnaireBD{
 		catch(SQLException e){System.out.println(e);}
 	}
 	
+	/**
+	 * 
+	 * @param q un questionnaire
+	 * @param idC un String qui est la catégorie du sonde qui a repondu
+	 */
+	public void ajouterReponses(Questionnaire q, String idC){
+		try{
+			for(Integer cle : q.getListeReponses().keySet()){
+				s.executeUpdate("INSERT INTO REPONDRE VALUES ("+q.getIdQ()+", "+cle+", "+idC+", "+q.getListeReponses().get(cle));
+			}
+		}
+		catch(SQLException e){ System.out.println(e); }
+	}
+	
+	/**
+	 * @param idQ un entier correspondant à l'id du questionnaire
+	 * @param idU un entier correspondant à l'id de l'utilisateur
+	 * @param role un string qui est le role de l'utilisateur
+	 * Permet de créer un questionnaire à partir des informations dans la base de donnees
+	 * @return un questionnaire
+	 */
 	public Questionnaire creerQuestionnaire(int idQ, int idU, String role){
 		return this.getListeQuestionnaire(idU, role).get(idQ-1);
 	}
 	
+	/**
+	 * @param numSond un entier qui est le numero du sonde
+	 * @param idU un entier qui est l'id de l'utilisateur
+	 * @param role un String qui est le role de l'utilisateur
+	 * permet de récupérer les quesitonnaires pour un sondé donné et correspondant à un utilisateur
+	 * @return une liste de questionnaire
+	 */
 	public ArrayList<Questionnaire> getListeQuestionnaireSonde(int numSond, int idU, String role){
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
 		try{

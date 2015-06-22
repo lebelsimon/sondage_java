@@ -23,7 +23,7 @@ public class mod extends Module{
     JButton appeler;
     Sonde toto;
     SondeBD info;
-    ModuleSondage modsond;
+    public ModuleSondage modsond;
 			
     public mod(ModuleSondage s){
 	try{
@@ -35,6 +35,11 @@ public class mod extends Module{
 	    System.out.println(e);
 	    System.out.println("coucou");
 	}
+	
+	//.....
+	this. modsond =s;
+	
+	
 	appeler = new JButton ("");
 	suivant = new JButton("Suivant");
 	
@@ -113,7 +118,7 @@ public class mod extends Module{
 		Random random = new Random();
 		int ind=random.nextInt(list.size());	
 		toto = new Sonde(list.get(ind));
-		info.supprimerSonde(toto.getNumSond());
+		//~ info.supprimerSonde(toto.getNumSond());
 
 		return toto;
 	}

@@ -8,12 +8,20 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.Font;
 import java.awt.Canvas;
-
+import java.util.ArrayList;
+import java.sql.*;
+import java.util.HashMap;
 
 public class Analyse_Questionnaire extends JFrame {
 	private JButton btnModifier;
 	public boolean visible;
+	public ConnexionMySQL co;
+	public QuestionnaireBD qbd;
+	public JList<String> list;
+	public HashMap<String,Questionnaire> total;
 	public Analyse_Questionnaire() {
+		co=new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
+		
 		this.visible=true;
 		this.setTitle("Rapid Sond'");
 		this.setSize(800,600);
@@ -26,11 +34,12 @@ public class Analyse_Questionnaire extends JFrame {
 		
 //		JPanel Menu = new JPanel();
 //		Menu.setLayout(new FlowLayout());
-		
+		try{qbd=new QuestionnaireBD(co);}
+		catch(SQLException e){}
 		
 		JButton btnDeco = new JButton("");
 		btnDeco.setName("Deco");
-		btnDeco.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\gnome-logout-icone-4756-48.png"));
+		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
 		btnDeco.setBounds(648, 11, 104, 62);
 		getContentPane().add(btnDeco);
 		btnDeco.addActionListener(new ActionBoutonI1(this));
@@ -38,7 +47,7 @@ public class Analyse_Questionnaire extends JFrame {
 		
 		JButton btnAnalyse = new JButton("");
 		btnAnalyse.setName("Analyse");
-		btnAnalyse.setIcon(new ImageIcon("C:\\Users\\thomas\\workspace\\Projet\\src\\analyse.png"));
+		btnAnalyse.setIcon(new ImageIcon("../Ressources/analyse.png"));
 		btnAnalyse.setBounds(326, 358, 146, 62);
 		getContentPane().add(btnAnalyse);
 		btnAnalyse.addActionListener(new ActionBoutonI1(this));
@@ -49,14 +58,25 @@ public class Analyse_Questionnaire extends JFrame {
 		VosQuest.setBounds(44, 109, 698, 22);
 		getContentPane().add(VosQuest);
 		
-		String categories[] = { "Questionnaire 1", "Questionnaire 2", "Questionnaire3",
-		        "Questionnaire 3", "Questionnaire 4", "Questionnaire 5", "Questionnaire 6"};
-		
+		//System.out.println("entrez boucle");
+		DefaultListModel<String> Liste=new DefaultListModel<String>();
+		//ArrayList<String> liste=new ArrayList<String>();
+		total=new HashMap<String,Questionnaire>();
+		for(Questionnaire q: qbd.getListeQuestionnaire(1,"Sondeur")){
+			Liste.addElement(q.getTitreQuestionnaire());
+			total.put(q.getTitreQuestionnaire(),q);
+			System.out.println(total);
+			//System.out.println(Liste);
+		}
+		// String categories[] = { "Questionnaire 1", "Questionnaire 2", "Questionnaire3",
+		//         "Questionnaire 3", "Questionnaire 4", "Questionnaire 5", "Questionnaire 6"};
+		//System.out.println("sortie boucle");
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(44, 154, 698, 181);
 		getContentPane().add(scrollPane);
 		
-		JList<String> list = new JList<String>(categories);
+		list = new JList<String>(Liste);
+		
 		scrollPane.setViewportView(list);
 		list.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0, 0, 0)));
 		
@@ -94,6 +114,7 @@ public class Analyse_Questionnaire extends JFrame {
 	public void setBtnModifierIcon(Icon icon) {
 		btnModifier.setIcon(icon);
 	}
+
 	}
 
 

@@ -1,4 +1,7 @@
 import java.sql.*;
+import java.util.HashMap;
+
+import javax.swing.DefaultListModel;
 
 /**
  * 
@@ -11,6 +14,7 @@ import java.sql.*;
 public class ReponseBD{
 	private ConnexionMySQL c;
 	private Statement s, s2;
+	private QuestionBD quest;
 
 	// constructeur
 	public ReponseBD(ConnexionMySQL c) throws SQLException {
@@ -19,6 +23,7 @@ public class ReponseBD{
 			Connection conn = c.getConnexion();
 			this.s = conn.createStatement();
 			this.s2 = conn.createStatement();
+			this.quest = new QuestionBD(c);
 			System.out.println("réponseBD créé");
 		} 
 		catch (SQLException e) {
@@ -85,7 +90,7 @@ public class ReponseBD{
 			break;
 		case 'm':
 			break;
-		case 'u': case 'l': // les réponses libres et les réponses uniques se comportent de la même manière car le nombre de réponses et dans la table VALPOSSIBLE
+		case 'u':
 			try{
 				rs2 = s2.executeQuery("SELECT COUNT(*) FROM VALPOSSIBLE WHERE numQ="+numQ);
 				rs.next();
@@ -97,6 +102,25 @@ public class ReponseBD{
 					tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
 				}
 			} catch (SQLException e) {
+				System.out.println(e);
+			}
+			break;
+		case 'l':
+			DefaultListModel<Proposition> listeProp = quest.getReponseLibre(idQ, numQ);
+			HashMap<String, Integer> listeRep = new HashMap<String, Integer>();
+			for (int i=0; i<listeProp.getSize(); i++){
+				listeRep.put(listeProp.elementAt(i).getTexte(), i+1);
+			}
+			try{
+				rs.next();
+				// on crée le tableau avec un +1 pour l'affichage du total
+				tabReponses = new int[listeRep.size()+ 1][nbTranche + 1];
+				tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				while (rs.next()) {
+					tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				}
+			} 
+			catch (SQLException e) {
 				System.out.println(e);
 			}
 			break;
@@ -186,7 +210,7 @@ public class ReponseBD{
 			break;
 		case 'm':
 			break;
-		case 'u': case 'l': // les réponses libres et les réponses uniques se comportent de la même manière car le nombre de réponses et dans la table VALPOSSIBLE
+		case 'u':
 			try{
 				rs2 = s2.executeQuery("SELECT COUNT(*) FROM VALPOSSIBLE WHERE numQ="+numQ);
 				rs.next();
@@ -198,6 +222,25 @@ public class ReponseBD{
 					tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
 				}
 			} catch (SQLException e) {
+				System.out.println(e);
+			}
+			break;
+		case 'l':
+			DefaultListModel<Proposition> listeProp = quest.getReponseLibre(idQ, numQ);
+			HashMap<String, Integer> listeRep = new HashMap<String, Integer>();
+			for (int i=0; i<listeProp.getSize(); i++){
+				listeRep.put(listeProp.elementAt(i).getTexte(), i+1);
+			}
+			try{
+				rs.next();
+				// on crée le tableau avec un +1 pour l'affichage du total
+				tabReponses = new int[listeRep.size()+ 1][nbTranche + 1];
+				tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				while (rs.next()) {
+					tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				}
+			} 
+			catch (SQLException e) {
 				System.out.println(e);
 			}
 			break;

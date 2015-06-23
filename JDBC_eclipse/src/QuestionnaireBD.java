@@ -180,4 +180,51 @@ public class QuestionnaireBD{
 			}
 		return listeQuestionnaire;
 	}
+	
+	public ArrayList<Questionnaire> getListeQuestionnaireConcepteur(int idU, String role){
+		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
+		ArrayList<Question> listeQuestion = new ArrayList<Question>();
+		ArrayList<String> questionAjoutee = new ArrayList<String>();
+		try{
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION WHERE idU="+idU+" AND Etat='"+role.charAt(0)+"'");
+			int idQcourant=-1;
+			while(rs.next()){
+				// si c'est le même questionnaire
+				if(rs.getInt("idQ")==idQcourant){
+					// on crée une nouvelle question et on lui ajoute la liste des propositions
+					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
+					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
+					if(!questionAjoutee.contains(question.getTexteQuestion())){
+						listeQuestion.add(question);
+						questionAjoutee.add(question.getTexteQuestion());
+					}
+				}
+				// sinon c'est un nouveau questionnaire
+				else{
+					// on crée une nouvelle liste de question
+					listeQuestion = new ArrayList<Question>();
+					// on crée un nouveau questionnaire
+					Questionnaire q = new Questionnaire(rs.getString("Titre"), rs.getInt("numC"), rs.getInt("idU"), rs.getInt("idPan"), rs.getString("etat").charAt(0));
+					q.setIdQ(rs.getInt("idQ"));
+					idQcourant=rs.getInt("idQ");
+					// on crée une nouvelle question
+					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
+					// on ajoute les propositions de la question
+					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
+					// on ajoute la question à la liste
+					if(!questionAjoutee.contains(question.getTexteQuestion())){
+						listeQuestion.add(question);
+						questionAjoutee.add(question.getTexteQuestion());
+					}
+					q.setListeQuestions(listeQuestion);
+					listeQuestionnaire.add(q);
+					
+				}
+			}
+		}
+		catch(SQLException e){System.out.println(e);}
+		return listeQuestionnaire;
+	}
+	
+	
 }

@@ -10,21 +10,21 @@ public class QuestionVue extends JPanel{
 	int nombreVal;
 	char typeQuestion ;
 	DefaultListModel<Proposition> propositions;
+	Question question;
 	QuestionnaireVue questionnaireVue;
-	
 	String enonceQuestion;
 	
 	
-	QuestionVue( QuestionnaireVue _questionnaireVue){
+	QuestionVue( Question q, QuestionnaireVue questV){
 		this.setLayout( new BorderLayout( 40,50));
-		questionnaireVue = _questionnaireVue;
-
+		question = q;
+		questionnaireVue = questV;
 		// initialisation des valeurs corespondant au elements de la Question
-		numQuestion = questionnaireVue.question.getNumQ();
-		propositions = questionnaireVue.question.getPropositions();
+		numQuestion = question.getNumQ();
+		propositions = question.getPropositions();
 		nombreVal = propositions.size();
-		typeQuestion = questionnaireVue.question.getIdT();
-		enonceQuestion = questionnaireVue.question.getTexteQuestion();
+		typeQuestion = question.getIdT();
+		enonceQuestion = question.getTexteQuestion();
 		
 		
 		

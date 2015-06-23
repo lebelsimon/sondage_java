@@ -208,7 +208,8 @@ public class TestJDBC {
 				tjdbc.sond.supprimerSonde(1);
 				break;
 			case 12:
-				System.out.println(tjdbc.questionnaire.getListeQuestionnaire(2, "Sondeur"));
+				//System.out.println(tjdbc.questionnaire.getListeQuestionnaire(1, "C"));
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaireConcepteur(1, "C"));
 				break;
 			case 13:
 				System.out.println(tjdbc.question.getListeQuestion(1));
@@ -237,7 +238,7 @@ public class TestJDBC {
 				break;
 			case 20:
 				System.out.println("------------ question note-------------");
-				int[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
+				String[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
 				for(int i=0; i<tab.length; i++){
 					for(int j=0; j<tab[i].length; j++){
 						System.out.print(tab[i][j]+", ");
@@ -271,7 +272,7 @@ public class TestJDBC {
 				break;
 			case 21:
 				System.out.println("------------ question note-------------");
-				int[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
+				String[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
 				for(int i=0; i<tab2.length; i++){
 					for(int j=0; j<tab2[i].length; j++){
 						System.out.print(tab2[i][j]+", ");
@@ -304,7 +305,7 @@ public class TestJDBC {
 				}
 				break;
 			case 22:
-				
+				System.out.println(tjdbc.client.getListeClient());
 				break;
 			case 23:
 				fini = true;

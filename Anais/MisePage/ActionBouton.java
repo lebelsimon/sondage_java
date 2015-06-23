@@ -47,8 +47,9 @@ public class ActionBouton implements ActionListener {
 	    //~ break;
 	case "Sondeur":
 	    conn.dispose();
-	    Fenetre fen = new Fenetre(new ModuleSondage(this.conn.c, u), u);
-	    
+		System.out.print("yooooo");
+	    Fenetre fen = new Fenetre(u);
+	    fen.SetModule(new ModuleSondage(this.conn.c, u, fen));
 	    break;
 	//~ case "Analyste":
 	    //~ conn.dispose();

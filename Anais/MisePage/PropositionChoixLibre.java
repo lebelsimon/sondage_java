@@ -17,7 +17,7 @@ public class PropositionChoixLibre extends JPanel{
 		//~ super();
 		this.setLayout(new BorderLayout());
 
-		lesPropositions = qVue.questionnaireVue.question.getPropositions();
+		lesPropositions = qVue.question.getPropositions();
 		
 		// creation de la liste des choix:
 	

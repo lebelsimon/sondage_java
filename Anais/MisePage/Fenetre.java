@@ -4,9 +4,10 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame{
-	Module m;
+	Module module;
 	Utilisateur util;
-	Fenetre(Module _m, Utilisateur u ){
+	Container c;
+	Fenetre( Utilisateur u ){
 		super("Rapid'Sond");
 		System.out.println("Fenetre deb");
 		util = u;
@@ -17,30 +18,30 @@ public class Fenetre extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setContentPane(f);
-		Container c = this.getContentPane();
+		c = this.getContentPane();
 
 			// Menu
 		this.setJMenuBar(new Menu());
 		System.out.println("ajout menu");
 		
 			// creation espace module
-		m = _m ;
-		m.setSource(this);
-		m.setOpaque(false);
-		
-		System.out.print("ICIIIII "+ m);
-		
-		
-		c.add(m,"Center");
 		 this.setVisible(true);
 		
 	}
 
 	// FONCTION NON TESTER, ATTENTION
-	public void changerModule(Module module){
-		Container c = this.getContentPane();
+	public void changerModule(Module _module){
 		c.removeAll();
-		this.m = module;
+		this.module = _module;
+		this.revalidate();
+		this.repaint();
+	}
+	
+	public void SetModule(Module m){
+		this.module =m;
+		c.removeAll();
+		System.out.print("\nAjout du module");
+		this.c.add(module,"Center");
 		this.revalidate();
 		this.repaint();
 	}

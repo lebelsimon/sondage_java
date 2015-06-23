@@ -22,10 +22,10 @@ public class PropositionChoix1 extends JPanel{
 		propHauteur = qVue.questionnaireVue.hauteur/2 - qVue.enonce.getHeight();
 		
 		
-		lesPropositions = new Proposition [qVue.questionnaireVue.question.getPropositions().size()];
+		lesPropositions = new Proposition [qVue.question.getPropositions().size()];
 		
-		for( int i=0; i< qVue.questionnaireVue.question.getPropositions().size(); i++)
-			lesPropositions[i] = qVue.questionnaireVue.question.getPropositions().get(i);
+		for( int i=0; i< qVue.question.getPropositions().size(); i++)
+			lesPropositions[i] = qVue.question.getPropositions().get(i);
 		
 		//this.setLayout(new GridLayout(question.getPropositions().size(),1));
 		

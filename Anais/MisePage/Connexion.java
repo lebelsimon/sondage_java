@@ -14,7 +14,7 @@ public class Connexion extends JFrame{
 		this.c=c;
 		this.setSize(600,400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setIconImage(new ImageIcon("../Ressources/icon1.jpg").getImage());
+		this.setIconImage(new ImageIcon("icon1.jpg").getImage());
 		Container cont= this.getContentPane();
 		cont.setLayout(new BorderLayout());
 		
@@ -22,7 +22,7 @@ public class Connexion extends JFrame{
 		JPanel total = new JPanel(new FlowLayout());
 		
 		//JLabel pour le logo
-		JLabel image = new JLabel(new ImageIcon("../Ressources/logo1.png"));
+		JLabel image = new JLabel(new ImageIcon("logo1.png"));
 
 		
 		//Panel de l'identifiant

@@ -8,7 +8,7 @@ public class PropositionChoixX extends JPanel{
 	PropositionChoixX(QuestionVue questionVue){
 	System.out.println("--- PropositionChoixX --- ");
 		// initialisation:
-		lesPropositions = questionVue.questionnaireVue.question.getPropositions();
+		lesPropositions = questionVue.question.getPropositions();
 		this.setLayout( new GridLayout(lesPropositions.size(),1));
 		
 		for(int i=0; i< lesPropositions.size(); i++){

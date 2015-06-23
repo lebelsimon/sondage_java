@@ -41,25 +41,29 @@ public class QuestionnaireButton implements ActionListener {
 			switch (nom){	
 				case "prec": 
 					System.out.println("bouton prec"); 
-					if ( (questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.question.getNumQ()).getNumQ())-2 ==0){
+					System.out.print(questionnaireVue.questionVue.question.getNumQ());
+					int nb = (questionnaireVue.questionVue.question.getNumQ())-2;
+					System.out.println(nb);
+					System.out.println(questionnaireVue.module.questionnaire.getListeQuestions().get(nb));
+					if ( questionnaireVue.module.questionnaire.getListeQuestions().get(nb).getNumQ() ==1){
 						questionnaireVue.qprec.setEnabled(false);
 						questionnaireVue.qprem.setEnabled(false);
 					}
 					questionnaireVue.qsuiv.setEnabled(true);
 					questionnaireVue.qder.setEnabled(true);
-					questionnaireVue.ChangerQuestion(questionnaireVue, questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.question.getNumQ()));
+					questionnaireVue.ChangerQuestion(questionnaireVue.module.questionnaire.getListeQuestions().get(nb));
 					
 					break;
 					
 				case "suiv": 
 					System.out.println("bouton suiv"); 
-					if (questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.question.getNumQ()) == questionnaireVue.module.questionnaire.getListeQuestions().get((questionnaireVue.module.questionnaire.getListeQuestions().size())-1)){
+					if (questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.questionVue.question.getNumQ()) == questionnaireVue.module.questionnaire.getListeQuestions().get((questionnaireVue.module.questionnaire.getListeQuestions().size())-1)){
+						questionnaireVue.qder.setEnabled(false);
 						questionnaireVue.qsuiv.setEnabled(false);
-						questionnaireVue.qprem.setEnabled(false);
 					}
 					questionnaireVue.qprec.setEnabled(true);
 					questionnaireVue.qprem.setEnabled(true);
-					questionnaireVue.ChangerQuestion(questionnaireVue,questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.question.getNumQ())); //newQ);
+					questionnaireVue.ChangerQuestion(questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.questionVue.question.getNumQ())); //newQ);
 
 					break;
 				case "prem": 
@@ -67,21 +71,31 @@ public class QuestionnaireButton implements ActionListener {
 					
 					questionnaireVue.qprec.setEnabled(false);
 					questionnaireVue.qprem.setEnabled(false);
-					questionnaireVue.ChangerQuestion(questionnaireVue, questionnaireVue.module.questionnaire.getListeQuestions().get(0));
-					
-					// on rend les boutons precedent et Prem inactivé 
-					
-					
-					
+					questionnaireVue.qsuiv.setEnabled(true);
+					questionnaireVue.qder.setEnabled(true);
+					questionnaireVue.ChangerQuestion( questionnaireVue.module.questionnaire.getListeQuestions().get(0));
+								
 					break;
 					
 				case "dern":
 					System.out.println("bouton dern"); 
-					questionnaireVue.ChangerQuestion(questionnaireVue, questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.module.questionnaire.getListeQuestions().size()-1));
 					questionnaireVue.qsuiv.setEnabled(false);
 					questionnaireVue.qder.setEnabled(false);
+					questionnaireVue.qprec.setEnabled(true);
+					questionnaireVue.qprem.setEnabled(true);
+					questionnaireVue.terminer.setEnabled(true);
+					questionnaireVue.ChangerQuestion( questionnaireVue.module.questionnaire.getListeQuestions().get(questionnaireVue.module.questionnaire.getListeQuestions().size()-1));
+					
 					break;				
-					 
+				
+				case "suivi":
+					modsond.modif();
+					break;
+				case "appeler":
+					BoiteDialogue bt=new BoiteDialogue(5000);
+					bt.start();
+					bt.showMessageDialog(null, "Appel en cours...");
+					System.out.println("terminer");break;
 			}
 
 	}

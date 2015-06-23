@@ -12,7 +12,7 @@ public class PropositionChoixNote extends JPanel{
 		System.out.println("--- PropositionChoixNote --- ");
 		JPanel listeChoix = new JPanel();
 		
-		valMax = questionVue.questionnaireVue.question.getMaxVal();
+		valMax = questionVue.question.getMaxVal();
 		valMin = 0;
 		JSlider slide = new JSlider();
 		slide.setMaximum(valMax);

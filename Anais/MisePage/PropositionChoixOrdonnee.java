@@ -15,9 +15,9 @@ public class PropositionChoixOrdonnee extends JPanel{
 		
 		// creation de la liste deroulante et des elements
 
-		nbValOrdonne = qVue.questionnaireVue.question.getMaxVal();
+		nbValOrdonne = qVue.question.getMaxVal();
 		opts = new Integer[nbValOrdonne+1];
-		listeProp = qVue.questionnaireVue.question.getPropositions();
+		listeProp = qVue.question.getPropositions();
 		
 		
 		GridLayout g = new GridLayout(listeProp.size(),2);

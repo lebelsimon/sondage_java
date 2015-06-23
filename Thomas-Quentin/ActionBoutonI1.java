@@ -13,7 +13,7 @@ public class ActionBoutonI1 implements ActionListener{
     	
     	if (b.getName()=="Analyse"){
     		i.setVisible(false);
-    		Analyse_Tableau j=new Analyse_Tableau(i.list.getSelectedValue(),0);}
+    		Analyse_Tableau j=new Analyse_Tableau(i.list.getSelectedValue(),0,false);}
     	else if(b.getName()=="Deco"){
     		System.exit(0);
     		

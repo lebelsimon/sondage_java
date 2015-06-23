@@ -124,6 +124,9 @@ public class VueGestQuest extends JFrame {
 
 		this.setVisible(true);
 	}
+	public Utilisateur getUtilisateur(){
+		return util;
+	}
 
 // public static void main(String[] args) {
 // 	VueGestQuest Appli = new VueGestQuest();

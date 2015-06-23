@@ -237,7 +237,7 @@ public class TestJDBC {
 				break;
 			case 20:
 				System.out.println("------------ question note-------------");
-				int[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
+				String[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
 				for(int i=0; i<tab.length; i++){
 					for(int j=0; j<tab[i].length; j++){
 						System.out.print(tab[i][j]+", ");
@@ -271,7 +271,7 @@ public class TestJDBC {
 				break;
 			case 21:
 				System.out.println("------------ question note-------------");
-				int[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
+				String[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
 				for(int i=0; i<tab2.length; i++){
 					for(int j=0; j<tab2[i].length; j++){
 						System.out.print(tab2[i][j]+", ");
@@ -304,6 +304,9 @@ public class TestJDBC {
 				}
 				break;
 			case 22:
+				
+				break;
+			case 23:
 				fini = true;
 				break;
 			}

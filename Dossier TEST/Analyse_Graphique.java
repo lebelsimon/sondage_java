@@ -100,7 +100,7 @@ public class Analyse_Graphique extends JFrame {
 		choixOption.add(rdbtnBaton);
 		choixOption.add(rdbtnCirculaire);
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		this.setVisible(true);
 
 	}

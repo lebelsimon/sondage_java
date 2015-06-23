@@ -73,7 +73,7 @@ public class Analyse_Questionnaire extends JFrame {
 	
 		
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		
 		
 		// END

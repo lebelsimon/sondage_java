@@ -10,52 +10,38 @@ public class QuestionnaireVue extends JPanel{
 	//static Questionnaire q, Sonde s;
 	
 	JLabel titreQuestionnaire;
-	Questionnaire questionnaire;
-	mod m;
+	ModuleSondage module;
 	QuestionVue questionVue;
 	Question question;
 	
-	// pour l'instant je crée un affichage vide, mais par la suite le constructeur prendra en parametre:
-	//		Questionnaire q, Sonde s
-	QuestionnaireVue(mod _m){
+
+	QuestionnaireVue(ModuleSondage s){
 		
 		// initialisation des valeurs
 		super();
-		this.m = _m;
+		this.module = s;
 		this.setLayout(new BorderLayout());
 		Random random = new Random();
-		int numSonde =199;
-		System.out.println("Cacule des indice pour sond num 10");//+m.toto.getNumSond());
-		System.out.println(m.info.getListeQuestionnairePourUnSonde(numSonde));//m.toto.getNumSond()));
-		int ind = random.nextInt(m.info.getListeQuestionnairePourUnSonde(numSonde).size());
-		//System.out.println("ind" +ind);
-		//System.out.println("m.toto.getListeQuestionnaire().get(ind): "+m.toto.getListeQuestionnaire().get(10));//ind));
-		int numQuestionnaire =  m.info.getListeQuestionnairePourUnSonde(numSonde).get(ind);
+		int numSonde =m.sonde.getNumSond();
+		
+		
+		int numQuestionnaire =  module.questionnaire.getNumC();
 		System.out.println("Indice calculer");
 
 		
 		// creation du questionnaire
 			// creation de la connection
-		try {
-			ConnexionMySQL co = new ConnexionMySQL(
-					"jdbc:mysql://servinfo-db:3306/", "dbdmartin", "dbdmartin",
-					"/home/dmartin");
-		QuestionnaireBD BD = new QuestionnaireBD(co);
-	
-		Random randomQ = new Random();
 		
-		questionnaire = BD.creerQuestionnaire(numQuestionnaire);
-		//~ int pif = random.nextInt( questionnaire.getListeQuestions().size());
 		System.out.println("Ici");		
 	
 		
-		question = questionnaire.getListeQuestions().get(0);
-		System.out.println("Ici");	
+		question = module.questionnaire.getListeQuestions().get(0);
+		
 
 		// Creation du label Questionnaire:
 		
 		JPanel idQuestionnaireJ = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 4));
-		titreQuestionnaire = new JLabel(questionnaire.getTitreQuestionnaire());
+		titreQuestionnaire = new JLabel(module.questionnaire.getTitreQuestionnaire());
 		idQuestionnaireJ.add(titreQuestionnaire);
 		idQuestionnaireJ.setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -126,6 +112,7 @@ public class QuestionnaireVue extends JPanel{
 		//~ System.out.println("changement du num");
 		//~ this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
 		
+		System.out.println(this.getParent().getParent().getParent().getParent());
 		this.getParent().getParent().revalidate();
 		this.getParent().getParent().repaint();
 		System.out.println("fin ChangerQuestion");

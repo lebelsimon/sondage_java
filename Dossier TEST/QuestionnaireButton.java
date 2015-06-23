@@ -43,13 +43,7 @@ public class QuestionnaireButton implements ActionListener {
 				case "dern":
 					System.out.println("bouton dern"); break;
 				case "suivi":
-					System.out.println("1");
-					mo.setVisible(false);
-					System.out.println("2");
-					modsond=new ModuleSondage();
-					System.out.println("3");
-					mo.setVisible(true);
-					System.out.println("4");
+					modsond.modif();
 					break;
 				case "appeler":
 					BoiteDialogue bt=new BoiteDialogue(5000);
@@ -61,5 +55,7 @@ public class QuestionnaireButton implements ActionListener {
 					 
 			}
 	}
+	
 
 }
+

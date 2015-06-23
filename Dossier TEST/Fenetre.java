@@ -19,7 +19,7 @@ public class Fenetre extends JFrame{
 		Container c = this.getContentPane();
 
 			// Menu
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		System.out.println("ajout menu");
 		
 			// creation espace module

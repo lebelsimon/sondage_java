@@ -23,7 +23,7 @@ public class QuestionnaireButton implements ActionListener {
 		this.mo=null;
 		this.modsond=null;
 	}
-	public QuestionnaireButton(String _nom,mod mo){//Questionnaire _q) {
+	public QuestionnaireButton(String _nom, mod mo){//Questionnaire _q) {
 		//~ this.q=_q;
 		this.nom=_nom;
 		this.mo=mo;
@@ -43,8 +43,7 @@ public class QuestionnaireButton implements ActionListener {
 					System.out.println("bouton prec"); 
 					newNumQ = questionVue.question.getNumQ() -1;
 					newQ = new Question(questionVue.questionnaire.getListeQuestions().get(newNumQ));
-
-					System.out.println(newQ);
+					System.out.println("Question: "+newQ);
 					questionVue.ChangerQuestion(questionVue, newQ);
 					
 					break;
@@ -53,7 +52,7 @@ public class QuestionnaireButton implements ActionListener {
 					System.out.println("bouton suiv"); 
 					newNumQ = questionVue.question.getNumQ() +1;
 					newQ = new Question(questionVue.questionnaire.getListeQuestions().get(newNumQ));
-					System.out.println(newQ);
+					System.out.println("Question: "+newQ);
 					questionVue.ChangerQuestion(questionVue, newQ);
 
 					break;
@@ -62,10 +61,8 @@ public class QuestionnaireButton implements ActionListener {
 					System.out.println("bouton prem"); 
 					newQ = new Question(questionVue.questionnaire.getListeQuestions().get(newNumQ));
 
-					System.out.println(newQ);
-					newQ = new Question(questionVue.questionnaire.getListeQuestions().get(newNumQ));
-
-					System.out.println(newQ);
+					
+					System.out.println("Question: "+newQ);
 					questionVue.ChangerQuestion(questionVue, newQ);
 					
 					break;
@@ -74,7 +71,7 @@ public class QuestionnaireButton implements ActionListener {
 					System.out.println("bouton dern"); 
 					newQ = new Question(questionVue.questionnaire.getListeQuestions().get(newNumQ));
 
-					System.out.println(newQ);
+					System.out.println("Question: "+newQ);
 					questionVue.ChangerQuestion(questionVue, newQ);
 
 					break;				

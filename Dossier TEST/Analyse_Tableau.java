@@ -130,7 +130,7 @@ public class Analyse_Tableau extends JFrame {
 		choixOption.add(rdbtnAge);
 		choixOption.add(rdbtnCategorieSociopro);
 		
-		this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		this.setVisible(true);
 
 	}

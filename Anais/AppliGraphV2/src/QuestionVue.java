@@ -15,17 +15,16 @@ public class QuestionVue extends JPanel{
 	String enonceQuestion;
 	JPanel haut,choix;
 	
-	QuestionVue( QuestionnaireVue QuestionnaireV, Question q){
-		this.setLayout( new BorderLayout());
+	QuestionVue( QuestionnaireVue _questionnaireVue, Question q){
+		this.setLayout( new BorderLayout( 40,50));
+		questionnaireVue = _questionnaireVue;
 		
 		// initialisation des valeurs corespondant au elements de la Question
-		questionnaireVue = QuestionnaireV;
-		question = q;
-		numQuestion =question.getNumQ();
-		propositions = question.getPropositions();
+		numQuestion = q.getNumQ();
+		propositions = q.getPropositions();
 		nombreVal = propositions.size();
-		typeQuestion = question.getIdT()+"";
-		enonceQuestion = question.getTexteQuestion();
+		typeQuestion = q.getIdT();
+		enonceQuestion = q.getTexteQuestion();
 		
 		
 		// creations des elements de la vue
@@ -71,44 +70,6 @@ public class QuestionVue extends JPanel{
 		}
 		return res;
 	}
-	
-	public void modifQuestion(Question q){	
-		System.out.println("test1");
-
-		QuestionnaireVue stock = questionnaireVue;
-		this.question = q;
-		this.removeAll();
-		this.question = q;
-		this.add(haut,"North");
-		this.add(choix, "Center");
-		this.questionnaireVue.module.fenetre.revalidate();
-		this.questionnaireVue.module.fenetre.repaint();
-		System.out.println("\nQuestion : "+q+ "MAQ: "+question);
-		
-		System.out.println("idQuestion: "+numQuestion);
-		
-		
-		System.out.println("idQuestion: "+idQuestion.getText());
-		this.add(choix, "Center");
-		
-		//this.revalidate();
-		//~ this.repaint();
-		//System.out.println(this.question);
-		
-		
-		//~ this.removeAll();
-		//~ this.questionnaireVue.question = q;
-		//~ this.questionnaireVue.questionVue = new QuestionVue(this.questionnaireVue, this.questionnaireVue.question);
-		//~ this.add(espaceSonde);
-		//~ this.add(questionnaireVue);
-		//~ this.revalidate();
-		//~ this.repaint();
-		
-		//~ m.modif();
-		//System.out.println("test");
-	}
-	
-	
 	
 		
 }

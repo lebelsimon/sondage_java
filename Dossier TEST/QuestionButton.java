@@ -32,6 +32,7 @@ public class QuestionButton implements ActionListener {
 					System.out.println("bouton prem"); break;
 				case "dern":
 					System.out.println("bouton dern"); break;
+				
 			}
 	}
 

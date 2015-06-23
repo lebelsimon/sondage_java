@@ -7,6 +7,7 @@ import java.awt.*;
 public class ModuleSondage extends Module{
 	
 	QuestionnaireVue questionnaire;
+	mod m;
 	
 	// par la suite le module sondage sera initialisé avec une question et un sonde 
 	// en cas d'erreur il y auras u pop-up indiquant qu'aucun questionnaire n'est disponible
@@ -14,11 +15,26 @@ public class ModuleSondage extends Module{
 	public ModuleSondage(){
 		super();	
 		this.setLayout( new FlowLayout());
-		mod m= new mod(this);
+		this.m= new mod(this);
 		this.questionnaire = new QuestionnaireVue(m);
 		
 		
 		this.add(m);
 		this.add(questionnaire);
+
 	}
+	// ajout methode modif application qcm 
+	public void modif(){
+		this.removeAll();
+		this.m= new mod(this);
+		this.questionnaire = new QuestionnaireVue(m);
+		this.add(m);
+		this.add(questionnaire);
+		this.revalidate();
+		this.repaint();
+		
+		//~ m.modif();
+		System.out.println("test");
+	}
+
 }

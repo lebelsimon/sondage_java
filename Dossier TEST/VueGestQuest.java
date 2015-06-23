@@ -74,6 +74,7 @@ public class VueGestQuest extends JFrame {
 		listeQ = new ArrayList<Questionnaire>();
 
 		for(Questionnaire elem:qBD.getListeQuestionnaire(util.getIdU(),"Concepteur")){
+			System.out.println(elem);
 			listeQ.add(elem);
 		}
 		listcat = new DefaultListModel<String>();

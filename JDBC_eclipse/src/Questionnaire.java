@@ -98,8 +98,8 @@ public class Questionnaire {
 	public String toString() {
 		return "Questionnaire [titreQuestionnaire=" + titreQuestionnaire
 				+ ", numC=" + numC + ", idU=" + idU + ", idPan=" + idPan
-				+ ", listeQuestions=" + listeQuestions + "]";
+				+ ", idQ=" + idQ + ", etat=" + etat + ", listeQuestions="
+				+ listeQuestions + ", listeReponses=" + listeReponses + "]";
 	}
-
 	
 }

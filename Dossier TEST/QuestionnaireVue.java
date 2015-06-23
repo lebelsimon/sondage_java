@@ -24,7 +24,7 @@ public class QuestionnaireVue extends JPanel{
 		this.m = _m;
 		this.setLayout(new BorderLayout());
 		Random random = new Random();
-		int numSonde =9;
+		int numSonde =11;
 		System.out.println("Cacule des indice pour sond num 10");//+m.toto.getNumSond());
 		System.out.println(m.info.getListeQuestionnairePourUnSonde(numSonde));//m.toto.getNumSond()));
 		int ind = random.nextInt(m.info.getListeQuestionnairePourUnSonde(numSonde).size());

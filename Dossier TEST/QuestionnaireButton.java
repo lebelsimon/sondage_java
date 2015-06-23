@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 
+
+
 public class QuestionnaireButton implements ActionListener {
 	
 	// Lien vers le questionnaire pour pouvoir modifier certaines de ses propriétés
@@ -48,7 +50,9 @@ public class QuestionnaireButton implements ActionListener {
 				case "appeler":
 					BoiteDialogue bt=new BoiteDialogue(5000);
 					bt.start();
-					bt.showMessageDialog(null, "Appel en cours...");
+					Icon tel = new ImageIcon("../Ressources/tel.png");
+					Object[] options = {"Annuler" };
+					bt.showOptionDialog(null,"Appel en cours ...", "Appel",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,tel, options, options[0]);
 					System.out.println("terminer");break;
 					
 					
@@ -58,4 +62,3 @@ public class QuestionnaireButton implements ActionListener {
 	
 
 }
-

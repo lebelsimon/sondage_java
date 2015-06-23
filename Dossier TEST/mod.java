@@ -116,7 +116,7 @@ public class mod extends Module{
 		Random random = new Random();
 		int ind=random.nextInt(list.size());	
 		toto = new Sonde(list.get(ind));
-		info.supprimerSonde(toto.getNumSond());
+		//~ info.supprimerSonde(toto.getNumSond());
 
 		return toto;
 	}

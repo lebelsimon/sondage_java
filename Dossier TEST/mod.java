@@ -35,6 +35,9 @@ public class mod extends Module{
 	    System.out.println(e);
 	    System.out.println("coucou");
 	}
+	
+	modsond=s;
+	
 	appeler = new JButton ("");
 	suivant = new JButton("Suivant");
 	

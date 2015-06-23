@@ -11,12 +11,15 @@ public class BoutonQuestion implements ActionListener {
 	Question laQuestion;
 	String titreQ;
 	String nomBouton;
-	
-	public BoutonQuestion(VueSaisieQuestion vue, String nomBouton){
+	ConnexionMySQL co;
+	Utilisateur u;
+	public BoutonQuestion(VueSaisieQuestion vue, String nomBouton,ConnexionMySQL maco, Utilisateur ut){
 		this.vue=vue;
 		titreQ=vue.liste2.getSelectedValue();
 		laQuestion = vue.question;
 		this.nomBouton = nomBouton;
+		this.co=maco;
+		this.u=ut;
 	}
 	
 	@Override
@@ -31,7 +34,10 @@ public class BoutonQuestion implements ActionListener {
 			for(int i=0; i<vue.liste.size(); i++){
 				q.addProposition(new Proposition(vue.liste.elementAt(i)));
 			}
+			vue.questionnaire.addQuestion(q);
 			System.out.println(q);
+			vue.setVisible(false);
+			VueCreatQuest vu = new VueCreatQuest(co,u);
 			break;
 		case "modifier":
 			vue.liste.removeElement(vue.liste2.getSelectedValue());
@@ -52,6 +58,8 @@ public class BoutonQuestion implements ActionListener {
 			vue.liste.removeElement(vue.liste2.getSelectedValue());
 			break;
 		case "annuler":
+			vue.setVisible(false);
+			VueCreatQuest v = new VueCreatQuest(co,u);
 			break;
 		}
 	}

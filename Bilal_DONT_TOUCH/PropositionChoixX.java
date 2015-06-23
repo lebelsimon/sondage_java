@@ -5,10 +5,10 @@ public class PropositionChoixX extends JPanel{
 	ButtonGroup lesChoix;
 	DefaultListModel<Proposition>  lesPropositions;
 	
-	PropositionChoixX(Question q){
+	PropositionChoixX(QuestionVue questionVue){
 	System.out.println("--- PropositionChoixX --- ");
 		// initialisation:
-		lesPropositions = q.getPropositions();
+		lesPropositions = questionVue.question.getPropositions();
 		this.setLayout( new GridLayout(lesPropositions.size(),1));
 		
 		for(int i=0; i< lesPropositions.size(); i++){

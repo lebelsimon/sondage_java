@@ -6,11 +6,13 @@ public class Question {
 	char idT;
 	int maxVal;
 	int numQ;
+	boolean valide;
 	DefaultListModel<Proposition> propositions;
 	public Question(String texteQuestion) {
 		super();
 		this.texteQuestion = new String(texteQuestion);
 		this.propositions = new DefaultListModel<Proposition>();
+		this.valide = false;
 	}
 	
 	public Question(String texteQuestion, char idT, int maxVal, int numQ) {
@@ -20,13 +22,14 @@ public class Question {
 		this.idT=idT;
 		this.maxVal=maxVal;
 		this.numQ=numQ;
+		this.valide = false;
 	}
 	
 	// constructeur permettant la recopie d'un question
 	public Question(Question q){
 		super();
 		this.texteQuestion=new String(q.texteQuestion);
-
+		this.valide = false;
 		int nbP=q.getPropositions().size();
 		this.propositions=new DefaultListModel<Proposition>();
 		for (int i=0;i<nbP;i++){
@@ -75,7 +78,15 @@ public class Question {
 	public void setNumQ(int numQ) {
 		this.numQ = numQ;
 	}
-
+	
+	public boolean estValide(){
+		return this.valide;
+	}
+	
+	public void setValide(boolean val){
+		this.valide = val;
+	}
+	
 	@Override
 	public String toString() {
 		return "Question [texteQuestion=" + texteQuestion + ", idT=" + idT

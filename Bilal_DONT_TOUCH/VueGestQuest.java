@@ -84,8 +84,6 @@ public class VueGestQuest extends JFrame {
 			listcat.addElement(elem.getTitreQuestionnaire());
 		}
 		
-		
-		
 		JLabel labelAjouter = new JLabel("Ajouter");
 		labelAjouter.setFont(new Font("Tahoma", Font.BOLD, 11));
 		labelAjouter.setHorizontalAlignment(SwingConstants.CENTER);

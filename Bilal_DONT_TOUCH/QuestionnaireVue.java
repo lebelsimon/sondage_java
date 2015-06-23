@@ -11,124 +11,136 @@ public class QuestionnaireVue extends JPanel{
 	
 	JLabel titreQuestionnaire;
 	Questionnaire questionnaire;
-	mod m;
+	ModuleSondage module;
 	QuestionVue questionVue;
-	Question question;
+	//Question question;
+	int largeur, hauteur;
+	JPanel boutonsQuestions;
+	JButton qprec, qsuiv, qprem, qder, terminer;
+	JPanel idQuestionnaireJ, questionJ;
 	
-	// pour l'instant je crée un affichage vide, mais par la suite le constructeur prendra en parametre:
-	//		Questionnaire q, Sonde s
-	QuestionnaireVue(mod _m){
-		
+	
+QuestionnaireVue(ModuleSondage mod){
 		// initialisation des valeurs
 		super();
-		this.m = _m;
+		System.out.println("DEB crea Vue questionnaire");
+
+		this.module = mod;
+		//this.questionnaire = module.questionnaire;// BD.getListeQuestionnaire().get(numQuestionnaire-1);
+		//~ this.question = questionnaire.getListeQuestions().get(0);
+		System.out.println(module.fenetre);
+		largeur = module.fenetre.getWidth()/2 - module.fenetre.getWidth()/10;
+		hauteur = module.fenetre.getHeight() - module.fenetre.getHeight()/10;
+		this.setPreferredSize(new Dimension(largeur, hauteur));
+		
 		this.setLayout(new BorderLayout());
 		Random random = new Random();
-		int numSonde =11;
-		System.out.println("Cacule des indice pour sond num 10");//+m.toto.getNumSond());
-		System.out.println(m.info.getListeQuestionnairePourUnSonde(numSonde));//m.toto.getNumSond()));
-		int ind = random.nextInt(m.info.getListeQuestionnairePourUnSonde(numSonde).size());
-		//System.out.println("ind" +ind);
-		//System.out.println("m.toto.getListeQuestionnaire().get(ind): "+m.toto.getListeQuestionnaire().get(10));//ind));
-		int numQuestionnaire =  m.info.getListeQuestionnairePourUnSonde(numSonde).get(ind);
+		System.out.println(module.sonde);//.getNumSond());
+		int numSonde = module.sonde.getNumSond();//199;
+		questionVue = new QuestionVue(module.questionnaire.getListeQuestions().get(0), this);
+
+		int numQuestionnaire = module.questionnaire.idQ; 
 		System.out.println("Indice calculer");
 
 		
-		// creation du questionnaire
-			// creation de la connection
-		try {
-			ConnexionMySQL co = new ConnexionMySQL(
-					"jdbc:mysql://servinfo-db:3306/", "dbdmartin", "dbdmartin",
-					"/home/dmartin");
-		QuestionnaireBD BD = new QuestionnaireBD(co);
-	
-		Random randomQ = new Random();
-		
-		questionnaire = BD.creerQuestionnaire(numQuestionnaire);
-		//~ int pif = random.nextInt( questionnaire.getListeQuestions().size());
-		System.out.println("Ici");		
-	
-		
-		question = questionnaire.getListeQuestions().get(0);
-		System.out.println("Ici");	
 
 		// Creation du label Questionnaire:
 		
-		JPanel idQuestionnaireJ = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 4));
-		titreQuestionnaire = new JLabel(questionnaire.getTitreQuestionnaire());
+		idQuestionnaireJ = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 4));
+		titreQuestionnaire = new JLabel(module.questionnaire.getTitreQuestionnaire());
 		idQuestionnaireJ.add(titreQuestionnaire);
 		idQuestionnaireJ.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		
+		System.out.println("CREATION BOUTONS");
 		// creation des boutons et de leur panel
-		JPanel boutonsQuestions = new JPanel();
+		boutonsQuestions = new JPanel();
 		
 			// question suivante
 		boutonsQuestions.setBorder(BorderFactory.createLineBorder(Color.black));
-		JButton qsuiv = new JButton(">");
+		qsuiv = new JButton(">");
 		qsuiv.setName("suiv");
 		qsuiv.setToolTipText("question suivante");
-		// qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this));//, this.q));
-		
+		qsuiv.addActionListener(new QuestionnaireButton(qsuiv.getName(), this));//, this.q));
 			//question precedente
-		JButton qprec = new JButton("<");
+		qprec = new JButton("<");
 		qprec.setName("prec");
-		qprec.setToolTipText("question précédente");
-		// qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this));//, this.q));
+		qprec.setToolTipText("question precedente");
+		qprec.addActionListener(new QuestionnaireButton(qprec.getName(), this));//, this.q));
+		qprec.setEnabled(false);
 		
 			//premiere question
-		JButton qprem = new JButton("<<<");
+		qprem = new JButton("<<<");
 		qprem.setName("prem");
-		qprem.setToolTipText("première question");
-		// qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this));//, this.q));
-		
+		qprem.setToolTipText("premiere question");
+		qprem.addActionListener(new QuestionnaireButton(qprem.getName(), this));//, this.q));
+		qprem.setEnabled(false);
 			// derniere question
-		JButton qder = new JButton(">>>");
+		qder = new JButton(">>>");
 		qder.setName("dern");
-		qder.setToolTipText("dernière question");
-		// qder.addActionListener(new QuestionnaireButton(qder.getName(), this));//, this.q));
+		qder.setToolTipText("derniere question");
+		qder.addActionListener(new QuestionnaireButton(qder.getName(), this));//, this.q));
+		
+			// Terminer questionnaire
+		terminer = new JButton("Terminer");
+		terminer.setName("term");
+		terminer.setToolTipText("Terminer questionnaire");
+		terminer.addActionListener(new QuestionnaireButton(terminer.getName(), this));
+		terminer.setEnabled(false);
 		
 		// ajout des boutons au panel boutons
 		boutonsQuestions.add(qprem); 
 		boutonsQuestions.add(qprec);
+		boutonsQuestions.add(terminer);
 		boutonsQuestions.add(qsuiv); 
 		boutonsQuestions.add(qder); 
 		
-
-		// creation de la vue de la question:
-			// par la suite on donnera une question et il creera la vue en fonction de la question
-		questionVue = new QuestionVue(question, this);
 		
+		System.out.println("QuestionVue creer");
 		questionVue.setBorder(BorderFactory.createLineBorder(Color.black));
-		questionVue.setPreferredSize(new Dimension(300,150));
+		//questionVue.setPreferredSize(new Dimension(300,150));
 		questionVue.setBorder(new EmptyBorder(10, 10, 10, 10));
+		
+		System.out.println(">Jusqu'il ça passe");
+
+
+		
+		System.out.println("CREATION BOUTONS FIN");
+
+		// creation du panel contenant la vue de la question et le bouton terminer:
+		questionJ = new JPanel(new BorderLayout());
+		questionJ.add(questionVue, BorderLayout.NORTH);
+			
+		
+		
 		
 		//this.add(new JLabel("TESTTTTT"));
 		this.add(idQuestionnaireJ, BorderLayout.NORTH);
-		this.add(questionVue, BorderLayout.CENTER);
+		this.add(questionJ, BorderLayout.CENTER);
 		this.add(boutonsQuestions,BorderLayout.SOUTH); 		
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		//this.add(new JLabel("coucou"));
 		this.setPreferredSize(new Dimension(350,530));
 		this.revalidate();
-		//this.setVisible(true);
 		
-		} catch (Exception e) {
-			System.out.println("connexion non établie");
-		}
+		System.out.println("CREA QUESTIONNAIRE FIN");
 	}
-	public void ChangerQuestion( QuestionnaireVue questionnaireVue ,Question q){
-		System.out.println("deb ChangerQuestion");
-		questionnaireVue.question = q;
-		questionnaireVue.questionVue =  new QuestionVue(q, questionnaireVue);
-		
-		//~ System.out.println("changement du num");
-		//~ this.questionVue.idQuestion.setText("Question numero: "+q.getNumQ());
-		
-		this.getParent().getParent().revalidate();
-		this.getParent().getParent().repaint();
-		System.out.println("fin ChangerQuestion");
-		
+	
+	public void ChangerQuestion(Question q){
+		this.questionJ.removeAll();
+		this.questionVue = null;
+		questionVue = new QuestionVue(q, this);
+		questionJ.add(questionVue, BorderLayout.NORTH);
+
+		//this.add(questionJ, BorderLayout.CENTER);
+		//this.questionVue.setVisible(true);
+		this.revalidate();
+		this.repaint();
+		//this.module.fenetre.repaint();
+		//this.module.fenetre.revalidate();
 	}
+
+	
+	
 }
+

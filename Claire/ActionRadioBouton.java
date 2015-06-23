@@ -20,21 +20,14 @@ public class ActionRadioBouton implements ActionListener,FocusListener{
 	static final int NOTE=3;
 	static final int LIBRE=4;
 	
-	int idBouton;
+	
 	VueSaisieQuestion formulaireQuestion; // la vue
-	Question laQuestion; // le Modèle
 	
-	public ActionRadioBouton(int idBouton, VueSaisieQuestion vue, Question modele) {
-		super();
-		this.idBouton = idBouton;
-		this.formulaireQuestion=vue;
-		this.laQuestion=modele;
-	}
+	int idBouton;
 	
-	public ActionRadioBouton(String nomBouton, VueSaisieQuestion vue, Question modele) {
+	public ActionRadioBouton(String nomBouton, VueSaisieQuestion vue) {
 		super();
 		this.formulaireQuestion=vue;
-		this.laQuestion=modele;
 		switch (nomBouton){
 		case "Simple": this.idBouton=SIMPLE;break;
 		case "Multiple": this.idBouton=MULTIPLE;break;
@@ -45,25 +38,28 @@ public class ActionRadioBouton implements ActionListener,FocusListener{
 		}
 	}
 
-	// méthodes utilitaires pour les boutons
+	// methodes utilitaires pour les boutons
 	private void simple(){
-		laQuestion.setIdT('u');
+		formulaireQuestion.question.setIdT('u');
 	}
 	
 	private void multiple(){
-		laQuestion.setIdT('m');
+		formulaireQuestion.question.setIdT('m');
+		formulaireQuestion.question.setMaxVal(formulaireQuestion.question.getPropositions().getSize());
 	}
 	
 	private void classement(){
-		laQuestion.setIdT('c');
+		formulaireQuestion.question.setIdT('c');
+		formulaireQuestion.question.setMaxVal(3);
 	}
 	
 	private void note(){
-		laQuestion.setIdT('n');
+		formulaireQuestion.question.setIdT('n');
+		formulaireQuestion.question.setMaxVal(10);
 	}
 	
 	private void libre(){
-		laQuestion.setIdT('l');
+		formulaireQuestion.question.setIdT('l');
 	}
 
 	@Override
@@ -83,6 +79,8 @@ public class ActionRadioBouton implements ActionListener,FocusListener{
 		case CLASSEMENT: classement();break;
 		case NOTE: note();break;
 		case LIBRE: libre();break;
+		
+
 		
 	}
 		

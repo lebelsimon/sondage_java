@@ -92,7 +92,7 @@ public class QuestionnaireVue extends JPanel{
 		boutonsQuestions.add(qsuiv); 
 		boutonsQuestions.add(qder); 
 		
-		questionVue = new QuestionVue(this, questionnaire.getListeQuestions().get(0));
+		questionVue = new QuestionVue(questionnaire.getListeQuestions().get(0));
 		System.out.println("QuestionVue creer");
 		questionVue.setBorder(BorderFactory.createLineBorder(Color.black));
 		//questionVue.setPreferredSize(new Dimension(300,150));

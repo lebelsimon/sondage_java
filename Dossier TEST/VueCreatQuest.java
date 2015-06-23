@@ -17,9 +17,14 @@ public class VueCreatQuest extends JFrame {
 	public Questionnaire questModif;
 	public ArrayList<Question> listeQuestions;
 	public QuestionnaireBD qBD;
+	public ClientBD cBD;
 	public Utilisateur util;
 	public JComboBox<Integer> CBSociete;
 	public JComboBox<Integer> CBPanel;
+	public HashMap<Integer,String> dictClient;
+	public HashMap<Integer,String> dictPanel;
+	public ArrayList<String> listClient;
+	public ArrayList<String> listPanel;
 	public VueCreatQuest(ConnexionMySQL connec,Utilisateur util){
 		this.connection = connec;
 		this.util = util;
@@ -28,6 +33,12 @@ public class VueCreatQuest extends JFrame {
 		}
 		catch (SQLException e) {
 			System.out.println("questionnaireBD non créé");
+		}
+		try{
+			cBD = new ClientBD(connection);
+		}
+		catch (SQLException e) {
+			System.out.println("clientBD non créé");
 		}
 		this.setTitle("Rapid Sond' | Creation questionnaire");
 		this.setSize(800,600);
@@ -94,11 +105,24 @@ public class VueCreatQuest extends JFrame {
 		lblAssocierPanel.setBounds(189, 422, 117, 27);
 		getContentPane().add(lblAssocierPanel);
 		
-		CBSociete = new JComboBox<Integer>();
+		dictClient = new HashMap<Integer,String>();
+		dictPanel = new HashMap<Integer,String>();
+		listClient = new ArrayList<String>();
+		listPanel = new ArrayList<String>();
+
+		for(String elem:dictClient.values()){
+			listClient.add(elem);
+		}
+
+		for(String elem:dictPanel.values()){
+			listPanel.add(elem);
+		}
+
+		CBSociete = new JComboBox<String>();
 		CBSociete.setBounds(292, 387, 215, 20);
 		getContentPane().add(CBSociete);
 		
-		CBPanel = new JComboBox<Integer>();
+		CBPanel = new JComboBox<String>();
 		CBPanel.setBounds(292, 425, 215, 20);
 		getContentPane().add(CBPanel);
 		
@@ -186,6 +210,18 @@ public class VueCreatQuest extends JFrame {
 		this.questModif = q;
 		this.connection = connec;
 		this.util = util;
+		try{
+			qBD = new QuestionnaireBD(connection);
+		}
+		catch (SQLException e) {
+			System.out.println("questionnaireBD non créé");
+		}
+		try{
+			cBD = new ClientBD(connection);
+		}
+		catch (SQLException e) {
+			System.out.println("clientBD non créé");
+		}
 		this.setTitle("Rapid Sond' | Creation questionnaire");
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -251,6 +287,19 @@ public class VueCreatQuest extends JFrame {
 		lblAssocierPanel.setBounds(189, 422, 117, 27);
 		getContentPane().add(lblAssocierPanel);
 		
+		dictClient = new HashMap<Integer,String>();
+		dictPanel = new HashMap<Integer,String>();
+		listClient = new ArrayList<String>();
+		listPanel = new ArrayList<String>();
+
+		for(String elem:dictClient.values()){
+			listClient.add(elem);
+		}
+
+		for(String elem:dictPanel.values()){
+			listPanel.add(elem);
+		}
+
 		CBSociete = new JComboBox<Integer>();
 		CBSociete.setBounds(292, 387, 215, 20);
 		getContentPane().add(CBSociete);

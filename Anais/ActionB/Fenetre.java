@@ -47,8 +47,11 @@ public class Fenetre extends JFrame{
 		// Par la suite il faudra faire en sorte que la vue de base soit celle de Connection et que lors de la conection, la vue change
 		
 		new Fenetre(new ModuleSondage());
-
-		
+	}
+	
+	@ Override
+	public String toString(){
+		return "Main";
 	}
 
 }

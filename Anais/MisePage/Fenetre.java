@@ -1,15 +1,16 @@
 import java.awt.*;
 
-
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame{
-	static Module m;
-	Fenetre(Module mod){
+	Module m;
+	Utilisateur util;
+	Fenetre(Module _m, Utilisateur u ){
 		super("Rapid'Sond");
 		System.out.println("Fenetre deb");
-
+		util = u;
+		System.out.println("ici");
 		// mise en place d'une image de fond
 		Fond f = new Fond();		
 		this.setSize(800,600);
@@ -23,14 +24,16 @@ public class Fenetre extends JFrame{
 		System.out.println("ajout menu");
 		
 			// creation espace module
-		m = mod;
+		m = _m ;
+		m.setSource(this);
 		m.setOpaque(false);
 		
+		System.out.print("ICIIIII "+ m);
+		
+		
 		c.add(m,"Center");
-		System.out.println("Fenetre: "+this);
 		 this.setVisible(true);
-		 this.revalidate();
-		 this.repaint();
+		
 	}
 
 	// FONCTION NON TESTER, ATTENTION
@@ -46,9 +49,8 @@ public class Fenetre extends JFrame{
 	public static void main ( String [] args){
 		// Par la suite il faudra faire en sorte que la vue de base soit celle de Connection et que lors de la conection, la vue change
 		
-		new Fenetre(new ModuleSondage());
-
-		
+		Connexion monLogin = new Connexion(new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/", "dbdmartin", "dbdmartin","/home/dmartin"));
 	}
+	
 
 }

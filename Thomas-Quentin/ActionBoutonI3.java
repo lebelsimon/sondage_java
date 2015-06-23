@@ -13,7 +13,7 @@ public class ActionBoutonI3 implements ActionListener{
     	
     	if (b.getName()=="Tableau"){
     		i.setVisible(false);
-    		Analyse_Tableau j=new Analyse_Tableau(i.Nom_Questionnaire,i.Indice_Question);
+    		Analyse_Tableau j=new Analyse_Tableau(i.Nom_Questionnaire,i.Indice_Question,i.socio);
         }
     	else if(b.getName()=="Retour"){
     		i.setVisible(false);
@@ -22,7 +22,7 @@ public class ActionBoutonI3 implements ActionListener{
         else if(b.getName()=="Suivante"){
             try{
             i.setVisible(false);
-            Analyse_Graphique l=new Analyse_Graphique(i.Nom_Questionnaire,i.Indice_Question+1);}
+            Analyse_Graphique l=new Analyse_Graphique(i.Nom_Questionnaire,i.Indice_Question+1,i.socio);}
             catch(ArrayIndexOutOfBoundsException e){}
         }
         else if(b.getName()=="PDF"){

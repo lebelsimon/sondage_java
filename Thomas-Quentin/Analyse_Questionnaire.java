@@ -19,6 +19,7 @@ public class Analyse_Questionnaire extends JFrame {
 	public QuestionnaireBD qbd;
 	public JList<String> list;
 	public HashMap<String,Questionnaire> total;
+
 	public Analyse_Questionnaire() {
 		co=new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
 		
@@ -62,7 +63,7 @@ public class Analyse_Questionnaire extends JFrame {
 		DefaultListModel<String> Liste=new DefaultListModel<String>();
 		//ArrayList<String> liste=new ArrayList<String>();
 		total=new HashMap<String,Questionnaire>();
-		for(Questionnaire q: qbd.getListeQuestionnaire(1,"Sondeur")){
+		for(Questionnaire q: qbd.getListeQuestionnaire(2,"Sondeur")){
 			Liste.addElement(q.getTitreQuestionnaire());
 			total.put(q.getTitreQuestionnaire(),q);
 			System.out.println(total);
@@ -93,7 +94,7 @@ public class Analyse_Questionnaire extends JFrame {
 	
 		
 		
-		this.setJMenuBar(new Menu());
+		//this.setJMenuBar(new Menu());
 		
 		
 		// END

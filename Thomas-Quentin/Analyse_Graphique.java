@@ -26,11 +26,13 @@ public class Analyse_Graphique extends JFrame {
 	public String Nom_Questionnaire;
 	public int Indice_Question;
 	public Analyse_Questionnaire Aq;
-	Analyse_Graphique(String Nom_Questionnaire,int Indice_Question){
+	public boolean socio;
+	Analyse_Graphique(String Nom_Questionnaire,int Indice_Question,boolean socio){
 		Aq=new Analyse_Questionnaire();
 		int indicebis=Indice_Question+1;
 		this.Nom_Questionnaire=Nom_Questionnaire;
 		this.Indice_Question=Indice_Question;
+		this.socio=socio;
 		this.setSize(800,600);
 		this.setResizable(false);
 		this.setTitle("Appli RapidSond");
@@ -101,7 +103,7 @@ public class Analyse_Graphique extends JFrame {
         getContentPane().add(btnSuivant);
         btnSuivant.setIcon(new ImageIcon("../Ressources/suivant1.png"));
         btnSuivant.setToolTipText("Suivante");
-        button.addActionListener(new ActionBoutonI3(this));}
+        btnSuivant.addActionListener(new ActionBoutonI3(this));}
         else{
 			JButton btnPDF = new JButton("");
 		btnPDF.setName("PDF");
@@ -118,7 +120,7 @@ public class Analyse_Graphique extends JFrame {
 		choixOption.add(rdbtnBaton);
 		choixOption.add(rdbtnCirculaire);
 		
-		this.setJMenuBar(new Menu());
+		//this.setJMenuBar(new Menu());
 		this.setVisible(true);
 
 	}

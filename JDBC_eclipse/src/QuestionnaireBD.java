@@ -200,9 +200,9 @@ public class QuestionnaireBD{
 			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION WHERE idU="+idU+" AND Etat='"+role.charAt(0)+"'");
 			int idQcourant=-1;
 			while(rs.next()){
-				// si c'est le même questionnaire
+				// si c'est le meme questionnaire
 				if(rs.getInt("idQ")==idQcourant){
-					// on crée une nouvelle question et on lui ajoute la liste des propositions
+					// on cree une nouvelle question et on lui ajoute la liste des propositions
 					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
 					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
 					if(!questionAjoutee.contains(question.getTexteQuestion())){

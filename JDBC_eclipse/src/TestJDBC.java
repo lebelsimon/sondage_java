@@ -208,7 +208,8 @@ public class TestJDBC {
 				tjdbc.sond.supprimerSonde(1);
 				break;
 			case 12:
-				System.out.println(tjdbc.questionnaire.getListeQuestionnaire(2, "Sondeur"));
+				//System.out.println(tjdbc.questionnaire.getListeQuestionnaire(1, "C"));
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaireConcepteur(1, "C"));
 				break;
 			case 13:
 				System.out.println(tjdbc.question.getListeQuestion(1));

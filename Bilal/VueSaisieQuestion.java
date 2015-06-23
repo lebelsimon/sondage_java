@@ -5,15 +5,34 @@ import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class VueSaisieQuestion extends JPanel {
-	Question model;
+	
+	ConnexionMySQL c;
+	Questionnaire questionnaire;
+	Question question;
 	JTextField enonceQuestion;
 	JTextField textProposition;
 	JList<Proposition> listePropositions;
 	JScrollPane scroll;
 	JList<String> liste2;
 	DefaultListModel<String> liste;
+	DefaultListModel<Proposition> listeProp;
+	JPanel quest;
+	JPanel haut;
+	JPanel milieu;
+	JPanel bas;
+	JLabel numquestionnaire;
+	JLabel numquest;
+	JPanel titre;
+	JLabel eq;
+	JPanel enonce;
+	String radionom;
 	
-	public VueSaisieQuestion(Question q){
+	public VueSaisieQuestion(Questionnaire q, Question Q, ConnexionMySQL maco){
+		
+		c=maco;
+		
+		this.questionnaire=q;
+		this.question=Q;
 		
 		this.setLayout(new BorderLayout());
 		// =====================================================================
@@ -24,27 +43,28 @@ public class VueSaisieQuestion extends JPanel {
 		// =====================================================================
 		//                   Fenetre de centre avec les questions
 		// =====================================================================
-		JPanel quest = new JPanel(new GridLayout(0,1));
+		quest = new JPanel(new GridLayout(0,1));
 		
-		JPanel haut = new JPanel(new GridLayout(2,0));
-		JPanel milieu = new JPanel(new FlowLayout());
-		JPanel bas = new JPanel();
+		haut = new JPanel(new GridLayout(2,0));
+		milieu = new JPanel(new FlowLayout());
+		bas = new JPanel();
 		
 		// =====================================================================
 		//                          Enoncee des questions
 		// =====================================================================
-		JLabel numquestionnaire = new JLabel("Questionnaire n� X");
-		JLabel numquest = new JLabel("Question n� X");
-		JPanel titre = new JPanel();
+		numquestionnaire = new JLabel("Questionnaire n°"+Integer.toString(questionnaire.getIdQ()));//
+		numquest = new JLabel("Question n°"+Integer.toString(questionnaire.getListeQuestions().size()));//
+		this.question.setNumQ(questionnaire.getListeQuestions().size());
+		titre = new JPanel();
 		titre.setLayout(new BorderLayout());
 		numquestionnaire.setHorizontalAlignment(getX()/2);
 		numquest.setHorizontalAlignment(getX()/2);
 		
-		JLabel eq = new JLabel("Enonce de la question : ");
-		enonceQuestion = new JTextField();
-		enonceQuestion.setText(q.getEnonce());
+		eq = new JLabel("Enonce de la question : ");
+		enonceQuestion = new JTextField(30);
+		enonceQuestion.setText(question.getTexteQuestion());
 		
-		JPanel enonce = new JPanel();
+		enonce = new JPanel();
 		
 		titre.add(numquestionnaire, BorderLayout.NORTH);
 		titre.add(numquest, BorderLayout.CENTER);
@@ -57,12 +77,17 @@ public class VueSaisieQuestion extends JPanel {
 		//                         Choix du type de question
 		// =====================================================================
 		// creation des radio boutons
-		JRadioButton bChoixsimple= new JRadioButton("Choix simple");
-		JRadioButton bChoixmultiple= new JRadioButton("Choix multiple");
+		JRadioButton bChoixsimple= new JRadioButton("Simple");
+		bChoixsimple.addActionListener(new ActionRadioBouton("Simple",this));
+		JRadioButton bChoixmultiple= new JRadioButton("Multiple");
+		bChoixmultiple.addActionListener(new ActionRadioBouton("Multiple",this));
 		JRadioButton bClassement= new JRadioButton("Classement");
+		bClassement.addActionListener(new ActionRadioBouton("Classement",this));
 		JRadioButton bNote= new JRadioButton("Note");
+		bNote.addActionListener(new ActionRadioBouton("Note",this));
 		JRadioButton bLibre= new JRadioButton("Libre");
-		// création du groupe de bouton
+		bLibre.addActionListener(new ActionRadioBouton("Libre",this));
+		// creation du groupe de bouton
 		ButtonGroup choixOption = new ButtonGroup();
 		// ajout des boutons au groupe de choix
 		choixOption.add(bChoixsimple);
@@ -70,7 +95,7 @@ public class VueSaisieQuestion extends JPanel {
 		choixOption.add(bClassement);
 		choixOption.add(bNote);
 		choixOption.add(bLibre);
-		// création du panel
+		// creation du panel
 		JPanel panelChoix = new JPanel();
 		// on va mettre les choix les uns en dessous des autres 
 		panelChoix.setLayout(new BoxLayout(panelChoix, BoxLayout.Y_AXIS));
@@ -85,14 +110,18 @@ public class VueSaisieQuestion extends JPanel {
 		
 		milieu.add(panelChoix);
 		
+		
+		
+		
 		// =====================================================================
 		//                         Liste des propositions
 		// =====================================================================
-		listePropositions = new JList<Proposition>(q.getProp());
+		listePropositions = new JList<Proposition>(question.getPropositions());
 		liste= new DefaultListModel<String>();
+		
 		//
-		for(int i=0; i<q.getProp().getSize(); i++){
-			liste.addElement(q.getProp().getElementAt(i).getText());
+		for(int i=0; i<question.getPropositions().getSize(); i++){
+			liste.addElement(question.getPropositions().getElementAt(i).getTexte());
 		}
 		
 		liste2 = new JList<String>(liste);
@@ -106,29 +135,30 @@ public class VueSaisieQuestion extends JPanel {
 		milieu.add(scroll);
 		
 		// =====================================================================
-		//                              Les boutons
+		// Les boutons
 		// =====================================================================
 		JButton ajouter = new JButton("Ajouter");
-		ajouter.addActionListener(new BoutonAjouter());
-		JButton modifier = new JButton("Modier");
-		modifier.addActionListener(new BoutonModifier());
+		ajouter.addActionListener(new BoutonAjouter(this));
+		JButton modifier = new JButton("Modifier");
+		modifier.addActionListener(new BoutonModifier(this));
 		JButton supprimer = new JButton("Supprimer");
-		supprimer.addActionListener(new BoutonSupprimer());
-		
-		JPanel pBouton = new JPanel(new GridLayout(0,1,0,20));
+		supprimer.addActionListener(new BoutonSupprimer(this));
+
+		JPanel pBouton = new JPanel(new GridLayout(0, 1, 0, 20));
 		pBouton.add(ajouter);
 		pBouton.add(modifier);
 		pBouton.add(supprimer);
-		
+
 		milieu.add(pBouton);
-		
-		JButton valider = new JButton ("Valider");
-		valider.addActionListener(new BoutonValider());
-		
+
+		JButton valider = new JButton("Valider");
+		valider.addActionListener(new BoutonValider(this));
+
+		JButton annuler = new JButton("Annuler");
+		annuler.addActionListener(new BoutonAnnuler());
+
+		bas.add(annuler);
 		bas.add(valider);
-		
-		
-		model=q;
 		
 		// =====================================================================
 		//                       Assemblement des panel

@@ -15,14 +15,14 @@ public class ControleurVueCreatQuest implements ActionListener {
 			VCQ.dispose();
 		}
 		if(b.getName()=="Ajouter"){
-//			VueSaisieQuestion VSQ = new VueSaisieQuestion();
+			VueSaisieQuestion VSQ = new VueSaisieQuestion();
 			VCQ.setVisible(false);
 		}
 		if(b.getName()=="Supprimer"){
 			VCQ.list.removeElementAt(VCQ.listeQ.getSelectedIndex());
 		}
 		if(b.getName()=="Modifier"){
-//			VueSaisieQuestion VSQ = new VueSaisieQuestion();
+			VueSaisieQuestion VSQ = new VueSaisieQuestion();
 			VCQ.setVisible(false);
 		}
 		if(b.getName()=="Annuler"){

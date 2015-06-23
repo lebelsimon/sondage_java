@@ -19,7 +19,7 @@ public class ApplicationSondage extends JFrame {
 		question.addProposition(p2);
 		question.addProposition(p3);
 		questionnaire.addQuestion(question);
-		VueSaisieQuestion QCM1 = new VueSaisieQuestion(questionnaire, question);
+		VueSaisieQuestion QCM1 = new VueSaisieQuestion(questionnaire, question, new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/", "dbdmartin", "dbdmartin","/home/dmartin"));
 		
 		this.getContentPane().add(QCM1);
 		JPanel Fenetre = new JPanel();
@@ -31,7 +31,7 @@ public class ApplicationSondage extends JFrame {
 		
 	}
 	public static void main(String[] args) {
-		ApplicationSondage aplli = new ApplicationSondage();
+		ApplicationSondage appli = new ApplicationSondage();
 	}
 
 }

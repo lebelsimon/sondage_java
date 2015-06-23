@@ -6,7 +6,7 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class VueSaisieQuestion extends JPanel {
 	
-	private ConnexionMySQL c;
+	ConnexionMySQL c;
 	Questionnaire questionnaire;
 	Question question;
 	JTextField enonceQuestion;
@@ -15,6 +15,7 @@ public class VueSaisieQuestion extends JPanel {
 	JScrollPane scroll;
 	JList<String> liste2;
 	DefaultListModel<String> liste;
+	DefaultListModel<Proposition> listeProp;
 	JPanel quest;
 	JPanel haut;
 	JPanel milieu;
@@ -24,8 +25,11 @@ public class VueSaisieQuestion extends JPanel {
 	JPanel titre;
 	JLabel eq;
 	JPanel enonce;
+	String radionom;
 	
-	public VueSaisieQuestion(Questionnaire q, Question Q){
+	public VueSaisieQuestion(Questionnaire q, Question Q, ConnexionMySQL maco){
+		
+		c=maco;
 		
 		this.questionnaire=q;
 		this.question=Q;
@@ -49,7 +53,8 @@ public class VueSaisieQuestion extends JPanel {
 		//                          Enoncee des questions
 		// =====================================================================
 		numquestionnaire = new JLabel("Questionnaire n°"+Integer.toString(questionnaire.getIdQ()));//
-		numquest = new JLabel("Question n°"+Integer.toString(question.getNumQ()));//
+		numquest = new JLabel("Question n°"+Integer.toString(questionnaire.getListeQuestions().size()));//
+		this.question.setNumQ(questionnaire.getListeQuestions().size());
 		titre = new JPanel();
 		titre.setLayout(new BorderLayout());
 		numquestionnaire.setHorizontalAlignment(getX()/2);
@@ -73,11 +78,15 @@ public class VueSaisieQuestion extends JPanel {
 		// =====================================================================
 		// creation des radio boutons
 		JRadioButton bChoixsimple= new JRadioButton("Simple");
-		//bChoixsimple.addActionListener(new ActionRadioBouton(0,this,question));
+		bChoixsimple.addActionListener(new ActionRadioBouton("Simple",this));
 		JRadioButton bChoixmultiple= new JRadioButton("Multiple");
+		bChoixmultiple.addActionListener(new ActionRadioBouton("Multiple",this));
 		JRadioButton bClassement= new JRadioButton("Classement");
+		bClassement.addActionListener(new ActionRadioBouton("Classement",this));
 		JRadioButton bNote= new JRadioButton("Note");
+		bNote.addActionListener(new ActionRadioBouton("Note",this));
 		JRadioButton bLibre= new JRadioButton("Libre");
+		bLibre.addActionListener(new ActionRadioBouton("Libre",this));
 		// creation du groupe de bouton
 		ButtonGroup choixOption = new ButtonGroup();
 		// ajout des boutons au groupe de choix
@@ -109,6 +118,7 @@ public class VueSaisieQuestion extends JPanel {
 		// =====================================================================
 		listePropositions = new JList<Proposition>(question.getPropositions());
 		liste= new DefaultListModel<String>();
+		
 		//
 		for(int i=0; i<question.getPropositions().getSize(); i++){
 			liste.addElement(question.getPropositions().getElementAt(i).getTexte());
@@ -128,11 +138,14 @@ public class VueSaisieQuestion extends JPanel {
 		// Les boutons
 		// =====================================================================
 		JButton ajouter = new JButton("Ajouter");
-		ajouter.addActionListener(new BoutonAjouter(this));
+		//ajouter.addActionListener(new BoutonAjouter(this));
+		ajouter.addActionListener(new BoutonQuestion(this, "ajouter"));
 		JButton modifier = new JButton("Modifier");
-		modifier.addActionListener(new BoutonModifier(this));
+		//modifier.addActionListener(new BoutonModifier(this));
+		modifier.addActionListener(new BoutonQuestion(this, "modifier"));
 		JButton supprimer = new JButton("Supprimer");
-		supprimer.addActionListener(new BoutonSupprimer(this));
+		//supprimer.addActionListener(new BoutonSupprimer(this));
+		supprimer.addActionListener(new BoutonQuestion(this, "supprimer"));
 
 		JPanel pBouton = new JPanel(new GridLayout(0, 1, 0, 20));
 		pBouton.add(ajouter);
@@ -142,10 +155,12 @@ public class VueSaisieQuestion extends JPanel {
 		milieu.add(pBouton);
 
 		JButton valider = new JButton("Valider");
-		valider.addActionListener(new BoutonValider());
+		//valider.addActionListener(new BoutonValider(this));
+		valider.addActionListener(new BoutonQuestion(this, "valider"));
 
 		JButton annuler = new JButton("Annuler");
-		annuler.addActionListener(new BoutonAnnuler());
+		//annuler.addActionListener(new BoutonAnnuler());
+		annuler.addActionListener(new BoutonQuestion(this, "annuler"));
 
 		bas.add(annuler);
 		bas.add(valider);

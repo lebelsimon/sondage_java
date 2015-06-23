@@ -4,16 +4,14 @@ import java.awt.event.ActionListener;
 
 public class BoutonAnnuler implements ActionListener{
 	
-	ApplicationSondage appli;
 	
-	//BoutonAnnuler(ApplicationSondage ap){
-		//appli=ap;
+	BoutonAnnuler(){
 		
-	//}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		appli.dispose();
+		
 		
 	}
 

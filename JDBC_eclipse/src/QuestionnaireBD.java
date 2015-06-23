@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class QuestionnaireBD{
 	private ConnexionMySQL c;
-	private Statement s, s2;
+	private Statement s, s2, s3;
 	private QuestionBD qBD;
 
 	// constructeur
@@ -17,6 +17,7 @@ public class QuestionnaireBD{
 			Connection conn = c.getConnexion();
 			this.s = conn.createStatement();
 			this.s2 = conn.createStatement();
+			this.s3 = conn.createStatement();
 			this.qBD=new QuestionBD(c);
 			System.out.println("questionnaireBD créé");
 		} 
@@ -90,7 +91,16 @@ public class QuestionnaireBD{
 	 */
 	public void ajouterQuestionnaire(Questionnaire q){
 		try{
+			// on ajoute un questionnaire
 			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+this.getMaxIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
+			for(Question question : q.getListeQuestions()){
+				// on ajoute les quesitons correspondantes
+				s2.executeUpdate("INSERT INTO QUESTION VALUES ("+q.getIdQ()+", "+question.getNumQ()+", "+question.getTexteQuestion()+", "+question.getMaxVal()+", "+question.getIdT()+")");
+				for(int i=0; i<question.getPropositions().getSize(); i++){
+					// on ajoute les propositions de chaqque question
+					s3.executeUpdate("INSERT INTO VALPOSSIBLE VALUES ("+q.getIdQ()+", "+question.getNumQ()+", "+(i+1)+", "+question.getPropositions().get(i));
+				}
+			}
 		}
 		catch(SQLException e){ System.out.println(e); }
 	}
@@ -185,6 +195,7 @@ public class QuestionnaireBD{
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
 		ArrayList<Question> listeQuestion = new ArrayList<Question>();
 		ArrayList<String> questionAjoutee = new ArrayList<String>();
+		ArrayList<String> questionnaireAjoute = new ArrayList<String>();
 		try{
 			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE NATURAL JOIN QUESTION WHERE idU="+idU+" AND Etat='"+role.charAt(0)+"'");
 			int idQcourant=-1;
@@ -205,6 +216,7 @@ public class QuestionnaireBD{
 					listeQuestion = new ArrayList<Question>();
 					// on crée un nouveau questionnaire
 					Questionnaire q = new Questionnaire(rs.getString("Titre"), rs.getInt("numC"), rs.getInt("idU"), rs.getInt("idPan"), rs.getString("etat").charAt(0));
+					questionnaireAjoute.add(rs.getString("Titre"));
 					q.setIdQ(rs.getInt("idQ"));
 					idQcourant=rs.getInt("idQ");
 					// on crée une nouvelle question
@@ -218,7 +230,15 @@ public class QuestionnaireBD{
 					}
 					q.setListeQuestions(listeQuestion);
 					listeQuestionnaire.add(q);
-					
+				}
+			}
+			ResultSet rs2 = s2.executeQuery("SELECT * FROM QUESTIONNAIRE WHERE idU="+idU+" AND Etat='"+role.charAt(0)+"'");
+			while(rs2.next()){
+				if(!questionnaireAjoute.contains(rs2.getString("Titre"))){
+					questionnaireAjoute.add(rs2.getString("Titre"));
+					Questionnaire q = new Questionnaire(rs2.getString("Titre"), rs2.getInt("numC"), rs2.getInt("idU"), rs2.getInt("idPan"), rs2.getString("etat").charAt(0));
+					q.setIdQ(rs2.getInt("idQ"));
+					listeQuestionnaire.add(q);
 				}
 			}
 		}

@@ -6,6 +6,7 @@ public class Questionnaire {
 	int numC, idU, idPan, idQ;
 	char etat;
 	ArrayList <Question> listeQuestions;
+	
 	public Questionnaire(String titreQuestionnaire,int idq, int numC, int idU, int idPan, char etat) {
 		super();
 		this.titreQuestionnaire = titreQuestionnaire;

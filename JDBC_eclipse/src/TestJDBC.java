@@ -305,7 +305,7 @@ public class TestJDBC {
 				}
 				break;
 			case 22:
-				
+				System.out.println(tjdbc.client.getListeClient());
 				break;
 			case 23:
 				fini = true;

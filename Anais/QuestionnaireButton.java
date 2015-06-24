@@ -104,7 +104,7 @@ public class QuestionnaireButton implements ActionListener {
 				
 				case "suivi":
 					System.out.println("suiv");
-					//modsond.modif();
+					modsond.modif();
 					break;
 				case "appeler":
 					BoiteDialogue bt=new BoiteDialogue(5000);

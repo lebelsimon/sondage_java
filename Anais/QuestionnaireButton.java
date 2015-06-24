@@ -176,6 +176,8 @@ public class QuestionnaireButton implements ActionListener {
 					res+= stock[i]+"; ";
 				}
 				res = res.substring(0,res.length()-2);
+				if (res.contains("null"))
+					res = "";
 				break;
 				
 		}

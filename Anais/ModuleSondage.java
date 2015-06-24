@@ -4,6 +4,9 @@ import java.util.Random;
 import java.awt.*;
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 
 /// ICI A SUPR: creerTest  + remise en place acce conection
 		// Panel Module Sondage
@@ -49,8 +52,19 @@ public class ModuleSondage extends Module{
 			this.questionnaire = QBD.getListeQuestionnaireSonde(this.sonde.getNumSond(), util.getIdU(), "Sondeur").get(pif);
 			System.out.println("FIN INIT");
 			
-		}catch( Exception e){
-			System.out.println("pas de connexion"+ e);
+			}catch( Exception e){
+				JDialog.setDefaultLookAndFeelDecorated(true);
+				JOptionPane popUp =new JOptionPane();
+				Object[] options = {"Oui", "Se deconnecter" };
+				int reponse = popUp.showConfirmDialog(null, "Aucun sondage trouve, reactualiser la liste des soudage?", "Erreur:", JOptionPane.OK_OPTION, JOptionPane.NO_OPTION);
+						
+				if (reponse == JOptionPane.NO_OPTION){}
+				else{ 
+					fenetre.remove(fenetre.module);
+					fenetre.SetModule(new ModuleSondage(fenetre.maCo, fenetre.utilisateur, fenetre));
+								
+					
+			}
 		}
 		
 		//~ this.creerTest();

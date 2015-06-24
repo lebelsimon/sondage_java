@@ -22,6 +22,8 @@ public class VueGestQuest extends JFrame {
 		this.setSize(800,600);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Fond f = new Fond();
+		this.setContentPane(f);
 		getContentPane().setLayout(null);
 		try{
 			qBD = new QuestionnaireBD(connection);

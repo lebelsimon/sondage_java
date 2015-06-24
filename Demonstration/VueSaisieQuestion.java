@@ -53,8 +53,8 @@ public class VueSaisieQuestion extends JPanel {
 		// =====================================================================
 		//                          Enoncee des questions
 		// =====================================================================
-		numquestionnaire = new JLabel("Questionnaire n°"+Integer.toString(questionnaire.getIdQ()));//
-		numquest = new JLabel("Question n°"+Integer.toString(questionnaire.getListeQuestions().size()));//
+		numquestionnaire = new JLabel("Questionnaire n°");//+Integer.toString(questionnaire.getIdQ())
+		numquest = new JLabel("Question n°");//+Integer.toString(questionnaire.getListeQuestions().size())
 		this.question.setNumQ(questionnaire.getListeQuestions().size());
 		titre = new JPanel();
 		titre.setLayout(new BorderLayout());

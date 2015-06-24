@@ -6,17 +6,12 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class Module extends JPanel{
 	private JPanel perso;
+	JFrame fenetre;
 	
 	public Module(){
 		
-		// test
-		//~ JLabel PrenomNom = new JLabel();
-		//~ PrenomNom.setText("TESTTT");
-		//~ this.add( PrenomNom);
-	
-		// END
-		
-
-		
+	}
+	public void setSource(JFrame f){
+		fenetre = f;
 	}
 }

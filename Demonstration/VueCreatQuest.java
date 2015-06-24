@@ -33,6 +33,8 @@ public class VueCreatQuest extends JFrame {
 	public VueCreatQuest(ConnexionMySQL connec,Utilisateur util){
 		this.connection = connec;
 		this.util = util;
+		Fond f = new Fond();
+		this.setContentPane(f);
 		try{
 			qBD = new QuestionnaireBD(connection);
 		}

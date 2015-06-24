@@ -246,5 +246,15 @@ public class QuestionnaireBD{
 		return listeQuestionnaire;
 	}
 	
-	
+	public ArrayList<Integer> getListeIdQ(){
+		ArrayList<Integer> listeIdQ = new ArrayList<Integer>();
+		try{
+			ResultSet rs = s.executeQuery("SELECT idQ FROM QUESTIONNAIRE");
+			while(rs.next()){
+				listeIdQ.add(rs.getInt("idQ"));
+			}
+		}
+		catch(SQLException e){System.out.println(e);}
+		return listeIdQ;
+	}
 }

@@ -27,11 +27,12 @@ public class Analyse_Tableau extends JFrame {
 	public ButtonGroup groupeRadioBouton;
 	public int cptA, cptS;
 	public ReponseBD rbd;
+	public int indicebis;
 	//public boolean visible;
 	Analyse_Tableau(String Nom_Questionnaire,int Indice_Question,boolean socio){
-		Aq=new Analyse_Questionnaire();
-		int indicebis=Indice_Question+1;
+		Aq=new Analyse_Questionnaire(new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin"));
 		this.Indice_Question=Indice_Question;
+		indicebis=Indice_Question+1;
 		this.Nom_Questionnaire=Nom_Questionnaire;
 		this.socio=socio;
 		try{
@@ -183,8 +184,12 @@ public class Analyse_Tableau extends JFrame {
 			else{
 				ligneMax=Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size();
 			}
+			System.out.println(Aq.list.getSelectedIndex()+2);
+			System.out.println(indicebis);
+			System.out.println(rbd.getReponsesParAge(Aq.total.get(Nom_Questionnaire).getIdQ(),indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT()));
+			//System.out.println();
 			for(int i=0;i<ligneMax+2;i++){
-				for(int j=0;j<8;j++){
+				for(int j=0;j<7;j++){
 					if(i==0){
 						switch(j){
 							case 0:table.setValueAt("Age",i,j);break;
@@ -193,19 +198,32 @@ public class Analyse_Tableau extends JFrame {
 							case 3:table.setValueAt("40-50",i,j);break;
 							case 4:table.setValueAt("50-60",i,j);break;
 							case 5:table.setValueAt("60-70",i,j);break;
-							case 6:table.setValueAt("70+",i,j);break;
-							case 7:table.setValueAt("Total",i,j);break;
+							case 6:table.setValueAt("70+",i,j);table.setValueAt("Total",i,j+1);break;
+							//case 7:table.setValueAt("Total",i,j);break;
 						}
 					}
 
-					if(i>0){
+					if(i>0 && i<Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size()+1){
+						if(j==0){
+							System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().get(i-1));
+							table.setValueAt(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().get(i-1),i,j);
+							}
+						
+						
+
 						// System.out.println(Character.toString(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT()));
 						// System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getMaxVal());
 						// System.out.println(Aq.list.getSelectedIndex());
 						// System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question));
 						//System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT());
 						try{
-						table.setValueAt(rbd.getReponsesParAge(Aq.list.getSelectedIndex(),Indice_Question,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT())[i][j],i+1,j+1);}
+							System.out.println("for");
+							//System.out.println(rbd.getReponsesParAge(1,1,'n'));
+							//System.out.println(rbd.getReponsesParAge(Aq.list.getSelectedIndex()+2,indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT()));
+							//System.out.println(rbd.getReponsesParAge(Aq.total.get(Nom_Questionnaire).getIdQ(),indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT())[i][j]);
+						table.setValueAt(rbd.getReponsesParAge(Aq.total.get(Nom_Questionnaire).getIdQ(),indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT())[i][j],i+1,j+1);
+					//System.out.println("talbe");
+					}
 						catch(NullPointerException e){}
 					}
 					if(i==Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size()+1){
@@ -223,7 +241,7 @@ public class Analyse_Tableau extends JFrame {
 			table.setModel(new DefaultTableModel(
 			new Object[Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size()+2][8],new Object[] {"pouet", "New column", "New column", "New column", "New column", "New column", "New column", "New column"}));
 			for(int i=0;i<Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size()+2;i++){
-				for(int j=0;j<8;j++){
+				for(int j=0;j<7;j++){
 					if(i==0){
 						switch(j){
 							case 0:table.setValueAt("Socio-pro",i,j);break;
@@ -232,12 +250,43 @@ public class Analyse_Tableau extends JFrame {
 							case 3:table.setValueAt("Cadres",i,j);break;
 							case 4:table.setValueAt("Ouvriers",i,j);break;
 							case 5:table.setValueAt("Employés",i,j);break;
-							case 6:table.setValueAt("Autres",i,j);break;
-							case 7:table.setValueAt("Total",i,j);break;
+							case 6:table.setValueAt("Autres",i,j);table.setValueAt("Total",i,j+1);break;
+							//case 7:table.setValueAt("Total",i,j);break;
 						}
 
 					}
+
+					if(i>0 && i<Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size()+1){
+						if(j==0){
+							System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().get(i-1));
+							table.setValueAt(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().get(i-1),i,j);
+							}
+						
+						
+
+						// System.out.println(Character.toString(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT()));
+						// System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getMaxVal());
+						// System.out.println(Aq.list.getSelectedIndex());
+						// System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question));
+						//System.out.println(Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT());
+						try{
+							System.out.println("for");
+							//System.out.println(rbd.getReponsesParAge(1,1,'n'));
+							//System.out.println(rbd.getReponsesParAge(Aq.list.getSelectedIndex()+2,indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT()));
+							//System.out.println(rbd.getReponsesParAge(Aq.total.get(Nom_Questionnaire).getIdQ(),indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT())[i][j]);
+						table.setValueAt(rbd.getReponsesParCategorie(Aq.total.get(Nom_Questionnaire).getIdQ(),indicebis,Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getIdT())[i][j],i+1,j+1);
+					//System.out.println("talbe");
+					}
+						catch(NullPointerException e){}
+					}
+					if(i==Aq.total.get(Nom_Questionnaire).getQuestion(Indice_Question).getPropositions().size()+1){
+						switch(j){
+							case 0:table.setValueAt("Total",i,j);break;
+						}
+					}
+					
 				}
+
 			}
 		
 		table.setBounds(0, 0, 434, 312);

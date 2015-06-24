@@ -74,7 +74,11 @@ public class VueGestQuest extends JFrame {
 
 		listeQ = new ArrayList<Questionnaire>();
 
-		for(Questionnaire elem:qBD.getListeQuestionnaire(util.getIdU(),"Concepteur")){
+		System.out.println(util.getIdU());
+		System.out.println(qBD.getListeQuestionnaireConcepteur(util.getIdU(),"C"));
+		
+		for(Questionnaire elem:qBD.getListeQuestionnaireConcepteur(util.getIdU(),"C")){
+
 			System.out.println(elem);
 			listeQ.add(elem);
 		}
@@ -83,8 +87,6 @@ public class VueGestQuest extends JFrame {
 		for(Questionnaire elem:listeQ){
 			listcat.addElement(elem.getTitreQuestionnaire());
 		}
-		
-		
 		
 		JLabel labelAjouter = new JLabel("Ajouter");
 		labelAjouter.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -123,6 +125,9 @@ public class VueGestQuest extends JFrame {
 		// END
 
 		this.setVisible(true);
+	}
+	public Utilisateur getUtilisateur(){
+		return util;
 	}
 
 // public static void main(String[] args) {

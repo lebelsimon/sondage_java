@@ -5,13 +5,14 @@ public class PropositionChoixNote extends JPanel{
 	int valMin, valMax;
 	JLabel valMaxL, valActuL;
 	
-	PropositionChoixNote(Question q){
-		GridLayout g= new GridLayout(2,1);
-		g.setVgap(4);
-		this.setLayout( g);
+	PropositionChoixNote(QuestionVue questionVue){
+		//~ GridLayout g= new GridLayout(2,1);
+		//~ g.setVgap(4);
+		//~ this.setLayout( g);
 		System.out.println("--- PropositionChoixNote --- ");
 		JPanel listeChoix = new JPanel();
-		valMax = q.getMaxVal();
+		
+		valMax = questionVue.question.getMaxVal();
 		valMin = 0;
 		JSlider slide = new JSlider();
 		slide.setMaximum(valMax);
@@ -22,19 +23,11 @@ public class PropositionChoixNote extends JPanel{
 		slide.setMinorTickSpacing(valMax/10);
 		slide.setMajorTickSpacing(valMax);
 		
-		//~ slide.addChangeListener(new ChangeListener(){
-			//~ public void stateChanged(ChangeEvent event){
-				//~ label.setText("Valeur actuelle : " + ((JSlider)event.getSource()).getValue());
-			//~ }
-		//~ }); 
-		//~ // creation du panel d'affichage des borne et du montant
 		
-		 BorderLayout b=  new BorderLayout();
-		 b.setHgap(140);
-		JPanel Note = new JPanel(b);
+		 //~ BorderLayout b=  new BorderLayout();
+		 //~ b.setHgap(140);
+		//~ JPanel Note = new JPanel(b);
 
-		//~ this.getContentPane().add(slide, BorderLayout.CENTER);
-		//~ this.getContentPane().add(label, BorderLayout.SOUTH);
 		
 		
 		

@@ -200,7 +200,7 @@ public class TestJDBC {
 				System.out.println(tjdbc.util.connexionUtilisateur(login, mdp));
 				break;
 			case 10:
-				ArrayList<Sonde> res = tjdbc.sond.getListeSonde();
+				ArrayList<Sonde> res = tjdbc.sond.getListeSonde(2);
 				for (Sonde s : res)
 					System.out.println(s);
 				break;
@@ -208,7 +208,8 @@ public class TestJDBC {
 				tjdbc.sond.supprimerSonde(1);
 				break;
 			case 12:
-				System.out.println(tjdbc.questionnaire.getListeQuestionnaire(1, "Sondeur"));
+				//System.out.println(tjdbc.questionnaire.getListeQuestionnaire(1, "C"));
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaireConcepteur(1, "C"));
 				break;
 			case 13:
 				System.out.println(tjdbc.question.getListeQuestion(1));
@@ -230,14 +231,14 @@ public class TestJDBC {
 				tjdbc.questionnaire.supprimerQuestionnaire(Integer.parseInt(num));
 				break;
 			case 18:
-				System.out.println(tjdbc.questionnaire.creerQuestionnaire(2));
+				System.out.println(tjdbc.questionnaire.creerQuestionnaire(1, 2, "Sondeur"));
 				break;
 			case 19:
-				System.out.println(tjdbc.sond.getListeQuestionnairePourUnSonde(10));
+				System.out.println(tjdbc.questionnaire.getListeQuestionnaireSonde(16, 2, "Sondeur"));
 				break;
 			case 20:
 				System.out.println("------------ question note-------------");
-				int[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
+				String[][] tab = tjdbc.rep.getReponsesParAge(1, 1, 'n');
 				for(int i=0; i<tab.length; i++){
 					for(int j=0; j<tab[i].length; j++){
 						System.out.print(tab[i][j]+", ");
@@ -271,7 +272,7 @@ public class TestJDBC {
 				break;
 			case 21:
 				System.out.println("------------ question note-------------");
-				int[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
+				String[][] tab2 = tjdbc.rep.getReponsesParCategorie(1, 1, 'n');
 				for(int i=0; i<tab2.length; i++){
 					for(int j=0; j<tab2[i].length; j++){
 						System.out.print(tab2[i][j]+", ");
@@ -304,6 +305,9 @@ public class TestJDBC {
 				}
 				break;
 			case 22:
+				System.out.println(tjdbc.client.getListeClient());
+				break;
+			case 23:
 				fini = true;
 				break;
 			}

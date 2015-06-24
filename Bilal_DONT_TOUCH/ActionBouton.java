@@ -11,7 +11,6 @@ public class ActionBouton implements ActionListener {
     // nom du bouton:
     String nom;
     Connexion conn;
-    Utilisateur u;
 	
     // Constructeur
     public ActionBouton(String _nom, Connexion conn){
@@ -22,6 +21,8 @@ public class ActionBouton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
 	String role="";
+	int idU;
+	Utilisateur u=null;
 	// on change l'affichage en fonction du boutons choisi
 	switch (this.nom){	
 	case "connexion":
@@ -32,7 +33,9 @@ public class ActionBouton implements ActionListener {
 	    catch(SQLException e){System.out.println(e);}
 	    u=utili.connexionUtilisateur(this.conn.texteID.getText(), this.conn.texteMdp.getText());
 	    role=u.getRole();
+	    //idU=u.getIdU();
 	    break;
+
 	case "mdp":
 	    System.out.println("mdp oublié");
 	}
@@ -44,13 +47,15 @@ public class ActionBouton implements ActionListener {
 	    break;
 	case "Sondeur":
 	    conn.dispose();
-	    Fenetre fen = new Fenetre(new ModuleSondage());;
+		System.out.print("yooooo");
+	    Fenetre fen = new Fenetre(u);
+	    fen.SetModule(new ModuleSondage(this.conn.c, u, fen));
 	    break;
 	case "Analyste":
 	    conn.dispose();
 	    Analyse_Questionnaire analyse = new Analyse_Questionnaire();
 	    break;
-	}
+	 }
     }
 
 }

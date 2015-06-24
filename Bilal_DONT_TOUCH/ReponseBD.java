@@ -34,8 +34,8 @@ public class ReponseBD{
 	/**
 	 * Permet de récupérer les données groupé par age d'une question dans un questionnaire donné
 	 */
-	public int[][] getReponsesParAge(int idQ, int numQ, char type){
-		int[][] tabReponses=null;
+	public String[][] getReponsesParAge(int idQ, int numQ, char type){
+		String[][] tabReponses=null;
 		ResultSet rs=null;
 		ResultSet rs2=null;
 		int nbTranche=0;
@@ -57,10 +57,10 @@ public class ReponseBD{
 				// on récupère les données
 				rs.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[rs.getInt("maxVal")+1+1][nbTranche+1]; // on doit mettre +1 à maxVal car il y a 11 valeurs entre 0 et 10 compris
-				tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getInt("COUNT(idTr)");
+				tabReponses = new String[rs.getInt("maxVal")+1+1][nbTranche+1]; // on doit mettre +1 à maxVal car il y a 11 valeurs entre 0 et 10 compris
+				tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getString("COUNT(idTr)");
 				while(rs.next()){
-					tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getInt("COUNT(idTr)");
+					tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getString("COUNT(idTr)");
 				}
 				break;
 			}
@@ -72,23 +72,61 @@ public class ReponseBD{
 				rs.next();
 				rs2.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[rs2.getInt("COUNT(*)")*3+ 1][nbTranche + 1];
+				tabReponses = new String[rs2.getInt("COUNT(*)")*3+ 1][nbTranche + 1];
 				// on insère la première valeur
-				String[] tabValStr = rs.getString("valeur").split("; ");
-				int[] tabValInt = new int[tabValStr.length];
-				for(int i=0; i<tabValInt.length; i++)
-					tabReponses[Integer.parseInt(tabValStr[i])-1+rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] +=1; //faire rs2.getInt("COUNT(*)")*i permet de rentrer les couleurs qui sont rentrées dans l'ordre
+				String[] tabValStr = rs.getString("valeur").split("; "); // on split le string que l'on a dans la base de donnees
+				int valeur=0;
+				for(int i=0; i<tabValStr.length; i++){
+					try{
+						valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1])+1;
+					}
+					catch(NumberFormatException e){}
+					tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] = Integer.toString(valeur); //faire rs2.getInt("COUNT(*)")*i permet de rentrer les couleurs qui sont rentrées dans l'ordre
+				}
 				// on insère les autres valeurs
 				while(rs.next()){
 					tabValStr = rs.getString("valeur").split("; ");
-					tabValInt = new int[tabValStr.length];
-					for(int i=0; i<tabValInt.length; i++)
-						tabReponses[Integer.parseInt(tabValStr[i])-1+rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] +=1; 
+					for(int i=0; i<tabValStr.length; i++){
+						try{
+							valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1])+1;
+						}
+						catch(NumberFormatException e){}
+						tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] = Integer.toString(valeur);
+					}
 				}
 			}
 			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'm':
+			try{
+				rs2 = s2.executeQuery("SELECT COUNT(*) FROM VALPOSSIBLE WHERE numQ="+numQ);
+				rs.next();
+				rs2.next();
+				// on crée le tableau avec un +1 pour l'affichage du total
+				tabReponses = new String[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
+				// on insère la première valeur
+				String[] tabValStr = rs.getString("valeur").split("; "); // on split le string que l'on a dans la base de donnees
+				int valeur=0;
+				for(int i=0; i<tabValStr.length; i++){
+					try{
+						valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1])+1;
+					}
+					catch(NumberFormatException e){}
+					tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] = Integer.toString(valeur); //faire rs2.getInt("COUNT(*)")*i permet de rentrer les couleurs qui sont rentrées dans l'ordre
+				}
+				// on insère les autres valeurs
+				while(rs.next()){
+					tabValStr = rs.getString("valeur").split("; ");
+					for(int i=0; i<tabValStr.length; i++){
+						try{
+							valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1])+1;
+						}
+						catch(NumberFormatException e){}
+						tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] = Integer.toString(valeur);
+					}
+				}
+			}
+			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'u':
 			try{
@@ -96,10 +134,10 @@ public class ReponseBD{
 				rs.next();
 				rs2.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
-				tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				tabReponses = new String[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
+				tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				while (rs.next()) {
-					tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+					tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				}
 			} catch (SQLException e) {
 				System.out.println(e);
@@ -114,10 +152,10 @@ public class ReponseBD{
 			try{
 				rs.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[listeRep.size()+ 1][nbTranche + 1];
-				tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				tabReponses = new String[listeRep.size()+ 1][nbTranche + 1];
+				tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				while (rs.next()) {
-					tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+					tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				}
 			} 
 			catch (SQLException e) {
@@ -129,9 +167,12 @@ public class ReponseBD{
 		int totalLigne=0;
 		for (int i=0; i<tabReponses.length-1; i++){
 			for (int j=0; j<tabReponses[i].length-1; j++){
-				totalLigne+=tabReponses[i][j];
+				try{
+					totalLigne+=new Integer(tabReponses[i][j]);
+				}
+				catch(NumberFormatException e){}
 			}
-			tabReponses[i][tabReponses[i].length-1]=totalLigne;
+			tabReponses[i][tabReponses[i].length-1]=Integer.toString(totalLigne);
 			totalLigne=0;
 		}
 		// on calcule le total des colonnes
@@ -140,9 +181,12 @@ public class ReponseBD{
 		int nbColonnes=tabReponses[0].length;
 		for(int i=0; i<nbColonnes; i++){
 			for(int j=0; j<nbLignes; j++){
-				totalColonne+=tabReponses[j][i];
+				try{
+					totalColonne+=new Integer(tabReponses[j][i]);
+				}
+				catch(NumberFormatException e){}
 			}
-			tabReponses[tabReponses.length-1][i]=totalColonne;
+			tabReponses[tabReponses.length-1][i]=Integer.toString(totalColonne);
 			totalColonne=0;
 		}
 		
@@ -153,8 +197,8 @@ public class ReponseBD{
 	/**
 	 * Permet de récupérer les données groupé par age d'une question dans un questionnaire donné
 	 */
-	public int[][] getReponsesParCategorie(int idQ, int numQ, char type){
-		int[][] tabReponses=null;
+	public String[][] getReponsesParCategorie(int idQ, int numQ, char type){
+		String[][] tabReponses=null;
 		ResultSet rs=null;
 		ResultSet rs2=null;
 		int nbTranche=0;
@@ -177,10 +221,10 @@ public class ReponseBD{
 				// on récupère les données
 				rs.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[rs.getInt("maxVal")+1+1][nbTranche+1]; // on doit mettre +1 à maxVal car il y a 11 valeurs entre 0 et 10 compris
-				tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getInt("COUNT(idTr)");
+				tabReponses = new String[rs.getInt("maxVal")+1+1][nbTranche+1]; // on doit mettre +1 à maxVal car il y a 11 valeurs entre 0 et 10 compris
+				tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getString("COUNT(idTr)");
 				while(rs.next()){
-					tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getInt("COUNT(idTr)");
+					tabReponses[rs.getInt("valeur")][rs.getInt("idTr")-1]=rs.getString("COUNT(idTr)");
 				}
 				break;
 			}
@@ -192,23 +236,61 @@ public class ReponseBD{
 				rs.next();
 				rs2.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[rs2.getInt("COUNT(*)")*3+ 1][nbTranche + 1];
+				tabReponses = new String[rs2.getInt("COUNT(*)")*3+ 1][nbTranche + 1];
 				// on insère la première valeur
-				String[] tabValStr = rs.getString("valeur").split("; ");
-				int[] tabValInt = new int[tabValStr.length];
-				for(int i=0; i<tabValInt.length; i++)
-					tabReponses[Integer.parseInt(tabValStr[i])-1+rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] +=1; //faire rs2.getInt("COUNT(*)")*i permet de rentrer les couleurs qui sont rentrées dans l'ordre
+				String[] tabValStr = rs.getString("valeur").split("; "); // on split le string que l'on a dans la base de donnees
+				int valeur=0;
+				for(int i=0; i<tabValStr.length; i++){
+					try{
+						valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1])+1;
+					}
+					catch(NumberFormatException e){}
+					tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] = Integer.toString(valeur); //faire rs2.getInt("COUNT(*)")*i permet de rentrer les couleurs qui sont rentrées dans l'ordre
+				}
 				// on insère les autres valeurs
 				while(rs.next()){
 					tabValStr = rs.getString("valeur").split("; ");
-					tabValInt = new int[tabValStr.length];
-					for(int i=0; i<tabValInt.length; i++)
-						tabReponses[Integer.parseInt(tabValStr[i])-1+rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] +=1; 
+					for(int i=0; i<tabValStr.length; i++){
+						try{
+							valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1])+1;
+						}
+						catch(NumberFormatException e){}
+						tabReponses[Integer.parseInt(tabValStr[i])-1 + rs2.getInt("COUNT(*)")*i][rs.getInt("idTr")-1] = Integer.toString(valeur);
+					}
 				}
 			}
 			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'm':
+			try{
+				rs2 = s2.executeQuery("SELECT COUNT(*) FROM VALPOSSIBLE WHERE numQ="+numQ);
+				rs.next();
+				rs2.next();
+				// on crée le tableau avec un +1 pour l'affichage du total
+				tabReponses = new String[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
+				// on insère la première valeur
+				String[] tabValStr = rs.getString("valeur").split("; "); // on split le string que l'on a dans la base de donnees
+				int valeur=0;
+				for(int i=0; i<tabValStr.length; i++){
+					try{
+						valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1])+1;
+					}
+					catch(NumberFormatException e){}
+					tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] = Integer.toString(valeur); //faire rs2.getInt("COUNT(*)")*i permet de rentrer les couleurs qui sont rentrées dans l'ordre
+				}
+				// on insère les autres valeurs
+				while(rs.next()){
+					tabValStr = rs.getString("valeur").split("; ");
+					for(int i=0; i<tabValStr.length; i++){
+						try{
+							valeur=Integer.parseInt(tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1])+1;
+						}
+						catch(NumberFormatException e){}
+						tabReponses[Integer.parseInt(tabValStr[i])-1][rs.getInt("idTr")-1] = Integer.toString(valeur);
+					}
+				}
+			}
+			catch(SQLException e){System.out.println(e);}
 			break;
 		case 'u':
 			try{
@@ -216,10 +298,10 @@ public class ReponseBD{
 				rs.next();
 				rs2.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
-				tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				tabReponses = new String[rs2.getInt("COUNT(*)")+ 1][nbTranche + 1];
+				tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				while (rs.next()) {
-					tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+					tabReponses[rs.getInt("valeur")-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				}
 			} catch (SQLException e) {
 				System.out.println(e);
@@ -234,10 +316,10 @@ public class ReponseBD{
 			try{
 				rs.next();
 				// on crée le tableau avec un +1 pour l'affichage du total
-				tabReponses = new int[listeRep.size()+ 1][nbTranche + 1];
-				tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+				tabReponses = new String[listeRep.size()+ 1][nbTranche + 1];
+				tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				while (rs.next()) {
-					tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getInt("COUNT(idTr)");
+					tabReponses[listeRep.get(rs.getString("valeur"))-1][rs.getInt("idTr") - 1] = rs.getString("COUNT(idTr)");
 				}
 			} 
 			catch (SQLException e) {
@@ -249,9 +331,12 @@ public class ReponseBD{
 		int totalLigne=0;
 		for (int i=0; i<tabReponses.length-1; i++){
 			for (int j=0; j<tabReponses[i].length-1; j++){
-				totalLigne+=tabReponses[i][j];
+				try{
+					totalLigne+=Integer.parseInt(tabReponses[i][j]);
+				}
+				catch(NumberFormatException e){}
 			}
-			tabReponses[i][tabReponses[i].length-1]=totalLigne;
+			tabReponses[i][tabReponses[i].length-1]=Integer.toString(totalLigne);
 			totalLigne=0;
 		}
 		// on calcule le total des colonnes
@@ -260,9 +345,12 @@ public class ReponseBD{
 		int nbColonnes=tabReponses[0].length;
 		for(int i=0; i<nbColonnes; i++){
 			for(int j=0; j<nbLignes; j++){
-				totalColonne+=tabReponses[j][i];
+				try{
+					totalColonne+=Integer.parseInt(tabReponses[j][i]);
+				}
+				catch(NumberFormatException e){}
 			}
-			tabReponses[tabReponses.length-1][i]=totalColonne;
+			tabReponses[tabReponses.length-1][i]=Integer.toString(totalColonne);
 			totalColonne=0;
 		}
 		

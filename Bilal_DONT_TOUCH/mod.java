@@ -21,20 +21,10 @@ public class mod extends Module{
     JPanel SondeGlobal;//contient sonde et sondeP pour la centrer par rapport a ':'
     JButton suivant;
     JButton appeler;
-    Sonde toto;
-    SondeBD info;
     ModuleSondage modsond;
 			
     public mod(ModuleSondage s){
-	try{
-	    ConnexionMySQL co = new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
-	    info = new SondeBD(co);
 
-	}
-	catch(Exception e){
-	    System.out.println(e);
-	    System.out.println("coucou");
-	}
 	
 	modsond=s;
 	
@@ -53,14 +43,14 @@ public class mod extends Module{
 	prenom = new JLabel("Prenom : ");
 	telephone = new JLabel("telephone : ");
 	
-	Sonde toto = selectSond();
+	
 	
 	//ajout des infos du sonde
 	
-	JLabel tid=new JLabel(Integer.toString(toto.getNumSond()));
-	JLabel tnom=new JLabel(toto.getNomSond());
-	JLabel tprenom=new JLabel(toto.getPrenomSond());
-	JLabel ttel=new JLabel(toto.getTelephoneSond());
+	JLabel tid=new JLabel(Integer.toString(modsond.sonde.getNumSond()));
+	JLabel tnom=new JLabel(modsond.sonde.getNomSond());
+	JLabel tprenom=new JLabel(modsond.sonde.getPrenomSond());
+	JLabel ttel=new JLabel(modsond.sonde.getTelephoneSond());
 				
 	//encadrement
 	idtot.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -110,14 +100,4 @@ public class mod extends Module{
 	this.add(idtot);
 				
     }
-    public Sonde selectSond(){
-
-		ArrayList <Sonde> list=info.getListeSonde();
-		Random random = new Random();
-		int ind=random.nextInt(list.size());	
-		toto = new Sonde(list.get(ind));
-		//~ info.supprimerSonde(toto.getNumSond());
-
-		return toto;
-	}
 }

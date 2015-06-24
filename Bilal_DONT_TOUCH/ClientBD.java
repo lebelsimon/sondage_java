@@ -1,5 +1,8 @@
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
 
 /**
  * @author Damien MARTIN
@@ -125,6 +128,30 @@ public class ClientBD{
 	catch(SQLException e){
 	    System.out.println("erreur affichage liste "+e);
 	}
+    }
+    
+    public HashMap<Integer, String> getListeClient(){
+    	HashMap<Integer, String> listeClient = new HashMap<Integer, String>();
+    	try{
+    		ResultSet rs = s.executeQuery("SELECT * FROM CLIENT");
+    		while(rs.next()){
+    			listeClient.put(rs.getInt("numC"), rs.getString("raisonSoc"));
+    		}
+    	}
+    	catch(SQLException e){System.out.println(e);}
+    	return listeClient;
+    }
+    
+    public HashMap<Integer, String> getListePanel(){
+    	HashMap<Integer, String> listePanel = new HashMap<Integer, String>();
+    	try{
+    		ResultSet rs = s.executeQuery("SELECT * FROM PANEL");
+    		while(rs.next()){
+    			listePanel.put(rs.getInt("idPan"), rs.getString("nomPan"));
+    		}
+    	}
+    	catch(SQLException e){System.out.println(e);}
+    	return listePanel;
     }
     
 }

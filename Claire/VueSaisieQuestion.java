@@ -48,7 +48,7 @@ public class VueSaisieQuestion extends JPanel {
 		
 		haut = new JPanel(new GridLayout(2,0));
 		milieu = new JPanel(new FlowLayout());
-		bas = new JPanel();
+		bas = new JPanel(new FlowLayout());
 		
 		// =====================================================================
 		//                          Enoncee des questions
@@ -131,25 +131,33 @@ public class VueSaisieQuestion extends JPanel {
 		DefaultListCellRenderer renderer =(DefaultListCellRenderer)liste2.getCellRenderer();  
 		renderer.setHorizontalAlignment(JLabel.LEFT);
 		scroll = new JScrollPane(liste2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		Dimension dim = new Dimension(300,125);
+		Dimension dim = new Dimension(300,145);
 		scroll.setPreferredSize(dim);
 		milieu.add(scroll);
 		
 		// =====================================================================
-		// Les boutons
+		//                           Les boutons
 		// =====================================================================
 		
-		JButton ajouter = new JButton("Ajouter");
-		//ajouter.addActionListener(new BoutonAjouter(this));
+		JButton ajouter = new JButton("");
+		ajouter.setName("Ajouter");
+		ajouter.setIcon(new ImageIcon("../Ressources/ajouter-vert-plus-icone-9549-32.png"));
 		ajouter.addActionListener(new BoutonQuestion(this, "ajouter",c,util));
-		JButton modifier = new JButton("Modifier");
-		//modifier.addActionListener(new BoutonModifier(this));
+		//ajouter.setBounds(676, 188, 46, 34);
+		
+		JButton modifier = new JButton("");
+		modifier.setName("Modifier");
+		modifier.setIcon(new ImageIcon("../Ressources/bloc-notes-stylo-ecrire-icone-8970-32.png"));
 		modifier.addActionListener(new BoutonQuestion(this, "modifier",c,util));
-		JButton supprimer = new JButton("Supprimer");
-		//supprimer.addActionListener(new BoutonSupprimer(this));
+		//modifier.setBounds(676, 188, 46, 34);
+		
+		JButton supprimer = new JButton("");
+		supprimer.setName("Supprimer");
+		supprimer.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-32.png"));
 		supprimer.addActionListener(new BoutonQuestion(this, "supprimer",c,util));
+		//supprimer.setBounds(676, 188, 46, 34);
 
-		JPanel pBouton = new JPanel(new GridLayout(0, 1, 0, 20));
+		JPanel pBouton = new JPanel(new GridLayout(0, 1, 0, 5));
 		pBouton.add(ajouter);
 		pBouton.add(modifier);
 		pBouton.add(supprimer);
@@ -157,12 +165,16 @@ public class VueSaisieQuestion extends JPanel {
 		milieu.add(pBouton);
 
 		JButton valider = new JButton("Valider");
-		//valider.addActionListener(new BoutonValider(this));
+		//valider.setName("Valider");
+		//valider.setIcon(new ImageIcon("../Ressources/accepter-verifier-vert-ok-oui-icone-6380-48.png"));
 		valider.addActionListener(new BoutonQuestion(this, "valider",c,util));
+		//valider.setBounds(200, 411, 89, 83);
 
 		JButton annuler = new JButton("Annuler");
-		//annuler.addActionListener(new BoutonAnnuler());
+		//annuler.setName("Annuler");
+		//annuler.setIcon(new ImageIcon("../Ressources/supprimer-icone-5418-64.png"));
 		annuler.addActionListener(new BoutonQuestion(this, "annuler",c,util));
+		//annuler.setBounds(500, 411, 89, 83);
 
 		bas.add(annuler);
 		bas.add(valider);

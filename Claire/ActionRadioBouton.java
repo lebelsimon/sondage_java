@@ -14,7 +14,6 @@ import javax.swing.JScrollPane;
 
 public class ActionRadioBouton implements ActionListener,FocusListener{
 	
-	
 	static final int SIMPLE=0;
 	static final int MULTIPLE=1;
 	static final int CLASSEMENT=2;

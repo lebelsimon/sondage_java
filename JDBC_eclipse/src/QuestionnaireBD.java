@@ -92,7 +92,7 @@ public class QuestionnaireBD{
 	public void ajouterQuestionnaire(Questionnaire q){
 		try{
 			// on ajoute un questionnaire
-			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+this.getMaxIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
+			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+q.getIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
 			for(Question question : q.getListeQuestions()){
 				// on ajoute les quesitons correspondantes
 				s2.executeUpdate("INSERT INTO QUESTION VALUES ("+q.getIdQ()+", "+question.getNumQ()+", "+question.getTexteQuestion()+", "+question.getMaxVal()+", "+question.getIdT()+")");
@@ -256,5 +256,52 @@ public class QuestionnaireBD{
 		}
 		catch(SQLException e){System.out.println(e);}
 		return listeIdQ;
+	}
+	
+	
+	public ArrayList<Questionnaire> getListeQuestionnaireAnalyste(int idU, String role){
+		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
+		ArrayList<Question> listeQuestion = new ArrayList<Question>();
+		ArrayList<String> questionAjoutee = new ArrayList<String>();
+		try{
+			ResultSet rs = s.executeQuery("SELECT * FROM QUESTIONNAIRE q , QUESTION qu WHERE q.idU="+idU+" AND q.Etat='"+role.charAt(0)+"'");
+			int idQcourant=-1;
+			while(rs.next()){
+				// si c'est le même questionnaire
+				if(rs.getInt("q.idQ")==idQcourant){
+					// on crée une nouvelle question et on lui ajoute la liste des propositions
+					Question question = new Question(rs.getString("qu.texteQ"), rs.getString("qu.idT").charAt(0), rs.getInt("qu.maxVal"), rs.getInt("qu.numQ"));
+					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("qu.idQ"), rs.getInt("qu.numQ")));
+					if(!questionAjoutee.contains(question.getTexteQuestion())){
+						listeQuestion.add(question);
+						questionAjoutee.add(question.getTexteQuestion());
+					}
+				}
+				// sinon c'est un nouveau questionnaire
+				else{
+					// on crée une nouvelle liste de question
+					listeQuestion = new ArrayList<Question>();
+					// on crée un nouveau questionnaire
+					Questionnaire q = new Questionnaire(rs.getString("q.Titre"), rs.getInt("q.numC"), rs.getInt("q.idU"), rs.getInt("q.idPan"), rs.getString("q.etat").charAt(0));
+					q.setIdQ(rs.getInt("q.idQ"));
+					idQcourant=rs.getInt("q.idQ");
+					// on crée une nouvelle question
+					Question question = new Question(rs.getString("qu.texteQ"), rs.getString("qu.idT").charAt(0), rs.getInt("qu.maxVal"), rs.getInt("qu.numQ"));
+					// on ajoute les propositions de la question
+					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("qu.idQ"), rs.getInt("qu.numQ")));
+					// on ajoute la question à la liste
+					if(!questionAjoutee.contains(question.getTexteQuestion())){
+						listeQuestion.add(question);
+						questionAjoutee.add(question.getTexteQuestion());
+					}
+					q.setListeQuestions(listeQuestion);
+					listeQuestionnaire.add(q);
+					
+				}
+			}
+		}
+		catch(SQLException e) { System.out.println(e); }
+
+		return listeQuestionnaire;
 	}
 }

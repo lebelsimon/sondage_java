@@ -12,7 +12,9 @@ import java.awt.Canvas;
 
 
 public class Analyse_pdf extends JFrame {
-	public Analyse_pdf() {
+	String Nom_Questionnaire;
+	public Analyse_pdf(String Nom_Questionnaire) {
+		this.Nom_Questionnaire=Nom_Questionnaire;
 		this.setTitle("Rapid Sond'");
 		this.setSize(800,600);
 		this.setResizable(false);
@@ -32,7 +34,7 @@ public class Analyse_pdf extends JFrame {
 		getContentPane().add(panel_1);
 		panel_1.setBounds(134, 50, 498, 34);
 		
-		JLabel VosQuest = new JLabel("Questionnaire n\u00B0: 01 ");
+		JLabel VosQuest = new JLabel("Questionnaire : "+Nom_Questionnaire);
 		panel_1.add(VosQuest);
 		VosQuest.setHorizontalAlignment(SwingConstants.CENTER);
 		VosQuest.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -72,8 +74,10 @@ public class Analyse_pdf extends JFrame {
 		btnModifier.setIcon(new ImageIcon("../Ressources/send2.png"));
 		
 		JButton btnRetour = new JButton("");
+		btnRetour.setName("Retour");
 		btnRetour.setBounds(17, 353, 91, 44);
 		panel.add(btnRetour);
+		btnRetour.addActionListener(new ActionBoutonPDF(this));
 		btnRetour.setIcon(new ImageIcon("../Ressources/retourback.png"));
 		
 		JLabel lblRetour = new JLabel("Retour");
@@ -118,9 +122,9 @@ public class Analyse_pdf extends JFrame {
 
 			
 
-		public static void main(String[] args) {
-			Analyse_pdf Appli = new Analyse_pdf();
-			}
+		// public static void main(String[] args) {
+		// 	Analyse_pdf Appli = new Analyse_pdf();
+		// 	}
 	}
 
 

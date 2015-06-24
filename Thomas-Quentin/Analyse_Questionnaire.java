@@ -20,9 +20,8 @@ public class Analyse_Questionnaire extends JFrame {
 	public JList<String> list;
 	public HashMap<String,Questionnaire> total;
 
-	public Analyse_Questionnaire() {
-		co=new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin");
-		
+	public Analyse_Questionnaire(ConnexionMySQL co) {
+		this.co=co;
 		this.visible=true;
 		this.setTitle("Rapid Sond'");
 		this.setSize(800,600);
@@ -43,7 +42,7 @@ public class Analyse_Questionnaire extends JFrame {
 		btnDeco.setIcon(new ImageIcon("../Ressources/gnome-logout-icone-4756-48.png"));
 		btnDeco.setBounds(648, 11, 104, 62);
 		getContentPane().add(btnDeco);
-		btnDeco.addActionListener(new ActionBoutonI1(this));
+		btnDeco.addActionListener(new ActionBoutonI1(this,co));
 		
 		
 		JButton btnAnalyse = new JButton("");
@@ -51,7 +50,7 @@ public class Analyse_Questionnaire extends JFrame {
 		btnAnalyse.setIcon(new ImageIcon("../Ressources/analyse.png"));
 		btnAnalyse.setBounds(326, 358, 146, 62);
 		getContentPane().add(btnAnalyse);
-		btnAnalyse.addActionListener(new ActionBoutonI1(this));
+		btnAnalyse.addActionListener(new ActionBoutonI1(this,co));
 		
 		JLabel VosQuest = new JLabel("Vos questionnaires");
 		VosQuest.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,7 +62,7 @@ public class Analyse_Questionnaire extends JFrame {
 		DefaultListModel<String> Liste=new DefaultListModel<String>();
 		//ArrayList<String> liste=new ArrayList<String>();
 		total=new HashMap<String,Questionnaire>();
-		for(Questionnaire q: qbd.getListeQuestionnaire(2,"Sondeur")){
+		for(Questionnaire q: qbd.getListeQuestionnaire(2,"S")){
 			Liste.addElement(q.getTitreQuestionnaire());
 			total.put(q.getTitreQuestionnaire(),q);
 			System.out.println(total);
@@ -105,9 +104,9 @@ public class Analyse_Questionnaire extends JFrame {
 
 			
 
-		public static void main(String[] args) {
-			Analyse_Questionnaire Appli = new Analyse_Questionnaire();
-			}
+		// public static void main(String[] args) {
+		// 	Analyse_Questionnaire Appli = new Analyse_Questionnaire(new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin"));
+		// 	}
 		
 	public Icon getBtnModifierIcon() {
 		return btnModifier.getIcon();

@@ -28,7 +28,7 @@ public class Analyse_Graphique extends JFrame {
 	public Analyse_Questionnaire Aq;
 	public boolean socio;
 	Analyse_Graphique(String Nom_Questionnaire,int Indice_Question,boolean socio){
-		Aq=new Analyse_Questionnaire();
+		Aq=new Analyse_Questionnaire(new ConnexionMySQL("jdbc:mysql://servinfo-db:3306/","dbdmartin","dbdmartin","/home/dmartin"));
 		int indicebis=Indice_Question+1;
 		this.Nom_Questionnaire=Nom_Questionnaire;
 		this.Indice_Question=Indice_Question;

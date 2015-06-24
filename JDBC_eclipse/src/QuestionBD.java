@@ -43,7 +43,10 @@ public class QuestionBD {
 				while (rs2.next()) {
 					if (rs.getString("idT").equals("l")) {
 						q.setPropositions(this.getReponseLibre(rs.getInt("idQ"), rs.getInt("numQ")));
-					} 
+					}
+					if (rs.getString("idT").equals("n")) {
+						q.setPropositions(this.getReponseNote(rs.getInt("idQ"), rs.getInt("numQ")));
+					}
 					else if (rs2.getInt("numQ") == rs.getInt("numQ")) {
 						q.addProposition(new Proposition(rs2.getString("Valeur")));
 					}
@@ -56,6 +59,14 @@ public class QuestionBD {
 		return listeQuestion;
 	}
 
+	public DefaultListModel<Proposition> getReponseNote(int idQ, int numQ){
+		DefaultListModel<Proposition> valPossible = new DefaultListModel<Proposition>();
+		for(int i=0; i<11; i++){
+			valPossible.addElement(new Proposition(Integer.toString(i)));
+		}
+		return valPossible;
+	}
+	
 	public DefaultListModel<Proposition> getReponseLibre(int idQ, int numQ) {
 		DefaultListModel<Proposition> valPossible = new DefaultListModel<Proposition>();
 		ArrayList<String> valEntree = new ArrayList<String>();

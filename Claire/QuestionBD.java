@@ -100,4 +100,13 @@ public class QuestionBD {
 			System.out.println(e);
 		}
 	}
+	
+	public DefaultListModel<Proposition> getListePropositionPourUneQuestion(int idQ, int numQ){
+		ArrayList<Question> listeQuestion = this.getListeQuestion(idQ);
+		for(Question q : listeQuestion){
+			if(q.getNumQ()==numQ)
+				return q.getPropositions();
+		}
+		return new DefaultListModel<Proposition>();
+	}
 }

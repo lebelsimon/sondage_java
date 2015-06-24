@@ -1,0 +1,22 @@
+import java.awt.event.*;
+
+import javax.swing.JButton;
+
+public class ActionBoutonI1 implements ActionListener{
+    Analyse_Questionnaire i;
+    
+    public ActionBoutonI1(Analyse_Questionnaire i){
+		this.i=i;
+    }
+    public void actionPerformed(ActionEvent arg0){
+    	JButton b = (JButton)arg0.getSource();
+    	
+    	if (b.getName()=="Analyse"){
+    		i.setVisible(false);
+    		Analyse_Tableau j=new Analyse_Tableau();}
+    	else if(b.getName()=="Deco"){
+    		System.exit(0);
+    		
+    	}
+    }
+}

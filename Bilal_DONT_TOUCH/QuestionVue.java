@@ -8,24 +8,25 @@ public class QuestionVue extends JPanel{
 	JTextArea enonce;
 	int numQuestion;
 	int nombreVal;
-	String typeQuestion ;
+	char typeQuestion ;
 	DefaultListModel<Proposition> propositions;
 	Question question;
 	QuestionnaireVue questionnaireVue;
 	String enonceQuestion;
 	
 	
-	QuestionVue( Question question, QuestionnaireVue Questionnaire){
+	QuestionVue( Question q, QuestionnaireVue questV){
 		this.setLayout( new BorderLayout( 40,50));
-		
+		question = q;
+		questionnaireVue = questV;
 		// initialisation des valeurs corespondant au elements de la Question
 		numQuestion = question.getNumQ();
 		propositions = question.getPropositions();
 		nombreVal = propositions.size();
-		typeQuestion = question.getIdT()+"";
+		typeQuestion = question.getIdT();
 		enonceQuestion = question.getTexteQuestion();
-		this.question = question;
-		questionnaireVue = Questionnaire;
+		
+		
 		
 		// creations des elements de la vue
 		idQuestion = new JLabel("Question numero: "+numQuestion);
@@ -35,8 +36,7 @@ public class QuestionVue extends JPanel{
 		enonce.setEditable(false);
 		enonce.setLineWrap(true);
 		
-		// creation du panel contenant toutes les questions
-		JPanel reponces = new JPanel();	
+		//creation du panel contenant l'identifiant et l'enonce de la question	
 		JPanel haut = new JPanel(new GridLayout(2,1));
 		
 		
@@ -51,23 +51,23 @@ public class QuestionVue extends JPanel{
 	}
 	
 	// cree la liste des propositon en fonction du type de question
-	public JPanel creerProposition(String typeQuestion){
+	public JPanel creerProposition(char typeQuestion){
 		JPanel res;
 		
-		if (typeQuestion.equals("l")){
-			res = new PropositionChoixLibre(this.question);
+		if (typeQuestion=='l'){
+			res = new PropositionChoixLibre(this);
 		}
-		else if( typeQuestion.equals("c")){
-			res = new PropositionChoixOrdonnee(this.question);
+		else if( typeQuestion=='c'){
+			res = new PropositionChoixOrdonnee(this);
 		}
-		else if ( typeQuestion.equals("m")){
-			res = new PropositionChoixX(this.question);
+		else if ( typeQuestion=='m'){
+			res = new PropositionChoixX(this);
 		}
-		else if( typeQuestion.equals("n")){
-			res = new PropositionChoixNote(this.question);
+		else if( typeQuestion=='n'){
+			res = new PropositionChoixNote(this);
 		}
 		else{
-			res = new PropositionChoix1(this.question);
+			res = new PropositionChoix1(this);
 		}
 		return res;
 	}

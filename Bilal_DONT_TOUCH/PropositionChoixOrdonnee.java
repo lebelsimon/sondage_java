@@ -8,20 +8,22 @@ public class PropositionChoixOrdonnee extends JPanel{
 	int nbValOrdonne;
 	DefaultListModel<Proposition>  listeProp;
 	
-	PropositionChoixOrdonnee(Question question){
+	PropositionChoixOrdonnee(QuestionVue qVue){
 		System.out.println("--- PropositionChoixOrdonnee --- ");
+		
+		
+		
+		// creation de la liste deroulante et des elements
+
+		nbValOrdonne = qVue.question.getMaxVal();
+		opts = new Integer[nbValOrdonne+1];
+		listeProp = qVue.question.getPropositions();
+		
 		
 		GridLayout g = new GridLayout(listeProp.size(),2);
 		g.setHgap(4);
 		g.setVgap(4);
 		this.setLayout(g);
-		
-		// creation de la liste deroulante et des elements
-		nbValOrdonne = question.getMaxVal();
-		opts = new Integer[nbValOrdonne];
-		listeProp = question.getPropositions();
-		System.out.println("listeProp: "+listeProp);
-		
 		
 		// Creation du contenaire
 		//~ GridLayout g = new  GridLayout(listeProp.size(),2);

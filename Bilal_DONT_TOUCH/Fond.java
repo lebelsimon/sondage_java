@@ -8,9 +8,8 @@ import javax.swing.JPanel;
 public class Fond extends JPanel {
   public void paintComponent(Graphics g){
     try {
-	this.setSize(800,600);
 	
-      Image img = ImageIO.read(new File("../Ressources/FondV4.jpg"));
+      Image img = ImageIO.read(new File("FondV4.jpg"));
       g.drawImage(img, 0, 0, super.getWidth(), super.getHeight(), this);
       //~ System.out.print("this.getWidth(): "+this.getWidth()+ "this.getHeight(): "+this.getHeight());
       //Pour une image de fond

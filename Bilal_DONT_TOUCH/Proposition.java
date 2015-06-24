@@ -2,7 +2,7 @@
 public class Proposition {
 	String texte;
 
-	public Proposition(String texte){
+	public Proposition(){
 		this.texte=texte;
 	}
 	
@@ -10,6 +10,13 @@ public class Proposition {
 	public Proposition(Proposition p) {
 		super();
 		this.texte = new String(p.texte);
+
+	}
+	
+	// creer pour les test
+	public Proposition(String t) {
+		super();
+		this.texte = t;
 
 	}
 	

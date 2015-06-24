@@ -26,6 +26,10 @@ public class VueCreatQuest extends JFrame {
 	public HashMap<Integer,String> dictPanel;
 	public ArrayList<String> listClient;
 	public ArrayList<String> listPanel;
+	public String[] tabCli;
+	public String[] tabPan;
+	public ArrayList<Integer> listeIdQ;
+	public JLabel lblErreurIdQ;
 	public VueCreatQuest(ConnexionMySQL connec,Utilisateur util){
 		this.connection = connec;
 		this.util = util;
@@ -81,7 +85,7 @@ public class VueCreatQuest extends JFrame {
 		getContentPane().add(labelListeQ);
 		
 		JLabel labelNomQuest = new JLabel("Nom questionnaire :");
-		labelNomQuest.setBounds(143, 83, 139, 27);
+		labelNomQuest.setBounds(143, 83, 170, 27);
 		getContentPane().add(labelNomQuest);
 		
 		textField  = new JTextField();
@@ -90,42 +94,58 @@ public class VueCreatQuest extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblNumeroQuestionnaire = new JLabel("Numero questionnaire :");
-		lblNumeroQuestionnaire.setBounds(143, 121, 139, 27);
+		lblNumeroQuestionnaire.setBounds(113, 121, 170, 27);
 		getContentPane().add(lblNumeroQuestionnaire);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(292, 123, 215, 22);
 		getContentPane().add(textField_1);
+
+		lblErreurIdQ = new JLabel("");
+		lblErreurIdQ.setForeground(Color.red);
+		lblErreurIdQ.setBounds(515, 123, 215, 22);
+		getContentPane().add(lblErreurIdQ);
 		
 		JLabel lblAssocierSociete = new JLabel("Associer societe :");
-		lblAssocierSociete.setBounds(179, 384, 117, 27);
+		lblAssocierSociete.setBounds(153, 384, 170, 27);
 		getContentPane().add(lblAssocierSociete);
 		
 		JLabel lblAssocierPanel = new JLabel("Associer panel :");
-		lblAssocierPanel.setBounds(189, 422, 117, 27);
+		lblAssocierPanel.setBounds(170, 422, 117, 27);
 		getContentPane().add(lblAssocierPanel);
 		
-		dictClient = new HashMap<Integer,String>();
-		dictPanel = new HashMap<Integer,String>();
+		dictClient = cBD.getListeClient();
+		dictPanel = cBD.getListePanel();
 		listClient = new ArrayList<String>();
 		listPanel = new ArrayList<String>();
 
 		for(String elem:dictClient.values()){
 			listClient.add(elem);
 		}
-
 		for(String elem:dictPanel.values()){
 			listPanel.add(elem);
 		}
 
-		CBSociete = new JComboBox<String>();
+		tabCli = new String[listClient.size()];
+		tabPan = new String[listPanel.size()];
+
+		for(int i = 0;i<listClient.size();i++){
+			tabCli[i] = listClient.get(i);
+		}
+		for(int i = 0;i<listPanel.size();i++){
+			tabPan[i] = listPanel.get(i);
+		}
+
+		CBSociete = new JComboBox<String>(tabCli);
 		CBSociete.setBounds(292, 387, 215, 20);
 		getContentPane().add(CBSociete);
 		
-		CBPanel = new JComboBox<String>();
+		CBPanel = new JComboBox<String>(tabPan);
 		CBPanel.setBounds(292, 425, 215, 20);
 		getContentPane().add(CBPanel);
+
+		listeIdQ = qBD.getListeIdQ();
 		
 		JButton btnValider = new JButton("");
 		btnValider.setIcon(new ImageIcon("../Ressources/accepter-verifier-vert-ok-oui-icone-6380-48.png"));
@@ -263,7 +283,7 @@ public class VueCreatQuest extends JFrame {
 		getContentPane().add(labelListeQ);
 		
 		JLabel labelNomQuest = new JLabel("Nom questionnaire :");
-		labelNomQuest.setBounds(143, 83, 139, 27);
+		labelNomQuest.setBounds(143, 83, 170, 27);
 		getContentPane().add(labelNomQuest);
 		
 		textField  = new JTextField(q.getTitreQuestionnaire());
@@ -272,40 +292,59 @@ public class VueCreatQuest extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblNumeroQuestionnaire = new JLabel("Numero questionnaire :");
-		lblNumeroQuestionnaire.setBounds(143, 121, 139, 27);
+		lblNumeroQuestionnaire.setBounds(113, 121, 170, 27);
 		getContentPane().add(lblNumeroQuestionnaire);
 		
 		textField_1 = new JTextField(q.getIdQ());
 		textField_1.setColumns(10);
 		textField_1.setBounds(292, 123, 215, 22);
 		getContentPane().add(textField_1);
+
+		lblErreurIdQ = new JLabel("");
+		lblErreurIdQ.setForeground(Color.red);
+		lblErreurIdQ.setBounds(515, 123, 215, 22);
+		getContentPane().add(lblErreurIdQ);
 		
 		JLabel lblAssocierSociete = new JLabel("Associer societe :");
-		lblAssocierSociete.setBounds(179, 384, 117, 27);
+		lblAssocierSociete.setBounds(153, 384, 170, 27);
 		getContentPane().add(lblAssocierSociete);
 		
 		JLabel lblAssocierPanel = new JLabel("Associer panel :");
-		lblAssocierPanel.setBounds(189, 422, 117, 27);
+		lblAssocierPanel.setBounds(170, 422, 117, 27);
 		getContentPane().add(lblAssocierPanel);
 		
-		dictClient = new HashMap<Integer,String>();
-		dictPanel = new HashMap<Integer,String>();
+		dictClient = cBD.getListeClient();
+		dictPanel = cBD.getListePanel();
 		listClient = new ArrayList<String>();
 		listPanel = new ArrayList<String>();
+
+		tabCli = new String[listClient.size()];
+		tabPan = new String[listPanel.size()];
 
 		for(String elem:dictClient.values()){
 			listClient.add(elem);
 		}
-
 		for(String elem:dictPanel.values()){
 			listPanel.add(elem);
 		}
 
-		CBSociete = new JComboBox<String>();
+		tabCli = new String[listClient.size()];
+		tabPan = new String[listPanel.size()];
+
+		for(int i = 0;i<listClient.size();i++){
+			tabCli[i] = listClient.get(i);
+		}
+		for(int i = 0;i<listPanel.size();i++){
+			tabPan[i] = listPanel.get(i);
+		}
+
+		listeIdQ = qBD.getListeIdQ();
+
+		CBSociete = new JComboBox<String>(tabCli);
 		CBSociete.setBounds(292, 387, 215, 20);
 		getContentPane().add(CBSociete);
 		
-		CBPanel = new JComboBox<String>();
+		CBPanel = new JComboBox<String>(tabPan);
 		CBPanel.setBounds(292, 425, 215, 20);
 		getContentPane().add(CBPanel);
 		
@@ -395,6 +434,9 @@ public class VueCreatQuest extends JFrame {
 		
 //		getContentPane().add(Menu,"NORTH");
 		this.setVisible(true);
+	}
+	public Utilisateur getUtilisateur(){
+		return util;
 	}
 	// public static void main(String[] args) {
 	// 	VueCreatQuest Appli = new VueCreatQuest("c");

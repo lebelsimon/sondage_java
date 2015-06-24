@@ -45,7 +45,7 @@ public class ModuleSondage extends Module{
 			System.out.println("crea Sonde");
 			// calcul du Questionnaire 
 			int pif = random.nextInt( QBD.getListeQuestionnaireSonde(this.sonde.getNumSond(), util.getIdU(), "Sondeur").size());
-			
+			System.out.println(QBD.getListeQuestionnaireSonde(this.sonde.getNumSond(), util.getIdU(), "Sondeur"));
 			this.questionnaire = QBD.getListeQuestionnaireSonde(this.sonde.getNumSond(), util.getIdU(), "Sondeur").get(pif);
 			System.out.println("FIN INIT");
 			

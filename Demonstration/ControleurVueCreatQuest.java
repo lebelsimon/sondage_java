@@ -20,7 +20,7 @@ public class ControleurVueCreatQuest implements ActionListener {
 		}
 
 		if(b.getName()=="Ajouter"){
-			ApplicationSondageSQ exe = new ApplicationSondageSQ();
+			ApplicationSondage exe = new ApplicationSondage();
 			VCQ.setVisible(false);
 		}
 

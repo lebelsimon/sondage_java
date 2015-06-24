@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class QuestionnaireBD{
 	private ConnexionMySQL c;
-	private Statement s, s2;
+	private Statement s, s2, s3;
 	private QuestionBD qBD;
 
 	// constructeur
@@ -17,6 +17,7 @@ public class QuestionnaireBD{
 			Connection conn = c.getConnexion();
 			this.s = conn.createStatement();
 			this.s2 = conn.createStatement();
+			this.s3 = conn.createStatement();
 			this.qBD=new QuestionBD(c);
 			System.out.println("questionnaireBD créé");
 		} 
@@ -90,7 +91,16 @@ public class QuestionnaireBD{
 	 */
 	public void ajouterQuestionnaire(Questionnaire q){
 		try{
-			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+this.getMaxIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
+			// on ajoute un questionnaire
+			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+q.getIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
+			for(Question question : q.getListeQuestions()){
+				// on ajoute les quesitons correspondantes
+				s2.executeUpdate("INSERT INTO QUESTION VALUES ("+q.getIdQ()+", "+question.getNumQ()+", "+question.getTexteQuestion()+", "+question.getMaxVal()+", "+question.getIdT()+")");
+				for(int i=0; i<question.getPropositions().getSize(); i++){
+					// on ajoute les propositions de chaqque question
+					s3.executeUpdate("INSERT INTO VALPOSSIBLE VALUES ("+q.getIdQ()+", "+question.getNumQ()+", "+(i+1)+", "+question.getPropositions().get(i));
+				}
+			}
 		}
 		catch(SQLException e){ System.out.println(e); }
 	}
@@ -202,18 +212,18 @@ public class QuestionnaireBD{
 				}
 				// sinon c'est un nouveau questionnaire
 				else{
-					// on crM-CM-)e une nouvelle liste de question
+					// on crée une nouvelle liste de question
 					listeQuestion = new ArrayList<Question>();
-					// on crM-CM-)e un nouveau questionnaire
+					// on crée un nouveau questionnaire
 					Questionnaire q = new Questionnaire(rs.getString("Titre"), rs.getInt("numC"), rs.getInt("idU"), rs.getInt("idPan"), rs.getString("etat").charAt(0));
 					questionnaireAjoute.add(rs.getString("Titre"));
 					q.setIdQ(rs.getInt("idQ"));
 					idQcourant=rs.getInt("idQ");
-					// on crM-CM-)e une nouvelle question
+					// on crée une nouvelle question
 					Question question = new Question(rs.getString("texteQ"), rs.getString("idT").charAt(0), rs.getInt("maxVal"), rs.getInt("numQ"));
 					// on ajoute les propositions de la question
 					question.setPropositions(qBD.getListePropositionPourUneQuestion(rs.getInt("idQ"), rs.getInt("numQ")));
-					// on ajoute la question M-CM-  la liste
+					// on ajoute la question à la liste
 					if(!questionAjoutee.contains(question.getTexteQuestion())){
 						listeQuestion.add(question);
 						questionAjoutee.add(question.getTexteQuestion());
@@ -236,5 +246,15 @@ public class QuestionnaireBD{
 		return listeQuestionnaire;
 	}
 	
-	
+	public ArrayList<Integer> getListeIdQ(){
+		ArrayList<Integer> listeIdQ = new ArrayList<Integer>();
+		try{
+			ResultSet rs = s.executeQuery("SELECT idQ FROM QUESTIONNAIRE");
+			while(rs.next()){
+				listeIdQ.add(rs.getInt("idQ"));
+			}
+		}
+		catch(SQLException e){System.out.println(e);}
+		return listeIdQ;
+	}
 }

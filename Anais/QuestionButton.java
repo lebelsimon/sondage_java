@@ -1,38 +1,21 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
 
 public class QuestionButton implements ActionListener {
+	char TypeQ;
+	QuestionVue questionVue;
 	
-	// Lien vers le questionnaire pour pouvoir modifier certaines de ses propriétés
-	Question q;
-	
-	 // nom du bouton:
-	String nom;
-	
-	// Constructeur
-	public QuestionButton(String _nom, Question _q) {
-		this.q=_q;
-		this.nom=_nom;
+	public QuestionButton( QuestionVue qVue){
+		this.questionVue= qVue;
+		this.TypeQ= questionVue.typeQuestion;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
-			// on change l'affichage en fonction du boutons choisi
-			switch (nom){	
-				case "prec": 
-					System.out.println("bouton prec"); break;
-				case "suiv": 
-					System.out.println("bouton suiv"); break;
-				case "prem": 
-					System.out.println("bouton prem"); break;
-				case "dern":
-					System.out.println("bouton dern"); break;
-			}
+		// TODO Auto-generated method stub
+		Object source = arg0.getSource();
+		questionVue.questionnaireVue.module.questionnaire.listeReponses.remove(questionVue.numQuestion);
+		questionVue.questionnaireVue.ChangerQuestion(questionVue.question);	
 	}
-
 }

@@ -45,9 +45,11 @@ public class QuestionnaireButton implements ActionListener {
 				case "dern":
 					System.out.println("bouton dern"); break;
 				case "suivi":
+					System.out.println("suivant");
 					modsond.modif();
 					break;
 				case "appeler":
+					System.out.println("appeler");
 					BoiteDialogue bt=new BoiteDialogue(5000);
 					bt.start();
 					Icon tel = new ImageIcon("../Ressources/tel.png");

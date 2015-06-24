@@ -31,6 +31,7 @@ public class ControleurVueGestQuest implements ActionListener {
 		if(b.getName()=="Modifier"){
 			int indiceModif = VGQ.list.getSelectedIndex();
 			VueCreatQuest VCQ = new VueCreatQuest(VGQ.connection,VGQ.listeQ.get(indiceModif),util);
+			VGQ.qBD.supprimerQuestionnaire(VGQ.listeQ.get(indiceModif).getIdQ());
 			VGQ.dispose();
 		}
 	}

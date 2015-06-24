@@ -28,6 +28,7 @@ public class VueCreatQuest extends JFrame {
 	public ArrayList<String> listPanel;
 	public String[] tabCli;
 	public String[] tabPan;
+	public ArrayList<Integer> listeIdQ;
 	public VueCreatQuest(ConnexionMySQL connec,Utilisateur util){
 		this.connection = connec;
 		this.util = util;
@@ -137,6 +138,8 @@ public class VueCreatQuest extends JFrame {
 		CBPanel = new JComboBox<String>(tabPan);
 		CBPanel.setBounds(292, 425, 215, 20);
 		getContentPane().add(CBPanel);
+
+		listeIdQ = qBD.getListeIdQ();
 		
 		JButton btnValider = new JButton("");
 		btnValider.setIcon(new ImageIcon("../Ressources/accepter-verifier-vert-ok-oui-icone-6380-48.png"));
@@ -323,6 +326,8 @@ public class VueCreatQuest extends JFrame {
 		for(int i = 0;i<listPanel.size();i++){
 			tabPan[i] = listPanel.get(i);
 		}
+
+		listeIdQ = qBD.getListeIdQ();
 
 		CBSociete = new JComboBox<String>(tabCli);
 		CBSociete.setBounds(292, 387, 215, 20);

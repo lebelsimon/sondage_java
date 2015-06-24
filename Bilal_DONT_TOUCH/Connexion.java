@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Color;
 
 import javax.swing.*;
 
@@ -8,6 +9,7 @@ public class Connexion extends JFrame{
     ConnexionMySQL c;
     JTextField texteID;    
     JPasswordField texteMdp;
+    JLabel messageErreur=new JLabel("");
     
 	public Connexion(ConnexionMySQL c){
 		super("Projet Sondage");
@@ -52,6 +54,11 @@ public class Connexion extends JFrame{
 		boutons.add(connect,"North");
 		boutons.add(oubli,"South");
 		
+		// JPanel d'affichage de message d'erreur
+		JPanel message = new JPanel(new FlowLayout());
+		message.add(messageErreur);
+		messageErreur.setForeground(Color.red);
+		
 		//Positionnement des éléments
 		total.add(identifiant,"North");
 		total.add(mdp,"Center");
@@ -59,6 +66,7 @@ public class Connexion extends JFrame{
 		
 		cont.add(image, "North");
 		cont.add(total,"Center");
+		cont.add(message, "South");
 		this.setVisible(true);
 		
 	}

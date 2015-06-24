@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import java.awt.Font;
 
 public class ActionBouton implements ActionListener {
 	
@@ -31,9 +32,16 @@ public class ActionBouton implements ActionListener {
 		utili = new UtilisateurBD(this.conn.c);
 	    }
 	    catch(SQLException e){System.out.println(e);}
-	    u=utili.connexionUtilisateur(this.conn.texteID.getText(), this.conn.texteMdp.getText());
-	    role=u.getRole();
-	    //idU=u.getIdU();
+	    try{
+			u=utili.connexionUtilisateur(this.conn.texteID.getText(), this.conn.texteMdp.getText());
+			role=u.getRole();
+			//idU=u.getIdU();
+		}
+		catch(NullPointerException e){
+			conn.messageErreur.setText("Identifiants invalides");
+			Font font = new Font("Arial",Font.BOLD,18);
+			conn.messageErreur.setFont(font);
+		}
 	    break;
 
 	case "mdp":

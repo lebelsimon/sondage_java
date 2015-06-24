@@ -107,7 +107,7 @@ public class Analyse_pdf extends JFrame {
 		
 		
 		
-		//this.setJMenuBar(new Menu());
+		this.setJMenuBar(new Menu(this));
 		
 		
 		// END

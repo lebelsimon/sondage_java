@@ -26,13 +26,14 @@ public class VueSaisieQuestion extends JPanel {
 	JLabel eq;
 	JPanel enonce;
 	String radionom;
+	Utilisateur util;
 	
-	public VueSaisieQuestion(Questionnaire q, Question Q, ConnexionMySQL maco){
+	public VueSaisieQuestion(Questionnaire q, ConnexionMySQL maco, Utilisateur u){
 		
 		c=maco;
-		
+		util=u;
 		this.questionnaire=q;
-		this.question=Q;
+		this.question=new Question("");
 		
 		this.setLayout(new BorderLayout());
 		// =====================================================================
@@ -137,15 +138,16 @@ public class VueSaisieQuestion extends JPanel {
 		// =====================================================================
 		// Les boutons
 		// =====================================================================
+		
 		JButton ajouter = new JButton("Ajouter");
 		//ajouter.addActionListener(new BoutonAjouter(this));
-		ajouter.addActionListener(new BoutonQuestion(this, "ajouter"));
+		ajouter.addActionListener(new BoutonQuestion(this, "ajouter",c,util));
 		JButton modifier = new JButton("Modifier");
 		//modifier.addActionListener(new BoutonModifier(this));
-		modifier.addActionListener(new BoutonQuestion(this, "modifier"));
+		modifier.addActionListener(new BoutonQuestion(this, "modifier",c,util));
 		JButton supprimer = new JButton("Supprimer");
 		//supprimer.addActionListener(new BoutonSupprimer(this));
-		supprimer.addActionListener(new BoutonQuestion(this, "supprimer"));
+		supprimer.addActionListener(new BoutonQuestion(this, "supprimer",c,util));
 
 		JPanel pBouton = new JPanel(new GridLayout(0, 1, 0, 20));
 		pBouton.add(ajouter);
@@ -156,11 +158,11 @@ public class VueSaisieQuestion extends JPanel {
 
 		JButton valider = new JButton("Valider");
 		//valider.addActionListener(new BoutonValider(this));
-		valider.addActionListener(new BoutonQuestion(this, "valider"));
+		valider.addActionListener(new BoutonQuestion(this, "valider",c,util));
 
 		JButton annuler = new JButton("Annuler");
 		//annuler.addActionListener(new BoutonAnnuler());
-		annuler.addActionListener(new BoutonQuestion(this, "annuler"));
+		annuler.addActionListener(new BoutonQuestion(this, "annuler",c,util));
 
 		bas.add(annuler);
 		bas.add(valider);

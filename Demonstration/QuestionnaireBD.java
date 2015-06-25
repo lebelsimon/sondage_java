@@ -92,7 +92,7 @@ public class QuestionnaireBD{
 	public void ajouterQuestionnaire(Questionnaire q){
 		try{
 			// on ajoute un questionnaire
-			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+q.getIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
+			s.executeUpdate("INSERT INTO QUESTIONNAIRE VALUES ("+this.getMaxIdQ()+", '"+q.getTitreQuestionnaire()+"', 'C', "+ q.getNumC()+", "+q.getIdU()+", "+q.getIdPan()+")");
 			for(Question question : q.getListeQuestions()){
 				// on ajoute les quesitons correspondantes
 				s2.executeUpdate("INSERT INTO QUESTION VALUES ("+q.getIdQ()+", "+question.getNumQ()+", "+question.getTexteQuestion()+", "+question.getMaxVal()+", "+question.getIdT()+")");

@@ -95,20 +95,6 @@ public class VueCreatQuest extends JFrame {
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNumeroQuestionnaire = new JLabel("Numero questionnaire :");
-		lblNumeroQuestionnaire.setBounds(113, 121, 170, 27);
-		getContentPane().add(lblNumeroQuestionnaire);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(292, 123, 215, 22);
-		getContentPane().add(textField_1);
-
-		lblErreurIdQ = new JLabel("");
-		lblErreurIdQ.setForeground(Color.red);
-		lblErreurIdQ.setBounds(515, 123, 215, 22);
-		getContentPane().add(lblErreurIdQ);
-		
 		JLabel lblAssocierSociete = new JLabel("Associer societe :");
 		lblAssocierSociete.setBounds(153, 384, 170, 27);
 		getContentPane().add(lblAssocierSociete);
@@ -292,20 +278,6 @@ public class VueCreatQuest extends JFrame {
 		textField.setBounds(292, 85, 215, 22);
 		getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		JLabel lblNumeroQuestionnaire = new JLabel("Numero questionnaire :");
-		lblNumeroQuestionnaire.setBounds(113, 121, 170, 27);
-		getContentPane().add(lblNumeroQuestionnaire);
-		
-		textField_1 = new JTextField(q.getIdQ());
-		textField_1.setColumns(10);
-		textField_1.setBounds(292, 123, 215, 22);
-		getContentPane().add(textField_1);
-
-		lblErreurIdQ = new JLabel("");
-		lblErreurIdQ.setForeground(Color.red);
-		lblErreurIdQ.setBounds(515, 123, 215, 22);
-		getContentPane().add(lblErreurIdQ);
 		
 		JLabel lblAssocierSociete = new JLabel("Associer societe :");
 		lblAssocierSociete.setBounds(153, 384, 170, 27);

@@ -154,7 +154,7 @@ public class QuestionnaireBD{
 	public void ajouterReponses(Questionnaire q, String idC){
 		try{
 			for(Integer cle : q.getListeReponses().keySet()){
-				s.executeUpdate("INSERT INTO REPONDRE VALUES ("+q.getIdQ()+", "+cle+", "+idC+", "+q.getListeReponses().get(cle));
+				s.executeUpdate("INSERT INTO REPONDRE (idQ,numQ,idC,valeur) VALUES ("+q.getIdQ()+","+cle+",'"+idC+"','"+q.getListeReponses().get(cle)+"')");
 			}
 		}
 		catch(SQLException e){ System.out.println(e); }

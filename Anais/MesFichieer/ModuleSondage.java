@@ -4,9 +4,6 @@ import java.util.Random;
 import java.awt.*;
 import java.util.ArrayList;
 
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
 
 /// ICI A SUPR: creerTest  + remise en place acce conection
 		// Panel Module Sondage
@@ -15,12 +12,13 @@ public class ModuleSondage extends Module{
 
 	Sonde sonde=null;
 	Questionnaire questionnaire;
-	mod espaceSonde;
+	Mod espaceSonde;
 	QuestionnaireVue questionnaireVue;
 	SondeBD info;
 	ConnexionMySQL maCo;
 	Utilisateur utilisateur;
 	JFrame fenetre;
+	QuestionnaireBD QBD;
 	// en cas d'erreur il y auras u pop-up indiquant qu'aucun questionnaire n'est disponible
 	
 	public ModuleSondage(ConnexionMySQL connexion, Utilisateur util, JFrame f){ //
@@ -29,8 +27,6 @@ public class ModuleSondage extends Module{
 		System.out.println("DEB CREATION D UNE MODULE SONDAGE");
 		this.setLayout( new FlowLayout());
 		this.setOpaque(false);
-		Sonde sonde;
-		Questionnaire questionnaire;
 		maCo = connexion;
 		utilisateur = util;
 		fenetre = f;
@@ -42,7 +38,7 @@ public class ModuleSondage extends Module{
 		
 		try{
 			info = new SondeBD(maCo);
-			QuestionnaireBD QBD = new QuestionnaireBD(maCo);
+			QBD = new QuestionnaireBD(maCo);
 			System.out.println("FIN QBD");
 			this.sonde = this.selectSond();	
 			System.out.println("crea Sonde");
@@ -51,26 +47,15 @@ public class ModuleSondage extends Module{
 			this.questionnaire = QBD.getListeQuestionnaireSonde(this.sonde.getNumSond(), util.getIdU(), "Sondeur").get(pif);
 			System.out.println("FIN INIT");
 			
-			}catch( Exception e){
-				JDialog.setDefaultLookAndFeelDecorated(true);
-				JOptionPane popUp =new JOptionPane();
-				Object[] options = {"Oui", "Se deconnecter" };
-				int reponse = popUp.showConfirmDialog(null, "Aucun sondage trouve, reactualiser la liste des soudage?", "Erreur:", JOptionPane.OK_OPTION, JOptionPane.NO_OPTION);
-						
-				if (reponse == JOptionPane.NO_OPTION){}
-				else{ 
-					fenetre.remove(fenetre.module);
-					fenetre.SetModule(new ModuleSondage(fenetre.maCo, fenetre.utilisateur, fenetre));
-								
-					
-			}
+		}catch( Exception e){
+			System.out.println("pas de connexion"+ e);
 		}
 		
 		//~ this.creerTest();
 		
 		
 		// creation de la vue consernant les information du Sonde
-		this.espaceSonde= new mod(this);
+		this.espaceSonde= new Mod(this);
 		
 		// creation de la vue du questionnaire
 		this.questionnaireVue = new QuestionnaireVue(this);
@@ -101,7 +86,7 @@ public class ModuleSondage extends Module{
 		catch( Exception e){
 			System.out.println("pas de connexion"+ e);
 		}
-		this.espaceSonde= new mod(this);
+		this.espaceSonde= new Mod(this);
 		System.out.println(espaceSonde);
 		this.questionnaireVue = new QuestionnaireVue(this);
 		this.add(espaceSonde);

@@ -13,7 +13,7 @@ public class QuestionnaireButton implements ActionListener {
 	
 	 // nom du bouton:
 	String nom;
-	mod mo;
+	Mod mo;
 	ModuleSondage modsond;
 	QuestionnaireVue questionnaireVue;
 	char typeQ;
@@ -26,7 +26,7 @@ public class QuestionnaireButton implements ActionListener {
 		this.modsond=null;
 		this.typeQ = this.questionnaireVue.questionVue.question.getIdT();
 	}
-	public QuestionnaireButton(String _nom, mod mo){
+	public QuestionnaireButton(String _nom, Mod mo){
 
 		this.nom=_nom;
 		this.mo=mo;
@@ -115,14 +115,26 @@ public class QuestionnaireButton implements ActionListener {
 					System.out.println("terminer");break;
 					
 				case "term":
+					this.AjoutValeur(questionnaireVue);
 					if ( questionnaireVue.module.questionnaire.getListeReponses().size() != questionnaireVue.module.questionnaire.getListeQuestions().size()){
 							System.out.println("ERROR des reponces sont incomplete");
 							questionnaireVue.TerminerQuestionnaireError();
 						}
 					else {
 						System.out.println("le questionnaire a bien ete rempli");
+						
+						
+						
+						
+						//Questionnaire q, String idC
+						questionnaireVue.module.QBD.ajouterReponses(questionnaireVue.module.questionnaire, questionnaireVue.module.sonde.getIdC());
+						// ATTENTION DECOMENTER FAIT UNE SUPRESSION
+						//questionnaireVue.module.info.supprimerSonde(questionnaireVue.module.sonde.getNumSond());
+						questionnaireVue.module.modif();
+						
+						
 					}
-
+					break;
 			}
 			
 	}
@@ -146,10 +158,10 @@ public class QuestionnaireButton implements ActionListener {
 				break;
 				
 			case 'l':
-				System.out.println("ListeProp selec: "+((PropositionChoixLibre) questionVue.choix).listePropositions.getSelectedValue());
-				System.out.println("maRep: "+ ((PropositionChoixLibre) questionVue.choix).marep.getText());
-				if (( ((PropositionChoixLibre) questionVue.choix).listePropositions.getSelectedValue() != null) && !((PropositionChoixLibre) questionVue.choix).marep.getText().equals(""))
-					res+= ((PropositionChoix1) questionVue.choix).listePropositions.getSelectedValue().toString();
+				
+				if (( ((PropositionChoixLibre) questionVue.choix).listePropositions.getSelectedValue() != null) && ((PropositionChoixLibre) questionVue.choix).marep.getText().equals(""))
+					res+= ((PropositionChoixLibre) questionVue.choix).listePropositions.getSelectedValue().toString();
+				
 				else if( !((PropositionChoixLibre) questionVue.choix).marep.getText().equals( ""))
 					res+=((PropositionChoixLibre) questionVue.choix).marep.getText();
 				break;
@@ -176,12 +188,10 @@ public class QuestionnaireButton implements ActionListener {
 					res+= stock[i]+"; ";
 				}
 				res = res.substring(0,res.length()-2);
-				if (res.contains("null"))
-					res = "";
 				break;
 				
 		}
-			if (!res.equals(""))
+			if (!res.equals("") && !res.contains("null"))
 				questionnaireVue.module.questionnaire.ajouterReponse(questionnaireVue.questionVue.numQuestion, res);
 		return res;
 	}

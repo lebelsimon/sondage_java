@@ -90,7 +90,7 @@ public class Mod extends Module{
 	sondregroup.add(sonde);
 	sondregroup.add(sondeP);
 	
-	appeler.setIcon(new ImageIcon("../Ressources/tel.png"));
+	appeler.setIcon(new ImageIcon("Ressources/tel.png"));
 	appeler.setToolTipText("Appeler le sonde");
 	suivant.setToolTipText("Sonde suivant");
 	appeler.setName("appeler");

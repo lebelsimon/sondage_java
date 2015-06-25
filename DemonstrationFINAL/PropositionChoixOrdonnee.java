@@ -3,36 +3,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-// PB/ PAS D4AFFICHAGE
+/**
+ * @author LAVOREL anais
+ * Cree un panel contenant les JComboBox
+ */
 public class PropositionChoixOrdonnee extends JPanel{
 
-	Integer [] opts;
+	Integer [] opts; // la liste des Entier permetant de classer les choix
 	int nbValOrdonne;
+	
+		// La Liste des proposition
 	DefaultListModel<Proposition>  listeProp;
+		// la liste des JComboBox
 	ArrayList< JComboBox<Integer>> mesBoutons;
+	
+		// Constructeur
 	PropositionChoixOrdonnee(QuestionVue qVue){
-		System.out.println("--- PropositionChoixOrdonnee --- ");
 		
-		
-		
-		// creation de la liste deroulante et des elements
-
 		nbValOrdonne = qVue.question.getMaxVal();
 		opts = new Integer[nbValOrdonne+1];
 		listeProp = qVue.question.getPropositions();
 		mesBoutons =  new ArrayList< JComboBox<Integer>>();
 		
+			// mise en place d'un GridLayout pour espacer les element du panel
 		GridLayout g = new GridLayout(listeProp.size(),2);
 		g.setHgap(4);
 		g.setVgap(4);
 		this.setLayout(g);
 		
-		// Creation du contenaire
-		//~ GridLayout g = new  GridLayout(listeProp.size(),2);
-		//~ JPanel listeChoix = new JPanel(g);
 		
-		
-		//remplisage de la lise des choix
+		//remplisage de la liste des choix
 		for( int i=1; i< nbValOrdonne+1; i++){
 			opts[i] = (Integer) i;
 		}

@@ -4,7 +4,11 @@ import java.util.Random;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**
+ * @author LAVOREL anais
+ * @author REPULES Benjamin
+ * Cree un Panel contenant la JListe des question a remplir
+ */
 // Panel Module Sondage
 @SuppressWarnings("serial")
 public class ModuleSondage extends Module{
@@ -57,7 +61,7 @@ public class ModuleSondage extends Module{
 		
 		this.add(espaceSonde);
 		this.add(questionnaireVue);
-		System.out.println("\nFIN CREA MODULE SONDAGE");
+
 
 	}
 	//Selectionne un sonde aleatoirement
@@ -67,7 +71,6 @@ public class ModuleSondage extends Module{
 		Random random = new Random();
 		int ind=random.nextInt(list.size());	
 		sonde = new Sonde(list.get(ind));
-		//info.supprimerSonde(sonde.getNumSond());
 
 		return sonde;
 	}
@@ -90,7 +93,6 @@ public class ModuleSondage extends Module{
 		this.repaint();
 		
 		//~ m.modif();
-		System.out.println("test");
 	}
 	
 

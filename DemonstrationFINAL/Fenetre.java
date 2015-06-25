@@ -5,7 +5,6 @@ import javax.swing.event.ChangeEvent;
 
 /**
  * @author LAVOREL anais
- * @param Un utilisateur u
  * Cree le JFrame contenant tout les elements necessaire a l'utilisation du Module Sondage
  */
 

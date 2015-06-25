@@ -115,6 +115,7 @@ public class QuestionnaireButton implements ActionListener {
 					System.out.println("terminer");break;
 					
 				case "term":
+					this.AjoutValeur(questionnaireVue);	
 					if ( questionnaireVue.module.questionnaire.getListeReponses().size() != questionnaireVue.module.questionnaire.getListeQuestions().size()){
 							System.out.println("ERROR des reponces sont incomplete");
 							questionnaireVue.TerminerQuestionnaireError();

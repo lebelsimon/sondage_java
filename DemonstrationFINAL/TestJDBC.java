@@ -85,6 +85,7 @@ public class TestJDBC {
 	/**
 	 * @param args
 	 */
+	 
 	public static void main(String[] args) {
 		TestJDBC tjdbc = new TestJDBC();
 		// ici creation d'un connexion à MySQL

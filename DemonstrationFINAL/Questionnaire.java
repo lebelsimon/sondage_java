@@ -8,6 +8,7 @@ public class Questionnaire {
 	char etat;
 	ArrayList <Question> listeQuestions;
 	HashMap<Integer, String> listeReponses;
+	//constructeur
 	public Questionnaire(String titreQuestionnaire, int numC, int idU, int idPan, char etat) {
 		super();
 		this.titreQuestionnaire = titreQuestionnaire;
@@ -18,7 +19,7 @@ public class Questionnaire {
 		this.etat=etat;
 		this.listeReponses = new HashMap<Integer,String>();
 	}
-	
+	//getter + setter
 	public String getTitreQuestionnaire() {
 		return titreQuestionnaire;
 	}

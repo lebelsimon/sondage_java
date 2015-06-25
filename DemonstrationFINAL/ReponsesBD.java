@@ -28,6 +28,7 @@ public class ReponsesBD{
      * @param numQuestionnaire un entier représentant le numéro du questionnaire
      * @param numQuestion numéro de la question à choix libre du questionnaire
      */
+     // permet de recuperer la liste des reponses par categorie socio-pro d'une question dans un questionnaire dans la BD
     public void nbReponsesLibreParCat(int numQuestionnaire, int numQuestion){
 	try{
 	    ResultSet rs = s.executeQuery("SELECT texteQ, intituleCat, valeur, COUNT(valeur) FROM QUESTION NATURAL JOIN REPONDRE NATURAL JOIN CARACTERISTIQUE NATURAL JOIN CATEGORIE WHERE numQ="+numQuestion+" AND idQ="+numQuestionnaire+" GROUP BY valeur, intituleCat ORDER BY intituleCat, valeur");

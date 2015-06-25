@@ -5,15 +5,16 @@ import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.io.*;
 
+/**
+ * @author LAVOREL Anais
+ * Panel contenant le slider pour choisir la note
+ */
 public class PropositionChoixNote extends JPanel{
 	Integer valMin, valMax,  val;
 	JLabel valMaxL, valActuL;
 	JSlider slide;
 	PropositionChoixNote(QuestionVue questionVue){
-		//~ GridLayout g= new GridLayout(2,1);
-		//~ g.setVgap(4);
-		//~ this.setLayout( g);
-		System.out.println("--- PropositionChoixNote --- ");
+
 		this.setLayout(new BorderLayout());
 		
 		valMax = questionVue.question.getMaxVal();
@@ -32,13 +33,10 @@ public class PropositionChoixNote extends JPanel{
 		
 		slide.addChangeListener(new ChangeListener(){
 
-		      public void stateChanged(ChangeEvent event){
-		    	  val = ((JSlider)event.getSource()).getValue();
-		    	  valActuL.setText("Valeur actuelle : " +val );
-
-		      }
-
-		    });      
+		public void stateChanged(ChangeEvent event){
+			val = ((JSlider)event.getSource()).getValue();
+			valActuL.setText("Valeur actuelle : " +val );
+		      }});      
 
 		this.add(slide, BorderLayout.CENTER);
 		this.add(valActuL, BorderLayout.SOUTH);
@@ -48,7 +46,6 @@ public class PropositionChoixNote extends JPanel{
 		
 		//Note.add( (slide.getValue()+""), BorderLayout.CENTER);
 		//~ 
-		System.out.println("la");
 		//listeChoix.add(slide);
 		//this.add(listeChoix);
 		//this.add(slide);

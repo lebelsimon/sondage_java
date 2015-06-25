@@ -2,7 +2,11 @@ import javax.swing.*;
 
 import java.awt.*;
 
-		// Panel Module Sondage
+/**
+ * @author LAVOREL anais
+ * Cree le JFrame contenant tout les elements necessaire a l'utilisation du Module Sondage
+ */
+ 
 @SuppressWarnings("serial")
 public class Module extends JPanel{
 	private JPanel perso;

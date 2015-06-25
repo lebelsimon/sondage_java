@@ -7,6 +7,7 @@ public class Question {
 	int maxVal;
 	int numQ;
 	DefaultListModel<Proposition> propositions;
+	
 	public Question(String texteQuestion) {
 		super();
 		this.texteQuestion = new String(texteQuestion);
@@ -33,25 +34,31 @@ public class Question {
 			this.addProposition(new Proposition(q.getPropositions().get(i)));
 		}
 	}
+	//retourne le texte de la question
 	public String getTexteQuestion() {
 		return texteQuestion;
 	}
+	//permet de modifier le texte de la question
 	public void setTexteQuestion(String texteQuestion) {
 		this.texteQuestion = new String(texteQuestion);
 	}
+	
+
 	public DefaultListModel<Proposition> getPropositions() {
 		return propositions;
 	}
 	public void setPropositions(DefaultListModel<Proposition> reponses) {
 		this.propositions = reponses;
 	}
+	//permet d'ajouter des propositions
 	public void addProposition(Proposition rep){
 		this.propositions.addElement(rep);
 	}
+	
 	public void removeProposition(int index){
 		this.propositions.remove(index);
 	}
-	
+	// getter + setter
 	public char getIdT() {
 		return idT;
 	}

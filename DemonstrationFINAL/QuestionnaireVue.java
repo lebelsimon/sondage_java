@@ -1,3 +1,5 @@
+// ATTENTION IL FAUT VERIFIER QUE SI LE QUESTIONNAIRE NE CONTIEN QU'UNE REP, ON A ACCES A TERMINER QUESTIONNAIRE
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -21,27 +23,26 @@ public class QuestionnaireVue extends JPanel{
 	JPanel idQuestionnaireJ, questionJ;
 	
 	
-QuestionnaireVue(ModuleSondage mod){
+QuestionnaireVue(ModuleSondage Mod){
 		// initialisation des valeurs
 		super();
 		System.out.println("DEB crea Vue questionnaire");
 
-		this.module = mod;
-		this.questionnaire = module.questionnaire;// BD.getListeQuestionnaire().get(numQuestionnaire-1);
-		//this.question = questionnaire.getListeQuestions().get(0);
+		this.module = Mod;
+		this.questionnaire = module.questionnaire;
 		System.out.println(module.fenetre);
 		largeur = module.fenetre.getWidth()/2 - module.fenetre.getWidth()/10;
 		hauteur = module.fenetre.getHeight() - module.fenetre.getHeight()/10;
-		this.setPreferredSize(new Dimension(largeur, hauteur));
+		this.setSize(new Dimension(largeur, hauteur));
 		
 		this.setLayout(new BorderLayout());
 		Random random = new Random();
-		//System.out.println(module.sonde);//.getNumSond());
+
 		int numSonde = module.sonde.getNumSond();//199;
 		questionVue = new QuestionVue(module.questionnaire.getListeQuestions().get(0), this);
 
 		int numQuestionnaire = module.questionnaire.idQ; 
-		System.out.println("Indice calculer");
+
 
 		
 
@@ -88,7 +89,12 @@ QuestionnaireVue(ModuleSondage mod){
 		terminer.addActionListener(new QuestionnaireButton(terminer.getName(), this));
 		terminer.setEnabled(false);
 		
-			
+		// a tester des que POSIBLE
+		if ( this.questionVue.question.numQ == this.questionnaire.listeReponses.size()){
+			qder.setEnabled(false);
+			qsuiv.setEnabled(false);
+			terminer.setEnabled(true);
+		}
 		
 		// ajout des boutons au panel boutons
 		boutonsQuestions.add(qprem); 
@@ -132,6 +138,9 @@ QuestionnaireVue(ModuleSondage mod){
 		this.questionJ.removeAll();
 		this.questionVue = null;
 		questionVue = new QuestionVue(q, this);
+		if (this.questionnaire.listeReponses.containsKey(q.numQ)){
+			questionVue.placerRep();
+		}
 		questionVue.setBorder(BorderFactory.createLineBorder(Color.black));
 		questionVue.setBorder(new EmptyBorder(10, 10, 10, 10));
 		

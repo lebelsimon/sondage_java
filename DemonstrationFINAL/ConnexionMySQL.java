@@ -3,6 +3,7 @@ import java.sql.*;
 
 /**
  * @author Damien MARTIN
+ * Cree la connexion a la base de donnee
  */
 
 public class ConnexionMySQL {
@@ -24,7 +25,13 @@ public class ConnexionMySQL {
 			System.out.println("Msg: " + ex.getMessage() + ex.getErrorCode());
 		}
 	}
-
+	/**
+	 * @param Nom du serveur : String
+	 * @param Nom de la base : String
+	 * @param login pour se connecter : String
+	 * @param chemin pour acceder au repertoire principal : String 
+	 * Permet de se reconnecter
+	 */
 	public void reconnexion(String nom_serveur, String nom_base, String login, String repertoire_principal) {
 		try {
 			mysql = DriverManager.getConnection(nom_serveur, login, "dmartin");
@@ -33,10 +40,16 @@ public class ConnexionMySQL {
 		}
 	}
 
+	/**
+	 * Retourne le status de la connexion
+	 * true : la connexion est en cours d'utilisation
+	 * false: la connection n'est pas utilise
+	 */
 	public boolean estConnecte() {
 		return ouverte;
 	}
 
+	//permet de se deconnecter
 	public void deconnexion() {
 		try {
 			mysql.close();
@@ -47,6 +60,7 @@ public class ConnexionMySQL {
 		}
 	}
 
+	//permet de se reconnecter
 	public void reconnexion(String loginMySQL, String mdp) {
 		try {
 			mysql = DriverManager.getConnection(

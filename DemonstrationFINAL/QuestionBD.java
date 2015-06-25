@@ -30,6 +30,7 @@ public class QuestionBD {
 		}
 	}
 
+	//sort la liste des questionnaires
 	public ArrayList<Question> getListeQuestion(int idQ) {
 		ArrayList<Question> listeQuestion = new ArrayList<Question>();
 		try {
@@ -58,7 +59,7 @@ public class QuestionBD {
 		}
 		return listeQuestion;
 	}
-
+// getter
 	public DefaultListModel<Proposition> getReponseNote(int idQ, int numQ){
 		DefaultListModel<Proposition> valPossible = new DefaultListModel<Proposition>();
 		for(int i=0; i<11; i++){
@@ -84,7 +85,7 @@ public class QuestionBD {
 		}
 		return valPossible;
 	}
-
+//ajout d'une question a la BD
 	public void addQuestion(int idQ, Question q) {
 		try {
 			s.executeUpdate("INSERT INTO QUESTION VALUES (" + idQ + ", "+ q.getNumQ() + ", '" + q.getTexteQuestion() + "', "+ q.getMaxVal() + ", '" + q.idT + "'");
@@ -97,7 +98,7 @@ public class QuestionBD {
 			System.out.println(e);
 		}
 	}
-
+//modifie une question dans la BD
 	public void modifieQuestion(int idQ, Question q) {
 		try {
 			s.executeUpdate("UPDATE QUESTION SET texteQ='" + q.getTexteQuestion() + "', idT='"+ q.getIdT()+"' WHERE numQ="+q.getNumQ());
@@ -111,7 +112,7 @@ public class QuestionBD {
 			System.out.println(e);
 		}
 	}
-	
+	//supprime une question dans la BD
 	public void supprimerQuestion(int idQ, Question q){
 		try{
 			s.executeUpdate("DELETE FROM QUESTION WHERE numQ="+q.getNumQ()+" AND idQ="+idQ);
@@ -122,6 +123,7 @@ public class QuestionBD {
 		catch(SQLException e){ System.out.println(e); }
 	}
 	
+	// recupere la liste des propositions d'une question dans un questionnaire
 	public DefaultListModel<Proposition> getListePropositionPourUneQuestion(int idQ, int numQ){
 		ArrayList<Question> listeQuestion = this.getListeQuestion(idQ);
 		for(Question q : listeQuestion){

@@ -22,7 +22,7 @@ public class SondeBD {
 			System.out.println("SondeBD non créé");
 		}
 	}
-
+//getter
 	public ArrayList<Sonde> getListeSonde(int idU) {
 		ArrayList<Sonde> res = new ArrayList<Sonde>();
 		try {

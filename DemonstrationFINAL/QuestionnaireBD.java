@@ -32,6 +32,7 @@ public class QuestionnaireBD{
 	 * @param role son role
 	 * @return une liste de questionnaire dont l'utilisateur a la charge
 	 */
+	 //ertourne la liste des questionnaire de la BD
 	public ArrayList<Questionnaire> getListeQuestionnaire(int idU, String role){
 		ArrayList<Questionnaire> listeQuestionnaire = new ArrayList<Questionnaire>();
 		ArrayList<Question> listeQuestion = new ArrayList<Question>();

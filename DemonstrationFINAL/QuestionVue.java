@@ -3,6 +3,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * @author LAVOREL anais
+ * @param q: ne question
+ * @param questV: un QuestionnaireVue
+ * Cree la Vue de la question contenant tout les elements necesaire
+ */
 public class QuestionVue extends JPanel{
 	JLabel idQuestion;
 	JTextArea enonce;
@@ -20,7 +26,6 @@ public class QuestionVue extends JPanel{
 		this.setLayout( new BorderLayout( 40,50));
 		question = q;
 		questionnaireVue = questV;
-		// initialisation des valeurs corespondant au elements de la Question
 		numQuestion = question.getNumQ();
 		propositions = question.getPropositions();
 		nombreVal = propositions.size();
@@ -80,6 +85,45 @@ public class QuestionVue extends JPanel{
 			res = new PropositionChoix1(this);
 		}
 		return res;
+	}
+	
+	public void placerRep(){
+		switch (this.question.idT){
+			case 'l':
+				boolean trouve = false;
+				for( int i=0; i< ((PropositionChoixLibre)this.choix).lesPropositions.size(); i++){
+					if (((PropositionChoixLibre)this.choix).lesPropositions.get(i).texte.equals(questionnaireVue.questionnaire.listeReponses.get(question.numQ))){
+						((PropositionChoixLibre)this.choix).listePropositions.setSelectedIndex(i);
+						trouve = true;
+					}
+				}
+				if (!trouve){
+						((PropositionChoixLibre)this.choix).marep.setText(questionnaireVue.questionnaire.listeReponses.get(question.numQ));
+
+				}
+				break;
+			case 'm':
+				for( int i=0; i< ((PropositionChoixX)this.choix).lesPropositions.size(); i++){
+					if (questionnaireVue.questionnaire.listeReponses.get(question.numQ).contains(((PropositionChoixX)this.choix).lesPropositions.get(i).texte) )
+						((PropositionChoixX)this.choix).mesBox.get(i).setState(true);;
+				}
+				break;
+			case 'u':
+				for( int i=0; i< ((PropositionChoix1)this.choix).lesPropositions.length; i++){
+					if (((PropositionChoix1)this.choix).lesPropositions[i].texte.equals(questionnaireVue.questionnaire.listeReponses.get(question.numQ))) 
+						((PropositionChoix1)this.choix).listePropositions.setSelectedIndex(i);
+				}
+				break;
+			case 'n':
+				((PropositionChoixNote) this.choix).val = Integer.parseInt(questionnaireVue.questionnaire.listeReponses.get(question.numQ));
+				((PropositionChoixNote) this.choix).slide.setValue(((PropositionChoixNote) this.choix).val);
+				
+				break;
+			case 'c':
+
+				break;
+				
+		}
 	}
 	
 	

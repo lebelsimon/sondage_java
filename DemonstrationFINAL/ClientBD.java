@@ -34,6 +34,7 @@ public class ClientBD{
 	return rs.getInt("MAX(NumC)");
     }
 
+	//Permet d'inserer un nouveau client
     public void insererClient(Client c) throws SQLException{
 	s.executeUpdate("INSERT INTO CLIENT VALUES ("+
 			(this.maxNumClient()+1)+",'"+
@@ -45,10 +46,12 @@ public class ClientBD{
 			c.getTelephone()+"','"+
 			c.getEmail()+"')");
     }
-
+	
+	//Permet d'effacer un client
     public void effacerClient(int num) throws SQLException{
 	s.executeUpdate("DELETE FROM CLIENT WHERE numC="+num);
     }
+	
 
     public void majClient(Client c) throws SQLException{
 	s.executeUpdate("UPDATE CLIENT SET numC="+c.getNumero()+
@@ -61,6 +64,7 @@ public class ClientBD{
 			"',email='"+c.getEmail()+"')");
     }
 
+	//permet de rechercher un client grace a son identifiant
     public Client rechercherClientParNum(int num) throws SQLException{
 	ResultSet rs = s.executeQuery("SELECT * FROM CLIENT");
 	Client res = null;
@@ -82,6 +86,7 @@ public class ClientBD{
 	}
 	return res;
     }
+    
     
     public void affiche(int num) throws SQLException{
     	Client c = this.rechercherClientParNum(num);
@@ -130,6 +135,7 @@ public class ClientBD{
 	}
     }
     
+
     public HashMap<Integer, String> getListeClient(){
     	HashMap<Integer, String> listeClient = new HashMap<Integer, String>();
     	try{

@@ -8,7 +8,7 @@ import java.io.*;
 public class PropositionChoixNote extends JPanel{
 	Integer valMin, valMax,  val;
 	JLabel valMaxL, valActuL;
-	
+	JSlider slide;
 	PropositionChoixNote(QuestionVue questionVue){
 		//~ GridLayout g= new GridLayout(2,1);
 		//~ g.setVgap(4);
@@ -19,9 +19,9 @@ public class PropositionChoixNote extends JPanel{
 		valMax = questionVue.question.getMaxVal();
 		valMin = 0;
 		val = null;
-		valActuL = new JLabel("Valeur actuelle : 0");
+		valActuL = new JLabel();
 		valActuL.setHorizontalAlignment(getX() +this.getHeight());
-		JSlider slide = new JSlider();
+		slide = new JSlider();
 		slide.setMaximum(valMax);
 		slide.setMinimum(valMin);
 		slide.setValue(valMin);

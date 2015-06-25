@@ -10,7 +10,7 @@ public class Menu extends JMenuBar{
 
 	Menu(JFrame fen){
 		
-				// créatiojn des éléments du menu	  
+		// creation des éléments du menu + action listener sur deconnexion et manuel d'utilisateur
 		this.fen=fen;
 		Compte = new JMenu("Compte");
 		changerPerso = new JMenuItem("Paramètres");
@@ -29,7 +29,7 @@ public class Menu extends JMenuBar{
 		manuel.addActionListener(new MenuAction(manuel.getName(),this));
 
 	  
-				// ajout des sous-menu 
+		// ajout des sous-menu 
 		Compte.add(changerPerso);
 		Compte.add(deconnexion);
 	  
@@ -38,15 +38,15 @@ public class Menu extends JMenuBar{
 	  
 		Aide.add(tuto);
 		Aide.add(manuel);
-				// ajout des separateur
+		// ajout des separateur
 		Compte.addSeparator();
 		Affichage.addSeparator();
 		Aide.addSeparator();
 		
-				// creatio label personne permettant l'acces aux sous-menu du Compte	
+		// creatio label personne permettant l'acces aux sous-menu du Compte	
 		Personne = new JMenu("Prenom Nom ");
 		
-			// 1 JMenuItem ne peut appartenir qu'a un JMenu, il faut donc recréer des JMenuItem
+		// 1 JMenuItem ne peut appartenir qu'a un JMenu, il faut donc recréer des JMenuItem
 		changerPerso2 = new JMenuItem("Paramètres");
 		deconnexion2 = new JMenuItem("Deconnexion CTR+D");
 		deconnexion2.setName("deco");
@@ -63,6 +63,7 @@ public class Menu extends JMenuBar{
 		this.add(Personne);
 		
 	}
+	//permet de selectionner la JFrame danslaquelle apparait le menu
 	public JFrame getfen(){
 			return fen;
 		}

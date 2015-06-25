@@ -23,11 +23,11 @@ public class PropositionChoixLibre extends JPanel{
 	
 		listePropositions = new JList<Proposition>(lesPropositions); 
 
-		listePropositions.setLayoutOrientation(JList.VERTICAL_WRAP);
+		listePropositions.setLayoutOrientation(JList.VERTICAL);
 		System.out.println("listePropositions: " +listePropositions);
 		// creation du choix libre
 		marep = new JTextField(20);
-		
+		marep.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		
 		//System.out.println("deb crea scroll");
@@ -36,7 +36,7 @@ public class PropositionChoixLibre extends JPanel{
 		// scroll bar
 		JScrollPane  scroll = new JScrollPane(listePropositions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		int propLargeur = qVue.questionnaireVue.largeur - qVue.questionnaireVue.largeur/10;
-		int propHauteur = qVue.questionnaireVue.hauteur/2 - qVue.enonce.getHeight();
+		int propHauteur = qVue.questionnaireVue.hauteur/2 - qVue.enonce.getHeight()-20;
 		scroll.setPreferredSize( new Dimension(propLargeur,propHauteur));
 
 		

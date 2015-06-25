@@ -7,7 +7,7 @@ import java.awt.*;
 
 // Panel Module Sondage
 @SuppressWarnings("serial")
-public class mod extends Module{
+public class Mod extends Module{
 			
     JLabel nom;
     JLabel prenom;
@@ -23,9 +23,9 @@ public class mod extends Module{
     JButton appeler;
     ModuleSondage modsond;
 			
-    public mod(ModuleSondage s){
+    public Mod(ModuleSondage s){
 
-	
+	//creation des elements de la vue
 	modsond=s;
 	
 	appeler = new JButton ("");
@@ -74,6 +74,7 @@ public class mod extends Module{
 	sonde.add(prenom);
 	sonde.add(telephone);
 	
+	//positionnement des elements
 	suivant.setPreferredSize(new Dimension(100, 40));
 	appeler.setPreferredSize(new Dimension(100, 40));
 				
@@ -96,7 +97,9 @@ public class mod extends Module{
 	appeler.addActionListener(new QuestionnaireButton(appeler.getName(),this));
 	suivant.setName("suivi");
 	suivant.addActionListener(new QuestionnaireButton(suivant.getName(),this));
-			
+	
+	
+	//insertion de tous les elements
 	this.add(idtot);
 				
     }
